@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Insurance Study Planner | Aceable Insurance</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --pink:#DB306A;--pink-hover:#C50B4A;--pink-active:#990235;--pink-light:#FFF4F8;--pink-200:#FFEAF0;--pink-300:#FFCBDC;
+  --teal:#197886;--teal-hover:#0C5F6B;--teal-active:#024C56;--teal-light:#E7F8FA;--teal-bg:#F3FBFC;--teal-600:#12BDCD;--teal-300:#C4EEF2;
+  --dark:#21333F;--subtle:#43646F;--muted:#AFC1C6;
+  --grey-1:#F1F5F5;--grey-2:#E8EEEF;--grey-3:#D3DDDF;--grey-4:#294752;--grey-100:#FAFBFB;
+  --blue-100:#F4F9FC;--blue-200:#E9F3F9;--blue-600:#2689CA;
+  --green-200:#E9FCF6;--green-600:#2CE1AB;--green-700:#29B58F;
+  --yellow-500:#FDC554;--yellow-200:#FEF7E8;--yellow-700:#C59123;
+  --red-600:#EC5164;
+  --white:#FFFFFF;
+  --r-sm:8px;--r-md:12px;--r-lg:24px;--r-pill:9999px;
+  --shadow-card:0 0 4px 0 rgba(195,218,232,.6),0 12px 0 0 rgba(195,218,232,.5);
+  --shadow-header:0 8px 24px rgb(17 17 26/10%),0 16px 56px rgb(17 17 26/10%),0 24px 80px rgb(17 17 26/10%);
+  --shadow-btn:0px 1px 8px 0px rgba(34,34,34,.1);
+  --font:'Nunito Sans',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);color:var(--dark);background:var(--white);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;height:auto}
+
+/* ===== PROMO BANNER ===== */
+.promo{background:var(--pink);color:#fff;text-align:center;padding:10px 24px;font-size:.875rem;font-weight:700;position:sticky;top:0;z-index:100}
+.promo a{color:#fff;text-decoration:underline;text-underline-offset:3px;font-weight:800}
+
+/* ===== SITE HEADER ===== */
+.site-hdr{background:var(--white);position:sticky;top:38px;z-index:90;box-shadow:var(--shadow-header);padding:0 24px}
+.site-hdr-inner{max-width:1188px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:16px 0}
+.site-logo{font-size:1.35rem;font-weight:900;color:var(--dark);display:flex;align-items:center;gap:8px;text-decoration:none}
+.site-logo .logo-ins{font-size:.75rem;font-weight:800;color:var(--teal);text-transform:uppercase;letter-spacing:.05em;margin-left:2px}
+.site-nav{display:flex;align-items:center;gap:24px}
+.site-nav a{font-size:1rem;font-weight:700;color:var(--dark);transition:color .15s}
+.site-nav a:hover{color:var(--teal)}
+.cta-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--pink);color:#fff;border:none;border-radius:var(--r-pill);padding:14px 28px;font-family:var(--font);font-size:1rem;font-weight:700;cursor:pointer;text-decoration:none;transition:background .15s}
+.cta-btn:hover{background:var(--pink-hover)}
+.cta-btn:active{background:var(--pink-active)}
+.cta-btn-sm{padding:10px 20px;font-size:.875rem}
+.cta-btn-secondary{background:transparent;color:var(--pink);border:1.5px solid currentColor}
+.cta-btn-secondary:hover{background:var(--pink-hover);color:#fff}
+.cta-btn-dark{background:var(--dark);color:#fff}
+.cta-btn-dark:hover{background:var(--grey-4)}
+.cta-btn-white{background:#fff;color:var(--pink)}
+.cta-btn-white:hover{background:var(--grey-1)}
+.cta-link{color:var(--teal);font-weight:800;font-size:1.125rem;text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:1.5px;display:inline-flex;align-items:center;cursor:pointer;transition:color .15s}
+.cta-link:hover{color:var(--teal-hover)}
+
+/* ===== HERO ===== */
+.hero{background:var(--dark);padding:60px 24px 52px;text-align:center;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;top:-40%;right:-20%;width:500px;height:500px;background:radial-gradient(circle,rgba(219,48,106,.12) 0%,transparent 70%);border-radius:50%;pointer-events:none}
+.hero::before{content:'';position:absolute;bottom:-30%;left:-15%;width:400px;height:400px;background:radial-gradient(circle,rgba(25,120,134,.1) 0%,transparent 70%);border-radius:50%;pointer-events:none}
+.hero-inner{max-width:640px;margin:0 auto;position:relative;z-index:1}
+.eyebrow{font-size:.875rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;line-height:1.25rem;margin-bottom:8px}
+.hero .eyebrow{color:var(--teal-600)}
+.hero h1{font-size:clamp(1.75rem,5vw,2.5rem);font-weight:800;color:#fff;line-height:1.25;margin-bottom:12px}
+.hero p{color:rgba(255,255,255,.8);font-size:1.125rem;line-height:1.6875rem;max-width:520px;margin:0 auto}
+
+/* ===== MAIN CONTENT ===== */
+.main-wrap{max-width:700px;margin:0 auto;padding:32px 24px 60px}
+
+/* ===== PROGRESS BAR ===== */
+.prog{background:var(--white);border-radius:var(--r-lg);padding:16px 24px;box-shadow:var(--shadow-card);margin-bottom:28px;position:sticky;top:96px;z-index:50}
+.prog-steps{display:flex;justify-content:space-between;margin-bottom:10px}
+.prog-step{font-size:.78rem;font-weight:700;color:var(--muted);display:flex;align-items:center;gap:6px}
+.prog-step.active{color:var(--teal)}.prog-step.done{color:var(--teal)}
+.pdot{width:26px;height:26px;border-radius:50%;background:var(--grey-1);border:2px solid var(--muted);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:800;flex-shrink:0}
+.prog-step.active .pdot{background:var(--pink);border-color:var(--pink);color:#fff;box-shadow:0 0 0 4px rgba(219,48,106,.2)}
+.prog-step.done .pdot{background:var(--teal);border-color:var(--teal);color:#fff}
+.plbl{display:none}@media(min-width:520px){.plbl{display:inline}}
+.pbar{height:4px;background:var(--grey-1);border-radius:4px;overflow:hidden}
+.pfill{height:100%;background:linear-gradient(90deg,var(--pink),var(--pink-hover));border-radius:4px;transition:width .35s ease;width:0%}
+
+/* ===== STEP CARDS ===== */
+.card{background:var(--white);border-radius:var(--r-lg);padding:32px 28px;box-shadow:var(--shadow-card);margin-bottom:20px;display:none;animation:fadeIn .4s ease}
+.card.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.card h2{font-size:1.4rem;font-weight:800;color:var(--dark);margin-bottom:6px}
+.card .sub{color:var(--subtle);font-size:.92rem;margin-bottom:24px}
+
+/* ===== OPTIONS ===== */
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px}.opts.single{grid-template-columns:1fr}
+.opt{display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--grey-1);border:2px solid transparent;border-radius:var(--r-md);cursor:pointer;font-family:inherit;font-size:.9rem;font-weight:700;color:var(--dark);text-align:left;transition:all .2s ease}
+.opt:hover{border-color:var(--teal);background:var(--teal-bg)}.opt.sel{border-color:var(--pink);background:var(--pink-light);color:var(--dark)}
+.opt .ico{width:36px;height:36px;border-radius:var(--r-sm);background:var(--white);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}.opt.sel .ico{background:var(--pink);color:#fff;border-radius:var(--r-sm)}
+
+/* ===== FORM FIELDS ===== */
+.fg{margin-bottom:20px}.fg label{display:block;font-size:.85rem;font-weight:700;color:var(--dark);margin-bottom:8px}
+.sel,.inp{width:100%;padding:12px 16px;font-family:inherit;font-size:.95rem;border:1px solid var(--muted);border-radius:6px;background:var(--grey-100);color:var(--dark);appearance:none;-webkit-appearance:none}
+.sel{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2343646F' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:40px}
+.sel:focus,.inp:focus{outline:none;border-color:var(--teal);border-width:2px;box-shadow:0 0 0 4px var(--teal-300)}
+
+/* ===== DAY PICKER ===== */
+.days{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+.day{width:50px;height:50px;border-radius:50%;border:2px solid var(--grey-2);background:var(--white);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.8rem;font-weight:700;color:var(--subtle);font-family:inherit;transition:all .2s ease}
+.day:hover{border-color:var(--pink);color:var(--pink)}.day.sel{background:var(--pink);border-color:var(--pink);color:#fff;box-shadow:0 2px 8px rgba(219,48,106,.3)}
+
+/* ===== TIME SLOTS ===== */
+.times{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:24px}
+.tslot{padding:14px 10px;text-align:center;border:2px solid var(--grey-2);border-radius:var(--r-md);cursor:pointer;background:var(--white);font-family:inherit;transition:all .2s ease}
+.tslot:hover{border-color:var(--teal)}.tslot.sel{border-color:var(--pink);background:var(--pink-light)}
+.tslot .ti{font-size:1.3rem}.tslot .tl{font-size:.82rem;font-weight:800;color:var(--dark);margin-top:4px}.tslot .tr{font-size:.72rem;color:var(--subtle)}
+
+/* ===== SESSION SLIDER ===== */
+.sdisp{text-align:center;font-size:2rem;font-weight:800;color:var(--dark);margin-bottom:12px}
+.sdisp span{font-size:.85rem;font-weight:400;color:var(--subtle)}
+input[type="range"]{width:100%;height:6px;border-radius:3px;background:var(--grey-2);outline:none;appearance:none;-webkit-appearance:none}
+input[type="range"]::-webkit-slider-thumb{appearance:none;-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:var(--pink);cursor:pointer;box-shadow:0 2px 8px rgba(219,48,106,.35);border:3px solid #fff}
+.slbls{display:flex;justify-content:space-between;font-size:.75rem;color:var(--muted);margin-top:8px}
+
+/* ===== NAV BUTTONS ===== */
+.nav{display:flex;justify-content:space-between;gap:12px;margin-top:28px}
+.btn-back{background:none;border:none;color:var(--subtle);padding:14px 16px;font-family:var(--font);font-size:.92rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px}.btn-back:hover{color:var(--dark)}
+.btn-next{background:var(--pink);color:#fff;border:none;border-radius:var(--r-pill);padding:14px 28px;font-family:var(--font);font-size:.92rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:8px;box-shadow:0 2px 8px rgba(219,48,106,.3);transition:all .15s}
+.btn-next:hover{background:var(--pink-hover);transform:translateY(-1px)}
+.btn-next:disabled{background:var(--grey-3);color:var(--subtle);cursor:not-allowed;transform:none;box-shadow:none}
+
+/* ===== STATE INFO ===== */
+.info{background:var(--blue-100);border-radius:var(--r-md);padding:16px 20px;margin-bottom:20px;display:none}
+.info .row{display:flex;align-items:center;gap:10px}
+.info .dot{width:36px;height:36px;border-radius:50%;background:var(--teal);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1rem;flex-shrink:0}
+.info .ttl{font-weight:800;color:var(--dark);font-size:.9rem}.info .nt{font-size:.78rem;color:var(--subtle);margin-top:1px}
+
+/* ===== EMAIL GATE ===== */
+.gate{display:none;position:fixed;inset:0;background:rgba(33,51,63,.6);backdrop-filter:blur(4px);z-index:999;align-items:center;justify-content:center;padding:20px}
+.gate.active{display:flex}
+.gcard{background:var(--white);border-radius:var(--r-lg);padding:40px 32px;max-width:440px;width:100%;box-shadow:var(--shadow-card);text-align:center;animation:fadeIn .4s ease}
+.gcard h3{font-size:1.5rem;font-weight:800;color:var(--dark);margin-bottom:8px}
+.gcard p{color:var(--subtle);font-size:.9rem;margin-bottom:24px}.gcard .inp{margin-bottom:10px}
+.gpri{font-size:.75rem;color:var(--muted);margin-top:12px}
+
+/* ===== RESULTS ===== */
+.results{display:none;animation:fadeIn .5s ease}.results.active{display:block}
+
+/* Results Hero */
+.rhero{background:var(--dark);border-radius:var(--r-lg);padding:36px 28px;text-align:center;color:#fff;margin-bottom:24px;position:relative;overflow:hidden}
+.rhero::after{content:'';position:absolute;top:-50%;right:-30%;width:300px;height:300px;background:rgba(219,48,106,.12);border-radius:50%;pointer-events:none}
+.rhero h2{font-size:1.6rem;font-weight:800;margin-bottom:6px;position:relative;z-index:1}
+.rhero p{opacity:.8;font-size:.92rem;position:relative;z-index:1;white-space:pre-line}
+
+/* Stats Grid */
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px}
+.scard{background:var(--white);border-radius:var(--r-lg);padding:20px;box-shadow:var(--shadow-card);text-align:center}
+.scard .snum{font-size:1.8rem;font-weight:800;color:var(--pink)}
+.scard .slbl{font-size:.78rem;color:var(--subtle);margin-top:2px;font-weight:600}
+
+/* Download Section - Prominent */
+.dl-section{background:var(--white);border-radius:var(--r-lg);padding:28px 24px;box-shadow:var(--shadow-card);margin-bottom:24px}
+.dl-section h3{font-size:1.15rem;font-weight:800;color:var(--dark);margin-bottom:4px}
+.dl-section .dl-sub{font-size:.82rem;color:var(--subtle);margin-bottom:20px}
+.dlbtn{display:flex;align-items:center;gap:14px;padding:16px 20px;background:var(--grey-1);border:2px solid transparent;border-radius:var(--r-md);cursor:pointer;font-family:inherit;text-align:left;width:100%;margin-bottom:10px;transition:all .2s ease}
+.dlbtn:hover{border-color:var(--teal);background:var(--teal-bg)}
+.dlbtn .di{width:44px;height:44px;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;background:var(--teal-light)}
+.dlbtn .dn{font-weight:700;font-size:.9rem;color:var(--dark)}.dlbtn .dd{font-size:.78rem;color:var(--subtle);margin-top:1px}
+.dl-success{display:none;background:var(--green-200);border-radius:var(--r-md);padding:14px 18px;margin-top:12px;font-size:.85rem;color:#235E5A;font-weight:700;align-items:center;gap:8px}
+.dl-success.show{display:flex}
+
+/* Tabs */
+.tabs{display:flex;gap:6px;margin-bottom:24px;flex-wrap:wrap}
+.tab{padding:10px 18px;border-radius:var(--r-pill);font-family:inherit;font-size:.82rem;font-weight:700;cursor:pointer;border:1.5px solid var(--grey-2);background:var(--white);color:var(--subtle);transition:all .2s ease}
+.tab:hover{border-color:var(--pink);color:var(--pink)}.tab.active{background:var(--pink);border-color:var(--pink);color:#fff}
+.tab-panel{display:none;animation:fadeIn .3s ease}.tab-panel.active{display:block}
+
+/* Result Sections */
+.rsec{background:var(--white);border-radius:var(--r-lg);padding:28px 24px;box-shadow:var(--shadow-card);margin-bottom:24px}
+.rsec h3{font-size:1.15rem;font-weight:800;color:var(--dark);margin-bottom:4px}
+.rsec .rsub{font-size:.82rem;color:var(--subtle);margin-bottom:20px}
+
+/* Session List */
+.sess-item{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--grey-1);align-items:flex-start}
+.sess-item:last-child{border-bottom:none}
+.sess-date{width:52px;text-align:center;flex-shrink:0}
+.sess-date .sd-day{font-size:1.4rem;font-weight:800;color:var(--dark);line-height:1}
+.sess-date .sd-mon{font-size:.7rem;font-weight:800;color:var(--teal);text-transform:uppercase;letter-spacing:.05em}
+.sess-date .sd-dow{font-size:.68rem;color:var(--muted)}
+.sess-info{flex:1;min-width:0}
+.sess-time{font-size:.82rem;font-weight:700;color:var(--dark)}
+.sess-topic{font-size:.82rem;color:var(--subtle);margin-top:2px}
+.sess-type{display:inline-block;font-size:.68rem;font-weight:800;padding:2px 8px;border-radius:var(--r-pill);margin-top:4px;text-transform:uppercase;letter-spacing:.03em}
+.sess-type.study{background:var(--teal-light);color:var(--teal)}
+.sess-type.review{background:var(--yellow-200);color:var(--yellow-700)}
+
+/* Flashcards */
+.fc{background:var(--grey-1);border-radius:var(--r-md);padding:20px;cursor:pointer;transition:all .2s ease;border:2px solid transparent;position:relative;margin-bottom:10px}
+.fc:hover{border-color:var(--teal)}.fc.flipped{background:var(--teal-light);border-color:var(--teal)}
+.fc-q{font-weight:700;color:var(--dark);font-size:.9rem}
+.fc-a{display:none;color:var(--dark);font-size:.88rem;margin-top:10px;padding-top:10px;border-top:1px solid rgba(25,120,134,.2);line-height:1.5}
+.fc.flipped .fc-a{display:block}.fc-hint{font-size:.72rem;color:var(--muted);position:absolute;top:10px;right:14px}.fc.flipped .fc-hint{display:none}
+.fc-cat{font-size:.7rem;font-weight:800;color:var(--teal);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+
+/* Exam Snapshot */
+.snap-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.snap-item{background:var(--grey-1);border-radius:var(--r-sm);padding:14px;text-align:center}
+.snap-val{font-size:1.1rem;font-weight:800;color:var(--dark)}
+.snap-lbl{font-size:.72rem;color:var(--subtle);margin-top:2px;font-weight:600}
+
+/* Checklist */
+.ck-item{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--grey-1);font-size:.85rem;line-height:1.5}
+.ck-item:last-child{border-bottom:none}
+.ck-icon{flex-shrink:0;margin-top:2px}
+
+/* Tips */
+.tip-card{background:var(--grey-1);border-radius:var(--r-md);padding:16px 20px;margin-bottom:10px}
+.tip-card .tip-title{font-weight:800;color:var(--dark);font-size:.88rem;margin-bottom:4px;display:flex;align-items:center;gap:8px}
+.tip-card .tip-text{font-size:.82rem;color:var(--subtle);line-height:1.6}
+
+/* Topics */
+.topic-block{margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--grey-1)}
+.topic-block:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.topic-hdr{display:flex;justify-content:space-between;align-items:start;margin-bottom:8px}
+.topic-name{font-weight:800;color:var(--dark);font-size:.95rem}
+.topic-badge{font-size:.72rem;color:var(--teal);font-weight:800;background:var(--teal-light);padding:3px 10px;border-radius:var(--r-pill);white-space:nowrap}
+.topic-subs{font-size:.82rem;color:var(--subtle);line-height:1.8}
+
+/* Alert */
+.alert-box{background:var(--pink-light);border:1px solid var(--pink-300);border-radius:var(--r-md);padding:14px 18px;margin-bottom:16px;font-size:.85rem;color:var(--pink-hover)}
+
+/* ===== COURSE CTA CARD ===== */
+.course-cta{border-radius:var(--r-lg);padding:32px 28px;margin-bottom:24px;text-align:center;position:relative;overflow:hidden}
+.course-cta.dark{background:var(--dark);color:#fff}
+.course-cta.pink{background:var(--pink);color:#fff}
+.course-cta.teal-light{background:var(--teal-light);color:var(--dark)}
+.course-cta h3{font-size:1.3rem;font-weight:800;margin-bottom:8px}
+.course-cta p{opacity:.9;font-size:.88rem;margin-bottom:20px;line-height:1.6}
+.course-cta .cta-btn{margin:0 auto}
+
+/* ===== INLINE PRODUCT CARD ===== */
+.product-card{background:var(--white);border:1px solid var(--grey-2);border-radius:var(--r-lg);padding:20px 24px;display:flex;align-items:center;gap:16px;margin-bottom:12px;transition:all .2s;cursor:pointer;text-decoration:none}
+.product-card:hover{border-color:var(--pink);box-shadow:var(--shadow-btn)}
+.product-card .pc-icon{width:48px;height:48px;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0}
+.product-card .pc-text{flex:1}
+.product-card .pc-name{font-weight:800;font-size:.95rem;color:var(--dark)}
+.product-card .pc-desc{font-size:.8rem;color:var(--subtle);margin-top:2px}
+.product-card .pc-arrow{color:var(--pink);font-size:1.3rem;font-weight:700;flex-shrink:0}
+
+/* ===== WEEKLY MILESTONES ===== */
+.ms-week{background:var(--white);border:1px solid var(--grey-2);border-radius:var(--r-md);padding:16px 20px;margin-bottom:10px;transition:border-color .2s}
+.ms-week:hover{border-color:var(--teal)}
+.ms-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.ms-label{font-weight:800;font-size:.88rem;color:var(--dark)}
+.ms-hrs{font-size:.78rem;font-weight:700;color:var(--teal);background:var(--teal-light);padding:3px 10px;border-radius:var(--r-pill)}
+.ms-bar{height:6px;background:var(--grey-1);border-radius:3px;overflow:hidden;margin-bottom:6px}
+.ms-fill{height:100%;border-radius:3px;transition:width .4s ease}
+.ms-detail{font-size:.78rem;color:var(--subtle)}
+
+/* ===== CONFIDENCE METER ===== */
+.conf-meter{background:var(--white);border-radius:var(--r-lg);padding:24px;box-shadow:var(--shadow-card);margin-bottom:24px;text-align:center}
+.conf-meter h3{font-size:1rem;font-weight:800;color:var(--dark);margin-bottom:16px}
+.conf-ring{width:120px;height:120px;margin:0 auto 12px;position:relative}
+.conf-ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.conf-ring .bg{fill:none;stroke:var(--grey-1);stroke-width:8}
+.conf-ring .fg{fill:none;stroke-width:8;stroke-linecap:round;transition:stroke-dashoffset .8s ease}
+.conf-score{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:1.8rem;font-weight:800;color:var(--dark)}
+.conf-label{font-size:.85rem;color:var(--subtle);font-weight:600}
+.conf-tips{margin-top:16px;text-align:left}
+.conf-tip{font-size:.82rem;color:var(--subtle);padding:6px 0;border-bottom:1px solid var(--grey-1);display:flex;gap:8px;align-items:flex-start}
+.conf-tip:last-child{border-bottom:none}
+.conf-tip strong{color:var(--dark)}
+
+/* ===== SITE FOOTER ===== */
+.site-footer{background:var(--blue-200);padding:60px 24px}
+.footer-inner{max-width:1188px;margin:0 auto}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;margin-bottom:40px}
+.footer-brand{font-size:1.5rem;font-weight:900;color:var(--dark);margin-bottom:12px}
+.footer-brand .logo-ins{font-size:.8rem;font-weight:800;color:var(--teal);text-transform:uppercase;letter-spacing:.05em;display:block;margin-top:2px}
+.footer-tagline{font-size:.875rem;color:var(--subtle);line-height:1.6;margin-bottom:16px}
+.footer-col h4{font-size:.875rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--dark);margin-bottom:12px}
+.footer-col a{display:block;font-size:1rem;font-weight:700;color:var(--dark);padding:4px 0;transition:color .15s}
+.footer-col a:hover{color:var(--teal)}
+.footer-legal{border-top:1px solid var(--grey-3);padding-top:20px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;font-size:.75rem;color:var(--subtle)}
+.footer-legal a{color:var(--subtle);transition:color .15s}.footer-legal a:hover{color:var(--teal)}
+.footer-legal-links{display:flex;gap:16px}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px){
+  .site-nav .nav-link{display:none}
+  .footer-grid{grid-template-columns:1fr;gap:24px}
+}
+@media(max-width:600px){
+  #confRow{grid-template-columns:1fr!important}
+}
+@media(max-width:480px){
+  .opts{grid-template-columns:1fr}.times{grid-template-columns:1fr 1fr}
+  .sgrid{grid-template-columns:1fr}.card{padding:24px 20px}
+  .days{justify-content:center}.snap-grid{grid-template-columns:1fr}
+  .site-hdr{top:0}.promo{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- PROMO BANNER -->
+<div class="promo">
+  Get pre-licensed online at your own pace. <a href="https://insurance.aceable.com/pre-license/" target="_blank">Start your course today &rarr;</a>
+</div>
+
+<!-- SITE HEADER -->
+<header class="site-hdr">
+  <div class="site-hdr-inner">
+    <a href="https://insurance.aceable.com" target="_blank" class="site-logo">
+      aceable<span class="logo-ins">Insurance</span>
+    </a>
+    <nav class="site-nav">
+      <a href="https://insurance.aceable.com/pre-license/" target="_blank" class="nav-link">Courses</a>
+      <a href="https://insurance.aceable.com/resources/" target="_blank" class="nav-link">Resources</a>
+      <a href="https://insurance.aceable.com/pre-license/" target="_blank" class="cta-btn cta-btn-sm">Start Your Course</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">Free Study Planning Tool</div>
+    <h1>Build Your Pre-Licensing Study Plan</h1>
+    <p>Answer 5 quick questions and get a personalized calendar you can download straight to your phone.</p>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<div class="main-wrap">
+
+<!-- PROGRESS -->
+<div class="prog" id="prog">
+  <div class="prog-steps" id="progSteps"></div>
+  <div class="pbar"><div class="pfill" id="pfill"></div></div>
+</div>
+
+<!-- STEP 1: LICENSE -->
+<div class="card active" id="s1">
+  <h2>What license are you going for?</h2>
+  <p class="sub">Pick the one that fits your career goals.</p>
+  <div class="opts" id="licOpts"></div>
+  <div class="nav"><div></div><button class="btn-next" id="n1" disabled onclick="go(2)">Continue &rarr;</button></div>
+</div>
+
+<!-- STEP 2: STATE -->
+<div class="card" id="s2">
+  <h2>Where do you live?</h2>
+  <p class="sub">Each state has different pre-licensing hour requirements.</p>
+  <div class="fg"><label>Select your state</label><select class="sel" id="stSel" onchange="pickState()"><option value="">Choose your state...</option></select></div>
+  <div class="info" id="stInfo"><div class="row"><div class="dot">&#x1F4DA;</div><div><div class="ttl" id="stTxt"></div><div class="nt" id="stNote"></div></div></div></div>
+  <div class="nav"><button class="btn-back" onclick="go(1)">&larr; Back</button><button class="btn-next" id="n2" disabled onclick="go(3)">Continue &rarr;</button></div>
+</div>
+
+<!-- STEP 3: LIFE -->
+<div class="card" id="s3">
+  <h2>Tell us about your life</h2>
+  <p class="sub">Select everything that applies &mdash; we'll build around it.</p>
+  <div class="opts single" id="lifeOpts"></div>
+  <div class="nav"><button class="btn-back" onclick="go(2)">&larr; Back</button><button class="btn-next" onclick="go(4)">Continue &rarr;</button></div>
+</div>
+
+<!-- STEP 4: SCHEDULE -->
+<div class="card" id="s4">
+  <h2>When can you study?</h2>
+  <p class="sub">Pick the days and times that work best for you.</p>
+  <div class="fg"><label>Which days work for studying?</label><div class="days" id="dayPick"></div></div>
+  <div class="fg"><label>What time of day?</label><div class="times" id="timePick"></div></div>
+  <div class="fg">
+    <label>How long per session?</label>
+    <div class="sdisp"><span id="sLen">60</span> min <span>per session</span></div>
+    <input type="range" id="sSlider" min="30" max="120" step="15" value="60" oninput="document.getElementById('sLen').textContent=this.value;S.sessionMin=+this.value">
+    <div class="slbls"><span>30 min</span><span>1 hr</span><span>1.5 hr</span><span>2 hr</span></div>
+  </div>
+  <div class="nav"><button class="btn-back" onclick="go(3)">&larr; Back</button><button class="btn-next" id="n4" disabled onclick="go(5)">Continue &rarr;</button></div>
+</div>
+
+<!-- STEP 5: DATES -->
+<div class="card" id="s5">
+  <h2>When do you want to start?</h2>
+  <p class="sub">We'll map everything to your timeline.</p>
+  <div class="fg"><label>Start date</label><input type="date" class="inp" id="startD" onchange="chkDates()"></div>
+  <div class="fg"><label>Goal exam date <span style="font-weight:400;color:var(--muted)">(optional &mdash; we'll suggest one)</span></label><input type="date" class="inp" id="goalD" onchange="chkDates()"></div>
+  <div class="nav"><button class="btn-back" onclick="go(4)">&larr; Back</button><button class="btn-next" id="nGen" disabled onclick="buildPlan()">Build My Plan &rarr;</button></div>
+</div>
+
+<!-- ===== RESULTS ===== -->
+<div class="results" id="res">
+  <div class="rhero"><h2>Your Study Plan is Ready!</h2><p id="resSub"></p></div>
+  <div id="alertArea"></div>
+
+  <!-- CONFIDENCE METER + STATS -->
+  <div style="display:grid;grid-template-columns:1fr 2fr;gap:16px;margin-bottom:24px;align-items:start" id="confRow">
+    <div class="conf-meter" id="confMeter"></div>
+    <div>
+      <div class="sgrid" id="resGrid" style="margin-bottom:0"></div>
+    </div>
+  </div>
+
+  <!-- DOWNLOAD SECTION - PROMINENT -->
+  <div class="dl-section">
+    <h3>&#x1F4C5; Download Your Calendar</h3>
+    <p class="dl-sub">Add every session to your calendar app so you never miss a study block.</p>
+    <button class="dlbtn" onclick="dlICS()">
+      <div class="di">&#x1F4C5;</div>
+      <div><div class="dn">Download All Sessions (.ICS)</div><div class="dd">Works with Apple Calendar, Google Calendar, Outlook &amp; more</div></div>
+    </button>
+    <div id="dlMonthly" style="margin-top:4px"></div>
+    <button class="dlbtn" onclick="dlGoogle()">
+      <div class="di" style="background:#E8F0FE">&#x1F310;</div>
+      <div><div class="dn">Open in Google Calendar</div><div class="dd">Opens your first session &mdash; use the .ICS file for all sessions</div></div>
+    </button>
+    <div class="dl-success" id="dlSuccess">&#x2705; Calendar file downloaded! Open it to add all <span id="dlCount"></span> sessions to your calendar.</div>
+    <div style="background:var(--yellow-200);border-radius:var(--r-md);padding:12px 16px;margin-top:12px;font-size:.82rem;color:var(--yellow-700);line-height:1.5">
+      <strong>Tip:</strong> If your calendar app doesn't import all sessions at once, use the monthly downloads below. Some apps have trouble with large .ICS files.
+    </div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs" id="tabBar">
+    <button class="tab active" onclick="showTab('schedule')">&#x1F4C5; Schedule</button>
+    <button class="tab" onclick="showTab('topics')">&#x1F4D6; Topics</button>
+    <button class="tab" onclick="showTab('flashcards')">&#x1F0CF; Flashcards</button>
+    <button class="tab" onclick="showTab('examprep')">&#x1F3AF; Exam Prep</button>
+  </div>
+
+  <!-- SCHEDULE TAB -->
+  <div class="tab-panel active" id="panel-schedule">
+    <div class="rsec" id="milestoneSec">
+      <h3>Weekly Milestones</h3>
+      <p class="rsub">Track your progress week by week. Each milestone brings you closer to exam day.</p>
+      <div id="milestoneList"></div>
+    </div>
+    <div class="rsec">
+      <h3>Your Study Sessions</h3>
+      <p class="rsub">Every session mapped to a date, time, and topic.</p>
+      <div id="sessList"></div>
+    </div>
+  </div>
+
+  <!-- TOPICS TAB -->
+  <div class="tab-panel" id="panel-topics">
+    <div class="rsec">
+      <h3>What to Study &amp; When</h3>
+      <p class="rsub">Topics mapped to your exam content outline, matched to your schedule.</p>
+      <div id="topicList"></div>
+    </div>
+  </div>
+
+  <!-- FLASHCARDS TAB -->
+  <div class="tab-panel" id="panel-flashcards">
+    <div class="rsec">
+      <h3>Key Terms Flashcards</h3>
+      <p class="rsub">Tap any card to reveal the answer. <strong id="fcCount"></strong> cards for your license type.</p>
+      <div id="fcDeck"></div>
+      <div style="margin-top:20px;padding-top:20px;border-top:1px solid var(--grey-1);text-align:center">
+        <button class="cta-btn" onclick="dlFlashcardPDF()">&#x1F4C4; Download Flashcard PDF</button>
+        <p style="font-size:.75rem;color:var(--muted);margin-top:8px">Printable study cards to take on the go</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXAM PREP TAB -->
+  <div class="tab-panel" id="panel-examprep">
+    <div class="rsec" id="examSnap">
+      <h3>Your Exam at a Glance</h3>
+      <p class="rsub" id="snapSub"></p>
+      <div class="snap-grid" id="snapGrid"></div>
+    </div>
+    <div class="rsec">
+      <h3>Exam Day Checklist</h3>
+      <p class="rsub">Everything you need to know before test day.</p>
+      <div id="examChecklist"></div>
+    </div>
+    <div class="rsec" id="tipsSection">
+      <h3>Study Tips for Your Life</h3>
+      <p class="rsub">Personalized to how you told us you live.</p>
+      <div id="tipsList"></div>
+    </div>
+  </div>
+
+  <!-- COURSE RECOMMENDATIONS -->
+  <div id="courseRecs"></div>
+
+  <!-- BOTTOM CTA (dynamic) -->
+  <div id="bottomCta"></div>
+
+  <div style="text-align:center;margin-top:24px">
+    <button class="cta-btn cta-btn-secondary cta-btn-sm" onclick="startOver()">&#x21BA; Start Over</button>
+  </div>
+</div>
+
+</div><!-- /main-wrap -->
+
+<!-- EMAIL GATE -->
+<div class="gate" id="gate">
+  <div class="gcard">
+    <div style="font-size:2.5rem;margin-bottom:12px">&#x1F4C5;</div>
+    <h3>Your Plan is Ready!</h3>
+    <p>Enter your email to get your personalized study calendar and flashcard deck.</p>
+    <input class="inp" id="gEmail" placeholder="you@email.com" onkeydown="if(event.key==='Enter')submitGate()">
+    <input class="inp" id="gName" placeholder="First name (optional)" onkeydown="if(event.key==='Enter')submitGate()">
+    <button class="cta-btn" onclick="submitGate()" style="width:100%;margin-top:8px;padding:16px">Get My Study Plan &rarr;</button>
+    <p class="gpri">No spam, ever. We just want to help you pass.</p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">aceable<span class="logo-ins">Insurance</span></div>
+        <p class="footer-tagline">Online insurance pre-licensing courses. State-approved, self-paced, and built for busy people.</p>
+        <a href="https://insurance.aceable.com/pre-license/" target="_blank" class="cta-btn cta-btn-sm">Start Your Course</a>
+      </div>
+      <div class="footer-col">
+        <h4>Courses</h4>
+        <a href="https://insurance.aceable.com/pre-license/" target="_blank">Property &amp; Casualty</a>
+        <a href="https://insurance.aceable.com/pre-license/" target="_blank">Life &amp; Health</a>
+        <a href="https://insurance.aceable.com/pre-license/" target="_blank">All Lines</a>
+        <a href="https://insurance.aceable.com/pre-license/" target="_blank">Browse All Courses</a>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="https://insurance.aceable.com/resources/" target="_blank">Blog &amp; Guides</a>
+        <a href="https://insurance.aceable.com/support/" target="_blank">Help Center</a>
+        <a href="https://insurance.aceable.com/pre-license/" target="_blank">State Requirements</a>
+        <a href="https://insurance.aceable.com/support/" target="_blank">Contact Us</a>
+      </div>
+    </div>
+    <div class="footer-legal">
+      <div class="footer-legal-links">
+        <a href="https://www.aceable.com/privacy/" target="_blank">Privacy Policy</a>
+        <a href="https://www.aceable.com/terms/" target="_blank">Terms of Use</a>
+      </div>
+      <span>&copy; 2026 Aceable, Inc. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+var GATE = false;
+
+// ===== LICENSE & UI DATA =====
+var LIC={pc:{l:"Property & Casualty",e:"&#x1F3E0;",slug:"property-and-casualty"},life:{l:"Life",e:"&#x1F49A;",slug:"life"},health:{l:"Health / Accident",e:"&#x1FA7A;",slug:"health"},lh:{l:"Life & Health",e:"&#x26A1;",slug:"life-and-health"},pl:{l:"Personal Lines",e:"&#x1F4CB;",slug:"personal-lines"},pclh:{l:"All Lines",e:"&#x1F3AF;",slug:"all-in-one"}};
+
+// ===== STATE COURSE URL MAP =====
+// States where Aceable has dedicated course pages
+var STATE_SLUGS={
+AZ:"arizona",CA:"california",FL:"florida",GA:"georgia",
+IL:"illinois",LA:"louisiana",MA:"massachusetts",MI:"michigan",
+MO:"missouri",NY:"new-york",NC:"north-carolina",OH:"ohio",
+OK:"oklahoma",PA:"pennsylvania",SC:"south-carolina",TN:"tennessee",
+TX:"texas",WA:"washington"
+};
+// Build the right URL: state-specific with license type if available, else hub
+function getCourseUrl(stCode,licKey){
+  var base='https://insurance.aceable.com';
+  var stSlug=STATE_SLUGS[stCode];
+  if(!stSlug) return base+'/pre-license/';
+  var licSlug=LIC[licKey].slug;
+  // All-in-one and specific combos that exist on site
+  if(licKey==='pclh') return base+'/pre-license/'+stSlug+'/all-in-one/';
+  if(licKey==='lh') return base+'/pre-license/'+stSlug+'/life-and-health/';
+  if(licKey==='pc') return base+'/pre-license/'+stSlug+'/property-and-casualty/';
+  // For other types, link to state page (they'll find the right course)
+  return base+'/pre-license/'+stSlug+'/';
+}
+function getStateUrl(stCode){
+  var base='https://insurance.aceable.com';
+  var stSlug=STATE_SLUGS[stCode];
+  return stSlug ? base+'/pre-license/'+stSlug+'/' : base+'/pre-license/';
+}
+var LIFE_OPTS=[{v:"ft",l:"Working full-time",e:"&#x1F4BC;"},{v:"pt",l:"Working part-time",e:"&#x1F552;"},{v:"py",l:"Parent of young kids (under 5)",e:"&#x1F476;"},{v:"ps",l:"Parent of school-age kids",e:"&#x1F392;"},{v:"cg",l:"Caregiver for family member",e:"&#x1F91D;"},{v:"st",l:"Currently a student",e:"&#x1F393;"},{v:"fl",l:"Flexible schedule / lots of free time",e:"&#x2728;"}];
+var DAYS_DATA=[{d:1,l:"Mon"},{d:2,l:"Tue"},{d:3,l:"Wed"},{d:4,l:"Thu"},{d:5,l:"Fri"},{d:6,l:"Sat"},{d:0,l:"Sun"}];
+var TIMES_DATA=[{v:"morning",e:"&#x1F305;",l:"Morning",r:"6 AM - 11 AM"},{v:"afternoon",e:"&#x2600;&#xFE0F;",l:"Afternoon",r:"12 PM - 4 PM"},{v:"evening",e:"&#x1F319;",l:"Evening",r:"6 PM - 10 PM"}];
+var STEPS=["License","State","Your Life","Schedule","Dates"];
+
+// ===== STATE DATA (updated Mar 2026) =====
+// Sources: Kaplan Financial, ExamFX, state DOI sites. Many states eliminated pre-licensing 2023-2025.
+var ST={
+AL:{n:"Alabama",pc:0,life:0,health:0,lh:0,pl:0,qs:150,pass:70,time:150,prov:"Pearson VUE",nt:"No mandated pre-licensing; study strongly recommended"},
+AK:{n:"Alaska",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PSI",nt:"No mandated pre-licensing; study recommended"},
+AZ:{n:"Arizona",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PSI",nt:"No mandated pre-licensing; study recommended"},
+AR:{n:"Arkansas",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PSI",nt:"No mandated pre-licensing; study recommended"},
+CA:{n:"California",pc:12,life:12,health:12,lh:12,pl:12,qs:100,pass:60,time:120,prov:"PSI",nt:"12-hr Ethics & Code course required for all lines (AB 943, eff. Jan 2026)"},
+CO:{n:"Colorado",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PSI",nt:"No mandated pre-licensing; study recommended"},
+CT:{n:"Connecticut",pc:40,life:20,health:20,lh:40,pl:20,qs:130,pass:70,time:150,prov:"PSI"},
+DE:{n:"Delaware",pc:40,life:40,health:40,lh:40,pl:40,qs:100,pass:70,time:120,prov:"PSI"},
+FL:{n:"Florida",pc:200,life:40,health:40,lh:60,pl:200,qs:150,pass:70,time:150,prov:"Pearson VUE",nt:"FL has the highest hour requirements nationally"},
+GA:{n:"Georgia",pc:16,life:8,health:8,lh:16,pl:8,qs:100,pass:70,time:120,prov:"Pearson VUE"},
+HI:{n:"Hawaii",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PSI",nt:"No mandated pre-licensing; study recommended"},
+ID:{n:"Idaho",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PSI",nt:"No mandated pre-licensing; study recommended"},
+IL:{n:"Illinois",pc:40,life:20,health:20,lh:40,pl:20,qs:100,pass:70,time:120,prov:"PSI",nt:"P&C = 20hr Property + 20hr Casualty; 7.5hr/line must be classroom"},
+IN:{n:"Indiana",pc:40,life:20,health:20,lh:40,pl:40,qs:160,pass:70,time:180,prov:"PSI"},
+IA:{n:"Iowa",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PSI",nt:"No mandated pre-licensing; study recommended"},
+KS:{n:"Kansas",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PSI",nt:"No mandated pre-licensing; study recommended"},
+KY:{n:"Kentucky",pc:40,life:20,health:20,lh:40,pl:20,qs:100,pass:70,time:120,prov:"PSI"},
+LA:{n:"Louisiana",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PSI",nt:"No mandated pre-licensing; study recommended"},
+ME:{n:"Maine",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PSI",nt:"No mandated pre-licensing; study recommended"},
+MD:{n:"Maryland",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PSI",nt:"No mandated pre-licensing; study recommended"},
+MA:{n:"Massachusetts",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PSI",nt:"No mandated pre-licensing; study recommended"},
+MI:{n:"Michigan",pc:40,life:20,health:20,lh:40,pl:20,qs:100,pass:70,time:120,prov:"PSI",nt:"Includes 6hrs ethics per line"},
+MN:{n:"Minnesota",pc:40,life:20,health:20,lh:40,pl:20,qs:100,pass:70,time:120,prov:"PSI"},
+MS:{n:"Mississippi",pc:40,life:0,health:20,lh:20,pl:20,qs:100,pass:70,time:120,prov:"PSI",nt:"Life pre-licensing exempted Jul 2024; P&C and Health still required"},
+MO:{n:"Missouri",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PSI",nt:"No mandated pre-licensing; study recommended"},
+MT:{n:"Montana",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PSI",nt:"No mandated pre-licensing; study recommended"},
+NE:{n:"Nebraska",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PSI",nt:"No mandated pre-licensing; study recommended"},
+NV:{n:"Nevada",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PSI",nt:"No mandated pre-licensing; study recommended"},
+NH:{n:"New Hampshire",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PSI",nt:"No mandated pre-licensing; study recommended"},
+NJ:{n:"New Jersey",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PSI",nt:"No mandated pre-licensing; study recommended"},
+NM:{n:"New Mexico",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PSI",nt:"No mandated pre-licensing; study recommended"},
+NY:{n:"New York",pc:90,life:20,health:20,lh:40,pl:40,qs:150,pass:70,time:150,prov:"PSI",nt:"NY P&C requires 90 classroom hours (statutory minimum)"},
+NC:{n:"North Carolina",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PSI",nt:"Pre-licensing eliminated Oct 2025 (HB 737); study recommended"},
+ND:{n:"North Dakota",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PSI",nt:"No mandated pre-licensing; study recommended"},
+OH:{n:"Ohio",pc:40,life:20,health:20,lh:40,pl:40,qs:100,pass:70,time:120,prov:"PSI"},
+OK:{n:"Oklahoma",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PSI",nt:"No mandated pre-licensing; study recommended"},
+OR:{n:"Oregon",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PSI",nt:"No mandated pre-licensing; study recommended"},
+PA:{n:"Pennsylvania",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PSI",nt:"Pre-licensing eliminated Apr 2025 (Act 142); study recommended"},
+RI:{n:"Rhode Island",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PSI",nt:"No mandated pre-licensing; study recommended"},
+SC:{n:"South Carolina",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PSI",nt:"No mandated pre-licensing; study recommended"},
+SD:{n:"South Dakota",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PSI",nt:"No mandated pre-licensing; study recommended"},
+TN:{n:"Tennessee",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PSI",nt:"No mandated pre-licensing; study recommended"},
+TX:{n:"Texas",pc:0,life:0,health:0,lh:0,pl:0,qs:150,pass:70,time:150,prov:"Pearson VUE",nt:"No pre-licensing for permanent license; 40hrs for temporary license only"},
+UT:{n:"Utah",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PSI",nt:"No mandated pre-licensing; study recommended"},
+VT:{n:"Vermont",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PSI",nt:"No mandated pre-licensing; study recommended"},
+VA:{n:"Virginia",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PSI",nt:"No mandated pre-licensing; study recommended"},
+WA:{n:"Washington",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PSI",nt:"Pre-licensing eliminated Jul 2023; study recommended"},
+DC:{n:"Washington D.C.",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PSI",nt:"No mandated pre-licensing; study recommended"},
+WV:{n:"West Virginia",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PSI",nt:"No mandated pre-licensing; study recommended"},
+WI:{n:"Wisconsin",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PSI",nt:"No mandated pre-licensing; study recommended"},
+WY:{n:"Wyoming",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PSI",nt:"No mandated pre-licensing; study recommended"}
+};
+
+// ===== STUDY TOPICS =====
+var TOPICS={pc:[
+{cat:"Insurance Fundamentals",subs:["Risk types: pure vs speculative, perils, hazards","Insurable interest & elements of a legal contract","Indemnity, deductibles, coinsurance principle","Representations, warranties, concealment","Law of large numbers & adverse selection"]},
+{cat:"Policy Structure & Provisions",subs:["Declarations, insuring agreement, conditions, exclusions","Duties after loss, appraisal, settlement","Cancellation & nonrenewal provisions","Mortgage holder rights & loss payees","Common endorsements & modifications"]},
+{cat:"Property Insurance Basics",subs:["Cause of loss forms: basic, broad, special","ACV vs replacement cost valuation","Coinsurance calculations & penalties","Subrogation & salvage principles","Business interruption coverage"]},
+{cat:"Homeowners & Dwelling Policies",subs:["HO-2 through HO-8 form differences","Coverage A-F breakdown","Personal property special limits","Additional living expense","Dwelling fire policies vs homeowners"]},
+{cat:"Liability Insurance",subs:["Negligence: duty, breach, causation, damages","Third-party vs first-party coverage","Personal & commercial umbrella policies","No-fault benefits & med pay","Damage to rented premises"]},
+{cat:"Personal Auto Policy",subs:["PAP parts A through F","Liability, medical payments, UM/UIM","Collision vs other-than-collision (comprehensive)","Duties after an accident or loss","Covered auto & coverage territory"]},
+{cat:"Commercial Lines Overview",subs:["Commercial Package Policy structure","CGL: occurrence vs claims-made","Businessowners Policy (BOP) basics","Workers compensation fundamentals","Commercial auto & garage coverage"]},
+{cat:"Specialty & Surplus Coverage",subs:["National Flood Insurance Program","FAIR plans & surplus lines","Professional liability / E&O","Directors & Officers (D&O)","Cyber liability & inland marine"]},
+{cat:"State Laws & Regulations",subs:["Licensing requirements & appointments","Unfair trade practices (twisting, rebating)","Claims handling standards","Guaranty association basics","Rate & form approval processes"]}
+],life:[
+{cat:"Life Insurance Basics",subs:["Insurable interest principle","Human life value vs needs approach","Mortality tables & risk classification","Insurer types: stock, mutual, fraternal","Contract elements & legal purpose"]},
+{cat:"Term Life Insurance",subs:["Level term vs decreasing term","Annual renewable term (ART)","Convertibility options","Return of premium riders","Group term life basics"]},
+{cat:"Permanent Life Products",subs:["Whole life: ordinary, limited-pay, single premium","Universal life & flexible premiums","Variable life & variable UL","Indexed universal life","Cash value accumulation & policy loans"]},
+{cat:"Policy Provisions & Riders",subs:["Incontestability & grace period","Waiver of premium rider","Accelerated death benefit","Accidental death benefit","Guaranteed insurability option"]},
+{cat:"Beneficiaries & Settlement",subs:["Primary, contingent, revocable, irrevocable","Settlement options (lump sum, installments, interest)","Per stirpes vs per capita","Common disaster & simultaneous death","Assignment: absolute vs collateral"]},
+{cat:"Annuities",subs:["Fixed vs variable annuities","Immediate vs deferred","Accumulation & annuity phases","Settlement/payout options","1035 tax-free exchanges"]},
+{cat:"Nonforfeiture & Dividends",subs:["Cash surrender value","Reduced paid-up insurance","Extended term option","Policy loan provisions","Dividend options (paid-up additions, reduce premiums)"]},
+{cat:"Tax & Business Uses",subs:["Death benefit taxation (income tax-free)","Modified Endowment Contracts (MECs)","Key person insurance","Buy-sell agreement funding","Estate & gift tax basics"]},
+{cat:"State Laws & Ethics",subs:["Licensing & appointment requirements","Replacement regulations","Unfair trade practices","Advertising standards","Guaranty association protections"]}
+],health:[
+{cat:"Health Insurance Fundamentals",subs:["Medical expense, disability, LTC overview","Plan types: HMO, PPO, POS, EPO","Indemnity vs service plans","Usual, customary & reasonable (UCR)","Stop-loss & out-of-pocket maximums"]},
+{cat:"Medical Expense Coverage",subs:["Basic medical expense policies","Major medical: deductibles, coinsurance","Comprehensive policies","Prescription drug coverage","Coordination of benefits (COB)"]},
+{cat:"Disability Income Insurance",subs:["Short-term vs long-term disability","Own-occupation vs any-occupation","Elimination (waiting) period","Residual & partial disability","Social Security integration"]},
+{cat:"Group Health Insurance",subs:["Eligibility & enrollment rules","COBRA continuation (18-36 months)","ERISA requirements","Employer contribution structures","Conversion privileges"]},
+{cat:"Medicare & Supplements",subs:["Medicare Parts A, B, C, D","Medigap standardized plans","Medicare Advantage","Enrollment periods & penalties","Supplement marketing rules"]},
+{cat:"Long-Term Care",subs:["ADL benefit triggers (2 of 6)","Levels of care (skilled, custodial)","Tax-qualified vs non-qualified","Partnership programs","Required policy provisions"]},
+{cat:"ACA & Market Reforms",subs:["Essential health benefits (10 categories)","Health insurance marketplace/exchanges","Premium subsidies & cost-sharing","Guaranteed issue & community rating","Preventive care requirements"]},
+{cat:"Policy Provisions",subs:["Mandatory vs optional provisions","Pre-existing condition rules","Grace period & reinstatement","HIPAA portability","Uniform policy provisions"]},
+{cat:"State Regulations",subs:["Licensing requirements","Unfair claims settlement","Small group market rules","State continuation laws","Insurance fraud penalties"]}
+]};
+TOPICS.lh=[].concat(TOPICS.life,TOPICS.health);TOPICS.pl=TOPICS.pc;TOPICS.pclh=[].concat(TOPICS.pc,TOPICS.life,TOPICS.health);
+
+// ===== FLASHCARDS =====
+var FC={pc:[
+{cat:"Fundamentals",q:"What's the difference between a peril and a hazard?",a:"A peril is the direct cause of loss (fire, theft, windstorm). A hazard is a condition that increases the chance of loss. Three types: physical (icy sidewalk), moral (intent to defraud), morale (carelessness)."},
+{cat:"Fundamentals",q:"What are the 4 elements of a legal contract?",a:"(1) Offer & acceptance, (2) Consideration (premium for promise to pay), (3) Legal purpose, (4) Competent parties. All four must be present."},
+{cat:"Fundamentals",q:"What is the principle of indemnity?",a:"The insured should be restored to the same financial position as before the loss — no better, no worse. Prevents profiting from insurance."},
+{cat:"Fundamentals",q:"What is adverse selection?",a:"The tendency of higher-risk individuals to seek insurance more than lower-risk people. Insurers combat this through underwriting."},
+{cat:"Fundamentals",q:"What is subrogation?",a:"After the insurer pays a claim, they gain the right to pursue recovery from the responsible third party. The insured can't collect from both."},
+{cat:"Property",q:"What is the coinsurance formula?",a:"(Amount Carried / Amount Required) x Loss = Payment. If you insure below the required percentage (usually 80%), you become a co-insurer and share the loss."},
+{cat:"Property",q:"ACV vs replacement cost?",a:"Actual Cash Value = replacement cost MINUS depreciation. Replacement Cost = cost to replace with like kind and quality at current prices, no depreciation deducted."},
+{cat:"Property",q:"Name the 3 cause of loss forms.",a:"Basic (11 named perils), Broad (adds more named perils like weight of ice/snow), Special (open peril — covers everything EXCEPT what's specifically excluded)."},
+{cat:"Homeowners",q:"What are the 6 HO coverage sections?",a:"A: Dwelling, B: Other Structures, C: Personal Property, D: Loss of Use, E: Personal Liability, F: Medical Payments to Others."},
+{cat:"Homeowners",q:"What is an HO-3 policy?",a:"The 'Special Form' — most common homeowners policy. Open peril on dwelling (A & B), named peril on personal property (C)."},
+{cat:"Liability",q:"What are the 4 elements of negligence?",a:"(1) Duty of care owed, (2) Breach of that duty, (3) Proximate cause linking breach to injury, (4) Actual damages suffered. ALL four required to prove negligence."},
+{cat:"Auto",q:"Name the PAP coverage parts.",a:"A: Liability, B: Medical Payments, C: Uninsured/Underinsured Motorist, D: Coverage for Damage to Your Auto, E: Duties After Accident, F: General Provisions."},
+{cat:"Auto",q:"Collision vs comprehensive?",a:"Collision = your car hits another vehicle or object (even if your fault). Comprehensive (Other Than Collision) = theft, fire, hail, flood, vandalism, animal strikes."},
+{cat:"Commercial",q:"What does CGL cover?",a:"Commercial General Liability covers third-party bodily injury & property damage, personal/advertising injury, and medical payments. Written on occurrence or claims-made basis."},
+{cat:"Commercial",q:"How does workers comp work?",a:"No-fault, statutory coverage for on-the-job injuries. Provides medical benefits, disability income, rehabilitation, and death benefits. Employee gives up right to sue employer."},
+{cat:"Regulations",q:"Name common unfair trade practices.",a:"Misrepresentation, twisting (inducing replacement through lies), rebating (giving inducements not in the contract), unfair discrimination, defamation of competitors."},
+{cat:"Regulations",q:"What is a state guaranty association?",a:"Protects policyholders if their insurer becomes insolvent. Funded by assessments on remaining solvent insurers in the state. Coverage limits vary by state."}
+],life:[
+{cat:"Basics",q:"When is insurable interest required in life insurance?",a:"At the time of application only — NOT at the time of claim. The policyholder must benefit from the insured's continued life."},
+{cat:"Basics",q:"What is the incontestability clause?",a:"After 2 years from issue, the insurer cannot void the policy for misrepresentation on the application (fraud excepted in some states)."},
+{cat:"Term",q:"Level term vs decreasing term?",a:"Level: death benefit stays the same throughout. Decreasing: benefit decreases over time (common for mortgage protection). Premiums are typically level for both."},
+{cat:"Permanent",q:"Whole life vs universal life?",a:"Whole: fixed premiums, guaranteed cash value growth, guaranteed death benefit. Universal: flexible premiums, adjustable death benefit, cash value tied to interest rates."},
+{cat:"Permanent",q:"What is a Modified Endowment Contract (MEC)?",a:"A life policy that fails the 7-pay test (overfunded). Withdrawals are taxed LIFO (gains first) and hit with 10% penalty if taken before age 59 1/2."},
+{cat:"Provisions",q:"What are the nonforfeiture options?",a:"If you stop paying premiums: (1) Cash surrender — take the cash value, (2) Reduced paid-up — smaller permanent policy, (3) Extended term — same face amount as term for a limited period."},
+{cat:"Provisions",q:"How long is the grace period?",a:"31 days after premium due date. Policy stays in force during grace period. If insured dies during grace, benefit is paid minus the overdue premium."},
+{cat:"Beneficiaries",q:"Revocable vs irrevocable beneficiary?",a:"Revocable: policyowner can change anytime without consent. Irrevocable: requires the beneficiary's written consent to change. Irrevocable beneficiary has vested interest."},
+{cat:"Annuities",q:"Immediate vs deferred annuity?",a:"Immediate: funded with single premium, payouts begin within one annuity period. Deferred: accumulation phase (money grows), then annuitization/payout phase later."},
+{cat:"Tax",q:"What is a 1035 exchange?",a:"Tax-free swap of policies: Life-to-Life OK, Life-to-Annuity OK, Annuity-to-Annuity OK. Annuity-to-Life is NOT allowed."},
+{cat:"Tax",q:"How is a death benefit taxed?",a:"Generally received income tax-free by the beneficiary. Exception: transfer-for-value rule — if the policy was sold/transferred for consideration, gain may be taxable."},
+{cat:"Regulations",q:"What is twisting?",a:"Inducing a policyholder to replace an existing policy through misrepresentation or incomplete comparisons. Illegal in all states."}
+],health:[
+{cat:"Plans",q:"HMO vs PPO vs POS?",a:"HMO: in-network only, need referrals, lowest cost. PPO: can go out-of-network (higher cost), no referrals. POS: hybrid — choose PCP like HMO but can go OON like PPO."},
+{cat:"Plans",q:"What is a stop-loss provision?",a:"Once the insured's out-of-pocket costs hit a set threshold, the insurer pays 100% of covered expenses for the rest of the year. Caps the insured's annual cost."},
+{cat:"Medical",q:"Deductible vs coinsurance?",a:"Deductible: flat dollar amount you pay first each year before insurance kicks in. Coinsurance: percentage split after deductible (typically 80/20 — insurer pays 80%)."},
+{cat:"Disability",q:"Own-occupation vs any-occupation?",a:"Own-occ: you're disabled if you can't perform YOUR specific job. Any-occ: disabled only if you can't perform ANY job you're qualified for. Own-occ is more favorable and more expensive."},
+{cat:"Disability",q:"What is an elimination period?",a:"The waiting period between when disability begins and when benefits start. Works like a time-based deductible. Typically 30 to 180 days. Longer = lower premiums."},
+{cat:"Group",q:"What is COBRA?",a:"Allows employees to continue group health coverage for 18-36 months after a qualifying event (job loss, divorce, etc.). Employee pays full premium plus up to 2% administrative fee."},
+{cat:"Medicare",q:"Medicare Parts A, B, C, D?",a:"A: Hospital/inpatient (premium-free if qualified). B: Medical/outpatient (monthly premium). C: Medicare Advantage (private plans combining A+B). D: Prescription drug coverage."},
+{cat:"LTC",q:"What triggers LTC benefits?",a:"Inability to perform 2 of 6 Activities of Daily Living (bathing, dressing, eating, toileting, transferring, continence) for 90+ days, OR severe cognitive impairment."},
+{cat:"ACA",q:"Name the essential health benefits.",a:"10 categories: ambulatory, emergency, hospitalization, maternity/newborn, mental health/substance abuse, Rx drugs, rehabilitative, lab services, preventive/wellness, pediatric (including dental/vision)."},
+{cat:"Provisions",q:"What is coordination of benefits?",a:"When someone has multiple health plans, COB determines which plan pays first (primary) and which pays second (secondary). Birthday rule applies for dependent children."}
+]};
+FC.lh=[].concat(FC.life,FC.health);FC.pl=FC.pc;FC.pclh=[].concat(FC.pc,FC.life,FC.health);
+
+// ===== STUDY TIPS =====
+var TIPS={
+ft:{icon:"&#x1F4BC;",title:"Working Full-Time",tips:["Block 30-60 min before or after work as non-negotiable study time — consistency beats cramming","Use your commute for audio review (record yourself reading key terms, play it back)","Study on your lunch break — even 20 focused minutes adds up over weeks","Tell your employer you're getting licensed — many are supportive and may even adjust your schedule"]},
+pt:{icon:"&#x1F552;",title:"Working Part-Time",tips:["Schedule study sessions right before or after shifts when you're already in 'work mode'","Use your off-days for longer deep-study blocks (2+ hours)","If your schedule varies, batch-plan your study at the start of each week"]},
+py:{icon:"&#x1F476;",title:"Parent of Young Kids",tips:["Nap time = study time. Guard it fiercely.","Flashcards are your best friend — review them during feedings or playground time","If you have a partner, trade off kid duty for dedicated 1-hour study blocks","Don't aim for perfection. 20 focused minutes is better than 0 minutes."]},
+ps:{icon:"&#x1F392;",title:"Parent of School-Age Kids",tips:["Study while they do homework — model the behavior and get your hours in","Use the window after drop-off or before pickup for focused sessions","Weekend mornings before activities can be great for uninterrupted study","Get the family involved: let them quiz you on flashcards"]},
+cg:{icon:"&#x1F91D;",title:"Caregiver",tips:["Protect small windows: even 15-minute micro-sessions with flashcards count","Study during waiting rooms, appointment times, and quiet moments","Be realistic about your bandwidth — a slower pace still gets you to the finish line"]},
+st:{icon:"&#x1F393;",title:"Student",tips:["Apply study techniques you already use: spaced repetition, practice tests, study groups","Cross-reference insurance concepts with your coursework where possible","Your brain is already in learning mode — use that momentum"]},
+fl:{icon:"&#x2728;",title:"Flexible Schedule",tips:["With time on your side, aim for quality over quantity — deeper understanding beats memorization","Front-load the harder topics (policy math, coinsurance calculations) while motivation is high","Take practice exams early and often to gauge where you stand"]}
+};
+
+// ===== APP STATE =====
+var S={lic:null,st:null,life:[],days:[],time:null,sessionMin:60,startD:null,goalD:null,plan:null};
+
+// ===== INIT =====
+(function(){
+  document.getElementById('progSteps').innerHTML=STEPS.map(function(s,i){return '<div class="prog-step '+(i===0?'active':'')+'" data-s="'+(i+1)+'"><div class="pdot">'+(i+1)+'</div><span class="plbl">'+s+'</span></div>';}).join('');
+  document.getElementById('licOpts').innerHTML=Object.keys(LIC).map(function(k){var v=LIC[k];return '<button class="opt" data-v="'+k+'" onclick="pickLic(this)"><div class="ico">'+v.e+'</div><div><strong>'+v.l+'</strong></div></button>';}).join('');
+  var ss=document.getElementById('stSel');Object.keys(ST).sort(function(a,b){return ST[a].n.localeCompare(ST[b].n);}).forEach(function(c){ss.innerHTML+='<option value="'+c+'">'+ST[c].n+'</option>';});
+  document.getElementById('lifeOpts').innerHTML=LIFE_OPTS.map(function(x){return '<button class="opt" data-v="'+x.v+'" onclick="togLife(this)"><div class="ico">'+x.e+'</div><div><strong>'+x.l+'</strong></div></button>';}).join('');
+  document.getElementById('dayPick').innerHTML=DAYS_DATA.map(function(x){return '<button class="day" data-d="'+x.d+'" onclick="togDay(this)">'+x.l+'</button>';}).join('');
+  document.getElementById('timePick').innerHTML=TIMES_DATA.map(function(x){return '<button class="tslot" data-t="'+x.v+'" onclick="pickTime(this)"><div class="ti">'+x.e+'</div><div class="tl">'+x.l+'</div><div class="tr">'+x.r+'</div></button>';}).join('');
+  var tmrw=new Date();tmrw.setDate(tmrw.getDate()+1);document.getElementById('startD').value=fmtD(tmrw);document.getElementById('startD').min=fmtD(tmrw);
+})();
+
+function fmtD(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+
+// ===== NAVIGATION =====
+function go(n){
+  document.querySelectorAll('.card').forEach(function(c){c.classList.remove('active');});
+  document.getElementById('s'+n).classList.add('active');
+  document.querySelectorAll('.prog-step').forEach(function(s){var sn=+s.dataset.s;s.classList.remove('active','done');if(sn===n)s.classList.add('active');else if(sn<n)s.classList.add('done');});
+  document.getElementById('pfill').style.width=((n-1)/4*100)+'%';
+  window.scrollTo({top:document.querySelector('.hero').offsetHeight,behavior:'smooth'});
+}
+
+// ===== STEP HANDLERS =====
+function pickLic(btn){document.querySelectorAll('#licOpts .opt').forEach(function(b){b.classList.remove('sel');});btn.classList.add('sel');S.lic=btn.dataset.v;document.getElementById('n1').disabled=false;}
+function pickState(){
+  var c=document.getElementById('stSel').value;
+  if(!c){document.getElementById('stInfo').style.display='none';document.getElementById('n2').disabled=true;return;}
+  S.st=c;var s=ST[c];var h=getHrs(c,S.lic);
+  document.getElementById('stTxt').textContent=h===0?s.n+" doesn't mandate pre-licensing hours":s.n+" requires "+h+" hours for "+LIC[S.lic].l;
+  document.getElementById('stNote').textContent=s.nt||(h===0?"We'll build a recommended study plan.":"We'll spread these across your available days.");
+  document.getElementById('stInfo').style.display='block';document.getElementById('n2').disabled=false;
+}
+function getHrs(st,lic){var s=ST[st];if(lic==='pclh')return(s.pc||0)+(s.lh||0);return s[lic]||0;}
+function togLife(btn){btn.classList.toggle('sel');var v=btn.dataset.v;if(S.life.indexOf(v)>-1)S.life=S.life.filter(function(x){return x!==v;});else S.life.push(v);}
+function togDay(btn){btn.classList.toggle('sel');var d=+btn.dataset.d;if(S.days.indexOf(d)>-1)S.days=S.days.filter(function(x){return x!==d;});else S.days.push(d);chk4();}
+function pickTime(btn){document.querySelectorAll('.tslot').forEach(function(b){b.classList.remove('sel');});btn.classList.add('sel');S.time=btn.dataset.t;chk4();}
+function chk4(){document.getElementById('n4').disabled=!(S.days.length>0&&S.time);}
+function chkDates(){S.startD=document.getElementById('startD').value?new Date(document.getElementById('startD').value+'T00:00:00'):null;S.goalD=document.getElementById('goalD').value?new Date(document.getElementById('goalD').value+'T00:00:00'):null;document.getElementById('nGen').disabled=!S.startD;}
+
+// ===== BUILD PLAN =====
+function buildPlan(){
+  var totalHrs=getHrs(S.st,S.lic);if(totalHrs===0){var d={pc:40,life:20,health:20,lh:40,pl:20,pclh:60};totalHrs=d[S.lic]||40;}
+  var sessHrs=S.sessionMin/60,sorted=[].concat(S.days).sort(function(a,b){return a-b;});
+  var tMap={morning:{h:8},afternoon:{h:13},evening:{h:19}},startH=(tMap[S.time]||tMap.morning).h;
+  var endDate;
+  if(S.goalD){endDate=new Date(S.goalD);}else{var rw=Math.ceil(totalHrs/(S.days.length*sessHrs));endDate=new Date(S.startD);endDate.setDate(endDate.getDate()+Math.ceil(rw*1.25+1)*7);}
+  var allDates=[];var cur=new Date(S.startD);
+  while(cur<=endDate){if(sorted.indexOf(cur.getDay())>-1)allDates.push(new Date(cur));cur.setDate(cur.getDate()+1);}
+  if(!allDates.length){alert('No study days in your date range. Adjust your dates or study days.');return;}
+  var topics=TOPICS[S.lic]||TOPICS.pc,tc=topics.length,needed=Math.ceil(totalHrs/sessHrs),hasExtra=allDates.length>needed;
+  var tight=false,sp=[];
+  if(hasExtra){
+    var left=totalHrs,si=0;
+    for(var i=0;i<allDates.length;i++){
+      if(left>0){var h=Math.min(sessHrs,left);sp.push({date:allDates[i],type:'study',hours:h,topic:topics[si%tc].cat,topicIdx:si%tc});left-=h;si++;}
+      else{sp.push({date:allDates[i],type:'review',hours:sessHrs*.5,topic:'Review & Practice',topicIdx:-1});}
+    }
+  } else {
+    var per=Math.round(totalHrs/allDates.length*100)/100;if(per*60>S.sessionMin)tight=true;
+    var left2=totalHrs;for(var j=0;j<allDates.length;j++){var h2=Math.min(per,left2);sp.push({date:allDates[j],type:'study',hours:Math.round(h2*100)/100,topic:topics[j%tc].cat,topicIdx:j%tc});left2-=h2;}
+  }
+  var events=[];
+  sp.forEach(function(s){
+    var es=new Date(s.date);es.setHours(startH,0,0,0);
+    var dur=s.type==='study'?Math.round(s.hours*60):Math.round(sessHrs*30);
+    var ee=new Date(es);ee.setMinutes(ee.getMinutes()+dur);
+    var titleClean=s.type==='review'?'Review Session - '+LIC[S.lic].l:s.topic+' - '+LIC[S.lic].l;
+    events.push({title:titleClean,start:new Date(es),end:new Date(ee),topic:s.topic,type:s.type});
+  });
+  var se=sp.filter(function(x){return x.type==='study';}).length;
+  S.plan={events:events,sp:sp,totalHrs:totalHrs,totalSess:se,reviewSess:events.length-se,endDate:endDate,tight:tight};
+  if(GATE)document.getElementById('gate').classList.add('active');else showResults();
+}
+function submitGate(){var e=document.getElementById('gEmail').value;if(!e||e.indexOf('@')<0){document.getElementById('gEmail').style.borderColor='var(--pink)';return;}console.log('Lead:',{email:e,name:document.getElementById('gName').value});document.getElementById('gate').classList.remove('active');showResults();}
+
+// ===== RENDER RESULTS =====
+function showResults(){
+  var p=S.plan;document.querySelectorAll('.card').forEach(function(c){c.classList.remove('active');});document.getElementById('prog').style.display='none';document.getElementById('res').classList.add('active');
+  var fN=function(d){return d.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});};
+  document.getElementById('resSub').textContent=p.totalHrs+' hours of '+LIC[S.lic].l+' study in '+ST[S.st].n+'.\n'+fN(S.startD)+' through '+fN(p.endDate);
+  document.getElementById('alertArea').innerHTML=p.tight?'<div class="alert-box"><strong>Heads up:</strong> Your timeline is tight. Some sessions may run longer than '+S.sessionMin+' min. Consider adding more study days or pushing your goal date.</div>':'';
+  document.getElementById('resGrid').innerHTML='<div class="scard"><div class="snum">'+p.totalHrs+'</div><div class="slbl">Study Hours</div></div><div class="scard"><div class="snum">'+(p.totalSess+p.reviewSess)+'</div><div class="slbl">Total Sessions</div></div><div class="scard"><div class="snum">'+p.totalSess+'</div><div class="slbl">Study Sessions</div></div><div class="scard"><div class="snum">'+p.reviewSess+'</div><div class="slbl">Review Sessions</div></div>';
+  document.getElementById('dlCount').textContent=(p.totalSess+p.reviewSess);
+  renderConfidence();renderMilestones();renderMonthlyDownloads();renderSchedule();renderTopics();renderFC();renderExamPrep();renderCourseRecs();showTab('schedule');window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function renderSchedule(){
+  var el=document.getElementById('sessList');
+  var DOWNAMES=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  var MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var html='';
+  S.plan.events.forEach(function(e){
+    var d=e.start;
+    var timeStr=d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',hour12:true});
+    var endStr=e.end.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',hour12:true});
+    var dur=Math.round((e.end-e.start)/60000);
+    html+='<div class="sess-item"><div class="sess-date"><div class="sd-mon">'+MONTHS[d.getMonth()]+'</div><div class="sd-day">'+d.getDate()+'</div><div class="sd-dow">'+DOWNAMES[d.getDay()]+'</div></div><div class="sess-info"><div class="sess-time">'+timeStr+' - '+endStr+' ('+dur+' min)</div><div class="sess-topic">'+e.topic+'</div><span class="sess-type '+e.type+'">'+(e.type==='study'?'Study':'Review')+'</span></div></div>';
+  });
+  el.innerHTML=html;
+}
+
+function renderTopics(){
+  var topics=TOPICS[S.lic]||TOPICS.pc,el=document.getElementById('topicList');
+  var topicDates={};
+  S.plan.sp.forEach(function(s){if(s.topicIdx>=0){if(!topicDates[s.topicIdx])topicDates[s.topicIdx]=[];topicDates[s.topicIdx].push(s.date);}});
+  el.innerHTML=topics.map(function(t,i){
+    var dates=topicDates[i];var dateLabel='';
+    if(dates&&dates.length){
+      var first=dates[0].toLocaleDateString('en-US',{month:'short',day:'numeric'});
+      var last=dates.length>1?dates[dates.length-1].toLocaleDateString('en-US',{month:'short',day:'numeric'}):'';
+      dateLabel=last?first+' - '+last:first;
+    }
+    return '<div class="topic-block"><div class="topic-hdr"><div class="topic-name">'+t.cat+'</div>'+(dateLabel?'<div class="topic-badge">'+dateLabel+'</div>':'')+'</div><div class="topic-subs">'+t.subs.map(function(s){return '&bull; '+s;}).join('<br>')+'</div></div>';
+  }).join('');
+}
+
+function renderFC(){
+  var cards=FC[S.lic]||FC.pc;document.getElementById('fcCount').textContent=cards.length;
+  document.getElementById('fcDeck').innerHTML=cards.map(function(c){return '<div class="fc" onclick="this.classList.toggle(\'flipped\')"><div class="fc-cat">'+c.cat+'</div><div class="fc-q">'+c.q+'</div><div class="fc-a">'+c.a+'</div><div class="fc-hint">tap to reveal</div></div>';}).join('');
+}
+
+function renderExamPrep(){
+  var s=ST[S.st],hrs=getHrs(S.st,S.lic);
+  document.getElementById('snapSub').textContent=s.n+' '+LIC[S.lic].l+' licensing exam';
+  document.getElementById('snapGrid').innerHTML=
+    '<div class="snap-item"><div class="snap-val">'+(hrs>0?hrs+' hrs':'Recommended')+'</div><div class="snap-lbl">Pre-Licensing Hours</div></div>'+
+    '<div class="snap-item"><div class="snap-val">'+s.pass+'%</div><div class="snap-lbl">Passing Score</div></div>'+
+    '<div class="snap-item"><div class="snap-val">~'+s.qs+'</div><div class="snap-lbl">Exam Questions</div></div>'+
+    '<div class="snap-item"><div class="snap-val">'+s.time+' min</div><div class="snap-lbl">Time Limit</div></div>'+
+    '<div class="snap-item"><div class="snap-val">'+s.prov+'</div><div class="snap-lbl">Test Provider</div></div>'+
+    '<div class="snap-item"><div class="snap-val">1 Year</div><div class="snap-lbl">Score Validity</div></div>';
+
+  document.getElementById('examChecklist').innerHTML=[
+    {icon:'&#x1F4F7;',text:'<strong>Government-issued photo ID</strong> — must be current and not expired.'},
+    {icon:'&#x1F4CB;',text:'<strong>Exam confirmation</strong> — print or screenshot your scheduling confirmation from '+s.prov+'.'},
+    {icon:'&#x23F0;',text:'<strong>Arrive 30 minutes early</strong> — you\'ll need time to check in and store belongings.'},
+    {icon:'&#x1F6AB;',text:'<strong>No phones or electronics</strong> in the testing room.'},
+    {icon:'&#x1F4A1;',text:'<strong>Read every question carefully.</strong> Watch for "except," "not," and "all of the following."'},
+    {icon:'&#x23F1;',text:'<strong>Pace yourself:</strong> ~'+Math.round(s.time/s.qs*60)+' seconds per question. Flag tough ones and come back.'},
+    {icon:'&#x2705;',text:'<strong>After passing:</strong> Apply for your license through NIPR within the score validity window.'}
+  ].map(function(i){return '<div class="ck-item"><div class="ck-icon">'+i.icon+'</div><div>'+i.text+'</div></div>';}).join('');
+
+  var tipsEl=document.getElementById('tipsList');
+  if(S.life.length===0){
+    tipsEl.innerHTML='<div class="tip-card"><div class="tip-title">General Study Tips</div><div class="tip-text">Consistency beats intensity. Short daily sessions are more effective than occasional long cramming sessions. Use the flashcards to review during downtime.</div></div>';
+  } else {
+    tipsEl.innerHTML=S.life.map(function(l){
+      var t=TIPS[l];if(!t)return '';
+      return '<div class="tip-card"><div class="tip-title">'+t.icon+' '+t.title+'</div><div class="tip-text">'+t.tips.map(function(tip){return '&bull; '+tip;}).join('<br>')+'</div></div>';
+    }).join('');
+  }
+}
+
+// ===== COURSE RECOMMENDATIONS =====
+function renderCourseRecs(){
+  var lic=LIC[S.lic],state=ST[S.st];
+  var courseUrl=getCourseUrl(S.st,S.lic);
+  var stateUrl=getStateUrl(S.st);
+  var hasAceableCourse=!!STATE_SLUGS[S.st];
+  var html='';
+
+  // Top CTA - state-specific messaging
+  html+='<div class="course-cta teal-light" style="margin-top:8px">';
+  html+='<div class="eyebrow" style="color:var(--teal);margin-bottom:12px">RECOMMENDED FOR YOU</div>';
+  if(hasAceableCourse){
+    html+='<h3>Get Your '+state.n+' '+lic.l+' Course</h3>';
+    html+='<p>Aceable has a state-approved '+lic.l+' pre-licensing course for '+state.n+'. Study online at your own pace, on any device.</p>';
+    html+='<a href="'+courseUrl+'" target="_blank" class="cta-btn">Enroll in '+state.n+' '+lic.l+' &rarr;</a>';
+  } else {
+    html+='<h3>'+state.n+' '+lic.l+' Pre-Licensing Course</h3>';
+    html+='<p>Browse Aceable\'s growing catalog of state-approved insurance pre-licensing courses. New states added regularly!</p>';
+    html+='<a href="https://insurance.aceable.com/pre-license/" target="_blank" class="cta-btn">Browse Available Courses &rarr;</a>';
+  }
+  html+='</div>';
+
+  // Product cards with real deep links
+  html+='<div style="margin-top:16px;margin-bottom:24px">';
+  if(hasAceableCourse){
+    html+='<a href="'+courseUrl+'" target="_blank" class="product-card"><div class="pc-icon" style="background:var(--teal-light)">&#x1F4DA;</div><div class="pc-text"><div class="pc-name">'+state.n+' '+lic.l+' Course</div><div class="pc-desc">State-approved &bull; 100% online &bull; Self-paced &bull; Enroll now</div></div><div class="pc-arrow">&rsaquo;</div></a>';
+    // Show other license options for this state
+    var otherLics=[{k:'pc',l:'Property & Casualty'},{k:'lh',l:'Life & Health'},{k:'pclh',l:'All-in-One Bundle'}];
+    otherLics.forEach(function(ol){
+      if(ol.k!==S.lic){
+        var olUrl=getCourseUrl(S.st,ol.k);
+        html+='<a href="'+olUrl+'" target="_blank" class="product-card"><div class="pc-icon" style="background:var(--pink-light)">&#x1F4CB;</div><div class="pc-text"><div class="pc-name">'+state.n+' '+ol.l+'</div><div class="pc-desc">Also available for '+state.n+' &bull; Enroll online</div></div><div class="pc-arrow">&rsaquo;</div></a>';
+      }
+    });
+  } else {
+    html+='<a href="https://insurance.aceable.com/pre-license/" target="_blank" class="product-card"><div class="pc-icon" style="background:var(--teal-light)">&#x1F4DA;</div><div class="pc-text"><div class="pc-name">Browse All Pre-Licensing Courses</div><div class="pc-desc">Available in 18+ states &bull; P&amp;C, Life &amp; Health, All Lines</div></div><div class="pc-arrow">&rsaquo;</div></a>';
+  }
+  html+='<a href="https://insurance.aceable.com/resources/" target="_blank" class="product-card"><div class="pc-icon" style="background:var(--blue-200)">&#x1F4D6;</div><div class="pc-text"><div class="pc-name">Free Study Resources &amp; Guides</div><div class="pc-desc">Blog articles, exam tips, and career guides for new agents</div></div><div class="pc-arrow">&rsaquo;</div></a>';
+  html+='</div>';
+  document.getElementById('courseRecs').innerHTML=html;
+
+  // Bottom CTA - deep link to enrollment
+  var btm='<div class="course-cta dark">';
+  if(hasAceableCourse){
+    btm+='<h3>Ready to Get Licensed in '+state.n+'?</h3>';
+    btm+='<p>Your study plan is set. Now get the state-approved course to match it. Aceable\'s '+lic.l+' course for '+state.n+' is 100% online and self-paced.</p>';
+    btm+='<a href="'+courseUrl+'" target="_blank" class="cta-btn cta-btn-white">Enroll in Your '+state.n+' Course &rarr;</a>';
+  } else {
+    btm+='<h3>Ready to Start Your Pre-Licensing Course?</h3>';
+    btm+='<p>Aceable\'s online courses let you study at your own pace — on your phone, tablet, or computer. State-approved and trusted by thousands of new agents.</p>';
+    btm+='<a href="https://insurance.aceable.com/pre-license/" target="_blank" class="cta-btn cta-btn-white">Browse Insurance Courses &rarr;</a>';
+  }
+  btm+='</div>';
+  document.getElementById('bottomCta').innerHTML=btm;
+}
+
+// ===== CONFIDENCE METER =====
+function renderConfidence(){
+  var p=S.plan,score=0,tips=[];
+  // Score factors (max 100)
+  // 1. Enough total hours? (30 pts)
+  var hrs=getHrs(S.st,S.lic);
+  if(hrs===0||p.totalHrs>=hrs){score+=30;}else{score+=Math.round(p.totalHrs/hrs*30);tips.push('Your plan covers '+p.totalHrs+' of '+hrs+' required hours.');}
+  // 2. Session length appropriate? (15 pts)
+  if(S.sessionMin>=45&&S.sessionMin<=90){score+=15;}else if(S.sessionMin>=30){score+=10;tips.push('Sessions of 45-90 min are ideal for retention.');}else{score+=5;tips.push('Longer sessions help with deep study.');}
+  // 3. Study frequency (20 pts)
+  if(S.days.length>=5){score+=20;}else if(S.days.length>=3){score+=15;tips.push('Adding 1-2 more study days per week boosts retention.');}else{score+=8;tips.push('More frequent, shorter sessions beat fewer long ones.');}
+  // 4. Has review sessions? (15 pts)
+  if(p.reviewSess>0){score+=15;}else{score+=5;tips.push('Build in review sessions to reinforce what you learn.');}
+  // 5. Timeline not too tight (20 pts)
+  if(!p.tight){score+=20;}else{score+=8;tips.push('Your timeline is tight. Consider extending your goal date.');}
+
+  var color=score>=80?'var(--green-700)':score>=60?'var(--yellow-700)':'var(--pink)';
+  var label=score>=80?'Strong Plan':score>=60?'Good Plan':'Needs Work';
+  var circ=2*Math.PI*52;
+  var offset=circ-(score/100*circ);
+
+  var html='<h3>Plan Strength</h3>';
+  html+='<div class="conf-ring"><svg viewBox="0 0 120 120"><circle class="bg" cx="60" cy="60" r="52"/><circle class="fg" cx="60" cy="60" r="52" stroke="'+color+'" stroke-dasharray="'+circ+'" stroke-dashoffset="'+offset+'"/></svg><div class="conf-score">'+score+'</div></div>';
+  html+='<div class="conf-label" style="color:'+color+'">'+label+'</div>';
+  if(tips.length){
+    html+='<div class="conf-tips">';
+    tips.forEach(function(t){html+='<div class="conf-tip"><span>&#x1F4A1;</span><span>'+t+'</span></div>';});
+    html+='</div>';
+  }
+  document.getElementById('confMeter').innerHTML=html;
+}
+
+// ===== WEEKLY MILESTONES =====
+function renderMilestones(){
+  var p=S.plan,sp=p.sp;
+  if(!sp||!sp.length){document.getElementById('milestoneSec').style.display='none';return;}
+  // Group sessions by week number
+  var weeks=[],wStart=new Date(sp[0].date);
+  wStart.setDate(wStart.getDate()-wStart.getDay()); // start of week (Sunday)
+  var wIdx=0,totalAcc=0;
+  sp.forEach(function(s){
+    var d=new Date(s.date),sow=new Date(d);sow.setDate(sow.getDate()-sow.getDay());
+    var key=sow.toISOString().split('T')[0];
+    if(!weeks.length||weeks[weeks.length-1].key!==key){
+      weeks.push({key:key,start:new Date(sow),sessions:[],studyHrs:0,reviewCount:0});
+    }
+    var w=weeks[weeks.length-1];
+    w.sessions.push(s);
+    if(s.type==='study'){w.studyHrs+=s.hours;}else{w.reviewCount++;}
+  });
+
+  var cumHrs=0,totalStudyHrs=p.totalHrs;
+  var html='';
+  weeks.forEach(function(w,i){
+    cumHrs+=w.studyHrs;
+    var pct=Math.min(100,Math.round(cumHrs/totalStudyHrs*100));
+    var wEnd=new Date(w.start);wEnd.setDate(wEnd.getDate()+6);
+    var rangeStr=w.start.toLocaleDateString('en-US',{month:'short',day:'numeric'})+' - '+wEnd.toLocaleDateString('en-US',{month:'short',day:'numeric'});
+    var color=pct<33?'var(--pink)':pct<66?'var(--yellow-500)':'var(--green-600)';
+    var details=w.sessions.length+' session'+(w.sessions.length>1?'s':'')+' &bull; '+Math.round(w.studyHrs*10)/10+' study hrs';
+    if(w.reviewCount)details+=' &bull; '+w.reviewCount+' review';
+    // Topic focus for the week
+    var topicCounts={};w.sessions.forEach(function(s){if(s.type==='study'){topicCounts[s.topic]=(topicCounts[s.topic]||0)+1;}});
+    var topTopic=Object.keys(topicCounts).sort(function(a,b){return topicCounts[b]-topicCounts[a];})[0];
+    if(topTopic)details+=' &bull; Focus: '+topTopic;
+
+    html+='<div class="ms-week">';
+    html+='<div class="ms-hdr"><span class="ms-label">Week '+(i+1)+': '+rangeStr+'</span><span class="ms-hrs">'+pct+'% complete</span></div>';
+    html+='<div class="ms-bar"><div class="ms-fill" style="width:'+pct+'%;background:'+color+'"></div></div>';
+    html+='<div class="ms-detail">'+details+'</div>';
+    html+='</div>';
+  });
+  document.getElementById('milestoneList').innerHTML=html;
+}
+
+function showTab(id){document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');});document.querySelectorAll('.tab-panel').forEach(function(p){p.classList.remove('active');});document.querySelector('.tab[onclick="showTab(\''+id+'\')"]').classList.add('active');document.getElementById('panel-'+id).classList.add('active');}
+
+// ===== ICS EXPORT =====
+function makeICS(eventSubset,calName){
+  var evts=eventSubset||S.plan.events;
+  var name=calName||('Aceable Study Plan - '+LIC[S.lic].l);
+  var lines=[];
+  lines.push('BEGIN:VCALENDAR');
+  lines.push('VERSION:2.0');
+  lines.push('PRODID:-//Aceable Insurance//Study Planner//EN');
+  lines.push('CALSCALE:GREGORIAN');
+  lines.push('METHOD:PUBLISH');
+  lines.push('X-WR-CALNAME:'+name);
+
+  var stamp=new Date();
+  function pad(n){return String(n).padStart(2,'0');}
+  function fmtUtc(d){return d.getUTCFullYear()+pad(d.getUTCMonth()+1)+pad(d.getUTCDate())+'T'+pad(d.getUTCHours())+pad(d.getUTCMinutes())+pad(d.getUTCSeconds())+'Z';}
+  function fmtLocal(d){return d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate())+'T'+pad(d.getHours())+pad(d.getMinutes())+'00';}
+  var dtstamp=fmtUtc(stamp);
+
+  var tz;
+  try{tz=Intl.DateTimeFormat().resolvedOptions().timeZone;}catch(e){tz='';}
+
+  evts.forEach(function(e,i){
+    lines.push('BEGIN:VEVENT');
+    lines.push('UID:aceable-study-'+i+'-'+stamp.getTime()+'@insurance.aceable.com');
+    lines.push('DTSTAMP:'+dtstamp);
+    if(tz){
+      lines.push('DTSTART;TZID='+tz+':'+fmtLocal(e.start));
+      lines.push('DTEND;TZID='+tz+':'+fmtLocal(e.end));
+    }else{
+      lines.push('DTSTART:'+fmtLocal(e.start));
+      lines.push('DTEND:'+fmtLocal(e.end));
+    }
+    lines.push('SUMMARY:'+e.title);
+    var evUrl=getCourseUrl(S.st,S.lic);
+    lines.push('DESCRIPTION:Topic: '+e.topic+'\\nGet your '+ST[S.st].n+' course: '+evUrl+'\\nAceable Insurance - insurance.aceable.com');
+    lines.push('URL:'+evUrl);
+    lines.push('STATUS:CONFIRMED');
+    lines.push('BEGIN:VALARM');
+    lines.push('TRIGGER:-PT15M');
+    lines.push('ACTION:DISPLAY');
+    lines.push('DESCRIPTION:Study session starting soon');
+    lines.push('END:VALARM');
+    lines.push('END:VEVENT');
+  });
+  lines.push('END:VCALENDAR');
+  return lines.join('\r\n');
+}
+
+function downloadICSBlob(content,filename){
+  try{
+    var blob=new Blob([content],{type:'text/calendar;charset=utf-8'});
+    if(window.navigator&&window.navigator.msSaveOrOpenBlob){
+      window.navigator.msSaveOrOpenBlob(blob,filename);
+    }else{
+      var url=URL.createObjectURL(blob);
+      var a=document.createElement('a');
+      a.href=url;a.download=filename;a.style.display='none';
+      document.body.appendChild(a);a.click();
+      setTimeout(function(){document.body.removeChild(a);URL.revokeObjectURL(url);},1000);
+    }
+    return true;
+  }catch(err){
+    var dataUri='data:text/calendar;charset=utf-8,'+encodeURIComponent(content);
+    window.open(dataUri);
+    return true;
+  }
+}
+
+function dlICS(){
+  var content=makeICS();
+  var filename='aceable-study-plan-'+ST[S.st].n.toLowerCase().replace(/\s+/g,'-')+'.ics';
+  downloadICSBlob(content,filename);
+  var msg=document.getElementById('dlSuccess');
+  msg.classList.add('show');
+  setTimeout(function(){msg.classList.remove('show');},8000);
+}
+
+// Monthly batch downloads — workaround for calendar apps that choke on large ICS files
+function getEventMonths(){
+  var months={};
+  S.plan.events.forEach(function(e){
+    var key=e.start.getFullYear()+'-'+String(e.start.getMonth()+1).padStart(2,'0');
+    if(!months[key])months[key]={label:e.start.toLocaleDateString('en-US',{month:'long',year:'numeric'}),events:[]};
+    months[key].events.push(e);
+  });
+  return months;
+}
+
+function renderMonthlyDownloads(){
+  var months=getEventMonths();
+  var keys=Object.keys(months).sort();
+  if(keys.length<=1){document.getElementById('dlMonthly').innerHTML='';return;} // no need if only 1 month
+  var html='<div style="font-size:.78rem;font-weight:700;color:var(--subtle);margin-bottom:6px;margin-top:12px">Or download by month:</div>';
+  html+='<div style="display:flex;flex-wrap:wrap;gap:6px">';
+  keys.forEach(function(k){
+    var m=months[k];
+    html+='<button onclick="dlICSMonth(\''+k+'\')" style="padding:8px 14px;border-radius:var(--r-pill);border:1.5px solid var(--grey-2);background:var(--white);font-family:var(--font);font-size:.78rem;font-weight:700;color:var(--subtle);cursor:pointer;transition:all .2s" onmouseover="this.style.borderColor=\'var(--teal)\';this.style.color=\'var(--teal)\'" onmouseout="this.style.borderColor=\'var(--grey-2)\';this.style.color=\'var(--subtle)\'">';
+    html+=m.label+' ('+m.events.length+')</button>';
+  });
+  html+='</div>';
+  document.getElementById('dlMonthly').innerHTML=html;
+}
+
+function dlICSMonth(key){
+  var months=getEventMonths();
+  var m=months[key];
+  if(!m)return;
+  var calName='Aceable Study Plan - '+m.label;
+  var content=makeICS(m.events,calName);
+  var filename='aceable-plan-'+key+'-'+ST[S.st].n.toLowerCase().replace(/\s+/g,'-')+'.ics';
+  downloadICSBlob(content,filename);
+  var msg=document.getElementById('dlSuccess');
+  msg.classList.add('show');
+  setTimeout(function(){msg.classList.remove('show');},8000);
+}
+
+function dlGoogle(){
+  var e=S.plan.events[0];if(!e)return;
+  var f=function(d){return d.toISOString().replace(/[-:]/g,'').split('.')[0]+'Z';};
+  var gcUrl=getCourseUrl(S.st,S.lic);
+  window.open('https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent(e.title)+'&dates='+f(e.start)+'/'+f(e.end)+'&details='+encodeURIComponent('Topic: '+e.topic+'\nDownload the .ICS file from your study plan for ALL sessions.\n\nGet your '+ST[S.st].n+' course: '+gcUrl),'_blank');
+}
+
+// ===== FLASHCARD PDF =====
+function dlFlashcardPDF(){
+  var cards=FC[S.lic]||FC.pc;
+  var lic=LIC[S.lic].l;
+  var state=ST[S.st].n;
+  var w=window.open('','_blank');
+  if(!w){alert('Please allow popups to download the flashcard PDF.');return;}
+  w.document.write('<!DOCTYPE html><html><head><title>'+lic+' Flashcards - Aceable Insurance</title>'+
+'<style>'+
+'@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800;900&display=swap");'+
+'*{box-sizing:border-box;margin:0;padding:0}'+
+'body{font-family:"Nunito Sans",sans-serif;padding:40px;color:#21333F}'+
+'h1{font-size:24px;font-weight:800;color:#21333F;margin-bottom:4px}'+
+'.sub{font-size:14px;color:#43646F;margin-bottom:30px}'+
+'.cards{display:grid;grid-template-columns:1fr 1fr;gap:16px}'+
+'.card{border:2px solid #E8EEEF;border-radius:24px;padding:20px;break-inside:avoid;page-break-inside:avoid;box-shadow:0 0 4px 0 rgba(195,218,232,.6),0 12px 0 0 rgba(195,218,232,.5)}'+
+'.card-cat{font-size:10px;font-weight:800;color:#197886;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}'+
+'.card-q{font-weight:800;font-size:14px;color:#21333F;margin-bottom:12px}'+
+'.card-divider{height:1px;background:#E7F8FA;margin-bottom:12px}'+
+'.card-a{font-size:13px;color:#43646F;line-height:1.6}'+
+'.footer{margin-top:40px;text-align:center;font-size:11px;color:#AFC1C6;border-top:1px solid #E8EEEF;padding-top:20px}'+
+'.footer a{color:#DB306A;font-weight:700;text-decoration:none}'+
+'@media print{body{padding:20px}.cards{gap:12px}.card{padding:14px}}'+
+'</style></head><body>'+
+'<h1>'+lic+' Flashcards</h1>'+
+'<p class="sub">'+state+' Pre-Licensing Exam Prep &bull; '+cards.length+' Cards &bull; <a href="'+getCourseUrl(S.st,S.lic)+'">Aceable Insurance</a></p>'+
+'<div class="cards">'+cards.map(function(c){return '<div class="card"><div class="card-cat">'+c.cat+'</div><div class="card-q">'+c.q+'</div><div class="card-divider"></div><div class="card-a">'+c.a+'</div></div>';}).join('')+'</div>'+
+'<div class="footer">Created by <a href="https://insurance.aceable.com">Aceable Insurance</a> &bull; Get your '+state+' course at <a href="'+getCourseUrl(S.st,S.lic)+'">insurance.aceable.com</a></div>'+
+'</body></html>');
+  w.document.close();
+  setTimeout(function(){w.print();},500);
+}
+
+// ===== START OVER =====
+function startOver(){
+  S={lic:null,st:null,life:[],days:[],time:null,sessionMin:60,startD:null,goalD:null,plan:null};
+  document.querySelectorAll('.opt,.day,.tslot').forEach(function(b){b.classList.remove('sel');});
+  document.getElementById('stSel').value='';document.getElementById('stInfo').style.display='none';
+  document.getElementById('sSlider').value=60;document.getElementById('sLen').textContent='60';
+  document.getElementById('res').classList.remove('active');document.getElementById('prog').style.display='';
+  document.getElementById('dlSuccess').classList.remove('show');
+  document.getElementById('n1').disabled=true;document.getElementById('n2').disabled=true;
+  document.getElementById('n4').disabled=true;document.getElementById('nGen').disabled=true;
+  var t=new Date();t.setDate(t.getDate()+1);document.getElementById('startD').value=fmtD(t);document.getElementById('goalD').value='';
+  go(1);
+}
+</script>
+</body>
+</html>
