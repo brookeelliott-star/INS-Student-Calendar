@@ -399,7 +399,7 @@ input[type="range"]::-webkit-slider-thumb{appearance:none;-webkit-appearance:non
 <!-- STEP 3: LIFE -->
 <div class="card" id="s3">
   <h2>Tell us about your life</h2>
-  <p class="sub">Select everything that applies &mdash; we'll build around it.</p>
+  <p class="sub">Select everything that applies. We'll build around it.</p>
   <div class="opts single" id="lifeOpts"></div>
   <div class="nav"><button class="btn-back" onclick="go(2)">&larr; Back</button><button class="btn-next" onclick="go(4)">Continue &rarr;</button></div>
 </div>
@@ -424,7 +424,7 @@ input[type="range"]::-webkit-slider-thumb{appearance:none;-webkit-appearance:non
   <h2>When do you want to start?</h2>
   <p class="sub">We'll map everything to your timeline.</p>
   <div class="fg"><label>Start date</label><input type="date" class="inp" id="startD" onchange="chkDates()"></div>
-  <div class="fg"><label>Goal exam date <span style="font-weight:400;color:var(--muted)">(optional &mdash; we'll suggest one)</span></label><input type="date" class="inp" id="goalD" onchange="chkDates()"></div>
+  <div class="fg"><label>Goal exam date <span style="font-weight:400;color:var(--muted)">(optional, we'll suggest one)</span></label><input type="date" class="inp" id="goalD" onchange="chkDates()"></div>
   <div class="nav"><button class="btn-back" onclick="go(4)">&larr; Back</button><button class="btn-next" id="nGen" disabled onclick="buildPlan()">Build My Plan &rarr;</button></div>
 </div>
 
@@ -452,7 +452,7 @@ input[type="range"]::-webkit-slider-thumb{appearance:none;-webkit-appearance:non
     <div id="dlMonthly" style="margin-top:4px"></div>
     <button class="dlbtn" onclick="dlGoogle()">
       <div class="di" style="background:#E8F0FE">&#x1F310;</div>
-      <div><div class="dn">Open in Google Calendar</div><div class="dd">Opens your first session &mdash; use the .ICS file for all sessions</div></div>
+      <div><div class="dn">Open in Google Calendar</div><div class="dd">Opens your first session. Use the .ICS file for all sessions</div></div>
     </button>
     <div class="dl-success" id="dlSuccess">&#x2705; Calendar file downloaded! Open it to add all <span id="dlCount"></span> sessions to your calendar.</div>
     <div style="background:var(--yellow-200);border-radius:var(--r-md);padding:12px 16px;margin-top:12px;font-size:.82rem;color:var(--yellow-700);line-height:1.5">
@@ -566,10 +566,9 @@ input[type="range"]::-webkit-slider-thumb{appearance:none;-webkit-appearance:non
     <h3>Your Plan is Ready!</h3>
     <p>Enter your email to get your personalized study calendar and flashcard deck.</p>
     <input class="inp" id="gEmail" placeholder="you@email.com" onkeydown="if(event.key==='Enter')submitGate()">
-    <input class="inp" id="gName" placeholder="First name (optional)" onkeydown="if(event.key==='Enter')submitGate()">
+    <input class="inp" id="gName" placeholder="First name" onkeydown="if(event.key==='Enter')submitGate()">
     <button class="cta-btn" onclick="submitGate()" style="width:100%;margin-top:8px;padding:16px">Get My Study Plan &rarr;</button>
     <p class="gpri">No spam, ever. We just want to help you pass.</p>
-    <a href="#" onclick="document.getElementById('gate').classList.remove('active');showResults();return false;" style="display:inline-block;margin-top:12px;font-size:.8rem;color:var(--subtle);text-decoration:underline">Skip for now</a>
   </div>
 </div>
 
@@ -642,7 +641,7 @@ function getStateUrl(stCode){
   var stSlug=STATE_SLUGS[stCode];
   return stSlug ? base+'/pre-license/'+stSlug+'/' : base+'/pre-license/';
 }
-var LIFE_OPTS=[{v:"ft",l:"Working full-time",e:"&#x1F4BC;"},{v:"pt",l:"Working part-time",e:"&#x1F552;"},{v:"py",l:"Parent of young kids (under 5)",e:"&#x1F476;"},{v:"ps",l:"Parent of school-age kids",e:"&#x1F392;"},{v:"cg",l:"Caregiver for family member",e:"&#x1F91D;"},{v:"st",l:"Currently a student",e:"&#x1F393;"},{v:"fl",l:"Flexible schedule / lots of free time",e:"&#x2728;"}];
+var LIFE_OPTS=[{v:"ft",l:"Working full-time",e:"&#x1F4BC;"},{v:"pt",l:"Working part-time",e:"&#x1F552;"},{v:"py",l:"Parent of young kids (under 5)",e:"&#x1F476;"},{v:"ps",l:"Parent of school-age kids",e:"&#x1F392;"},{v:"cg",l:"Caregiver for family member",e:"&#x1F91D;"},{v:"st",l:"Currently a student",e:"&#x1F393;"},{v:"cc",l:"Changing careers",e:"&#x1F504;"},{v:"mv",l:"Military veteran / transitioning",e:"&#x1F396;&#xFE0F;"},{v:"rt",l:"Recently retired / semi-retired",e:"&#x2615;"},{v:"bj",l:"Between jobs",e:"&#x1F50D;"},{v:"si",l:"Looking for additional income",e:"&#x1F4B0;"},{v:"ne",l:"New to the workforce",e:"&#x1F331;"},{v:"fl",l:"Flexible schedule / lots of free time",e:"&#x2728;"}];
 var DAYS_DATA=[{d:1,l:"Mon"},{d:2,l:"Tue"},{d:3,l:"Wed"},{d:4,l:"Thu"},{d:5,l:"Fri"},{d:6,l:"Sat"},{d:0,l:"Sun"}];
 var TIMES_DATA=[{v:"morning",e:"&#x1F305;",l:"Morning",r:"6 AM - 11 AM"},{v:"afternoon",e:"&#x2600;&#xFE0F;",l:"Afternoon",r:"12 PM - 4 PM"},{v:"evening",e:"&#x1F319;",l:"Evening",r:"6 PM - 10 PM"}];
 var STEPS=["License","State","Your Life","Schedule","Dates"];
@@ -659,7 +658,7 @@ CO:{n:"Colorado",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PS
 CT:{n:"Connecticut",pc:40,life:20,health:20,lh:40,pl:20,qs:145,pass:70,time:150,prov:"Pearson VUE"},
 DE:{n:"Delaware",pc:40,life:40,health:40,lh:40,pl:40,qs:100,pass:70,time:120,prov:"PSI"},
 FL:{n:"Florida",pc:200,life:40,health:40,lh:60,pl:200,qs:165,pass:70,time:180,prov:"Pearson VUE",nt:"FL has the highest hour requirements nationally"},
-GA:{n:"Georgia",pc:40,life:20,health:20,lh:40,pl:20,qs:135,pass:70,time:150,prov:"Pearson VUE"},
+GA:{n:"Georgia",pc:16,life:8,health:8,lh:16,pl:8,qs:135,pass:70,time:150,prov:"Pearson VUE"},
 HI:{n:"Hawaii",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PSI",nt:"No mandated pre-licensing; study recommended"},
 ID:{n:"Idaho",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PSI",nt:"No mandated pre-licensing; study recommended"},
 IL:{n:"Illinois",pc:40,life:20,health:20,lh:40,pl:20,qs:100,pass:70,time:120,prov:"PSI",nt:"P&C = 20hr Property + 20hr Casualty; 7.5hr/line must be classroom"},
@@ -812,6 +811,12 @@ py:{icon:"&#x1F476;",title:"Parent of Young Kids",tips:["Nap time = study time. 
 ps:{icon:"&#x1F392;",title:"Parent of School-Age Kids",tips:["Study while they do homework. Model the behavior and get your hours in.","Use the window after drop-off or before pickup for focused sessions.","Weekend mornings before activities can be great for uninterrupted study.","Get the family involved: let them quiz you on flashcards."]},
 cg:{icon:"&#x1F91D;",title:"Caregiver",tips:["Protect small windows: even 15-minute micro-sessions with flashcards count.","Study during waiting rooms, appointment times, and quiet moments.","Be realistic about your bandwidth. A slower pace still gets you to the finish line."]},
 st:{icon:"&#x1F393;",title:"Student",tips:["Apply study techniques you already use: spaced repetition, practice tests, study groups.","Cross-reference insurance concepts with your coursework where possible.","Your brain is already in learning mode, so use that momentum."]},
+cc:{icon:"&#x1F504;",title:"Changing Careers",tips:["Your past experience is an advantage. Insurance touches every industry, so look for connections to what you already know.","Set a target date for your exam and work backward. A deadline keeps momentum going.","Treat studying like onboarding for your new career. Show up every day, even if it's just 30 minutes."]},
+mv:{icon:"&#x1F396;&#xFE0F;",title:"Military Veteran",tips:["Your discipline and structure are a huge advantage here. Apply that same consistency to your study schedule.","Many insurance companies actively recruit veterans. Getting licensed opens doors fast.","Check if your state offers exam fee waivers or expedited licensing for veterans."]},
+rt:{icon:"&#x2615;",title:"Recently Retired",tips:["You've got time and life experience on your side. Use both.","Insurance is a great second career with flexible hours and uncapped earning potential.","Study in the mornings when focus is sharpest, and give yourself weekends off to recharge."]},
+bj:{icon:"&#x1F50D;",title:"Between Jobs",tips:["This is the perfect time to invest in yourself. Getting licensed now means you're ready when opportunity comes.","Treat studying like a part-time job. Set daily hours and stick to them.","Many agencies hire newly licensed agents with no prior experience. The license is your ticket in."]},
+si:{icon:"&#x1F4B0;",title:"Additional Income",tips:["Insurance can start as a side hustle and grow into a full career. The license is step one.","Study around your current schedule. Even 20 minutes a day gets you there.","Focus on passing the exam first. You can figure out the business side after you're licensed."]},
+ne:{icon:"&#x1F331;",title:"New to the Workforce",tips:["Insurance is one of the few careers where you can earn six figures without a college degree.","The exam is very learnable. Thousands of people pass it every month with the right prep.","Start building good study habits now. They'll pay off for every certification you pursue after this."]},
 fl:{icon:"&#x2728;",title:"Flexible Schedule",tips:["With time on your side, aim for quality over quantity. Deeper understanding beats memorization.","Front-load the harder topics (policy math, coinsurance calculations) while motivation is high.","Take practice exams early and often to gauge where you stand."]}
 };
 
@@ -859,7 +864,7 @@ function chkDates(){S.startD=document.getElementById('startD').value?new Date(do
 
 // ===== BUILD PLAN =====
 function buildPlan(){
-  var totalHrs=getHrs(S.st,S.lic);if(totalHrs===0){var d={pc:15,life:10,health:10,lh:15,pl:10,pclh:24};totalHrs=d[S.lic]||15;}
+  var totalHrs=getHrs(S.st,S.lic);if(totalHrs===0){var d={pc:20,life:20,health:20,lh:40,pl:20,pclh:60};totalHrs=d[S.lic]||20;}
   var sessHrs=S.sessionMin/60,sorted=[].concat(S.days).sort(function(a,b){return a-b;});
   var tMap={morning:{h:8},afternoon:{h:13},evening:{h:19}},startH=(tMap[S.time]||tMap.morning).h;
   var endDate;
@@ -896,6 +901,7 @@ function submitGate(){
   var e=document.getElementById('gEmail').value.trim();
   var n=document.getElementById('gName').value.trim();
   if(!e||e.indexOf('@')<1||e.indexOf('.')<3){document.getElementById('gEmail').style.borderColor='var(--pink)';return;}
+  if(!n){document.getElementById('gName').style.borderColor='var(--pink)';return;}
   var btn=document.querySelector('#gate .cta-btn');
   btn.textContent='Sending...';btn.disabled=true;
   var courseUrl=getCourseUrl(S.st,S.lic);
@@ -938,7 +944,7 @@ function showResults(){
     document.getElementById('resSub').textContent=p.totalHrs+' hours of '+LIC[S.lic].l+' study in '+ST[S.st].n+'.\n'+fN(S.startD)+' through '+fN(p.endDate);
     document.getElementById('alertArea').innerHTML=p.tight?'<div class="alert-box"><strong>Heads up:</strong> Your timeline is tight. Some sessions may run longer than '+S.sessionMin+' min. Consider adding more study days or pushing your goal date.</div>':'';
   }
-  document.getElementById('resGrid').innerHTML='<div class="scard"><div class="snum">'+p.totalHrs+'</div><div class="slbl">'+(isUnreg?'Prep Hours':'Study Hours')+'</div></div><div class="scard"><div class="snum">'+(p.totalSess+p.reviewSess)+'</div><div class="slbl">Total Sessions</div></div><div class="scard"><div class="snum">'+p.totalSess+'</div><div class="slbl">Study Sessions</div></div><div class="scard"><div class="snum">'+p.reviewSess+'</div><div class="slbl">Review Sessions</div></div>';
+  document.getElementById('resGrid').innerHTML='<div class="scard"><div class="snum">'+p.totalHrs+'</div><div class="slbl">'+(isUnreg?'Recommended Hours':'Study Hours')+'</div></div><div class="scard"><div class="snum">'+(p.totalSess+p.reviewSess)+'</div><div class="slbl">Total Sessions</div></div><div class="scard"><div class="snum">'+p.totalSess+'</div><div class="slbl">Study Sessions</div></div><div class="scard"><div class="snum">'+p.reviewSess+'</div><div class="slbl">Review Sessions</div></div>';
   document.getElementById('dlCount').textContent=(p.totalSess+p.reviewSess);
   renderConfidence();renderMilestones();renderMonthlyDownloads();renderSchedule();renderTopics();renderFC();renderQuiz();renderExamPrep();renderCourseRecs();showTab('schedule');window.scrollTo({top:0,behavior:'smooth'});
 }
@@ -1179,7 +1185,7 @@ function renderConfidence(){
   if(isUnreg){
     // Unregulated state: empowering scoring calibrated for focused 4-6 week plans
     // 1. Study volume (25 pts) — scaled to recommended hours
-    var recHrs={pc:15,life:10,health:10,lh:15,pl:10,pclh:24}[S.lic]||15;
+    var recHrs={pc:20,life:20,health:20,lh:40,pl:20,pclh:60}[S.lic]||20;
     if(p.totalHrs>=recHrs){score+=25;tips.push('You\'re covering all the material. Solid plan!');}else if(p.totalHrs>=recHrs*0.7){score+=20;tips.push('Great start! A few more sessions would round this out nicely.');}else{score+=12;tips.push('Adding a few more study days would help you cover all topics.');}
     // 2. Topic coverage (25 pts)
     var topics=TOPICS[S.lic]||TOPICS.pc;
