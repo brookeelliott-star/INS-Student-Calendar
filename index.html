@@ -296,23 +296,6 @@ input[type="range"]::-webkit-slider-thumb{appearance:none;-webkit-appearance:non
 .ms-fill{height:100%;border-radius:3px;transition:width .4s ease}
 .ms-detail{font-size:.78rem;color:var(--subtle)}
 
-/* ===== MONTH CALENDAR ===== */
-.cal-month{margin-bottom:24px}
-.cal-month-title{font-weight:800;font-size:1rem;margin-bottom:8px;color:var(--dark);text-align:center}
-.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
-.cal-hdr{text-align:center;font-size:.7rem;font-weight:700;color:var(--muted);padding:6px 0}
-.cal-day{text-align:center;aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:var(--r-sm);font-size:.82rem;color:var(--subtle)}
-.cal-day.study{background:var(--pink-light);color:var(--pink);font-weight:800}
-.cal-day.review{background:var(--teal-light);color:var(--teal);font-weight:700}
-.cal-day.today{box-shadow:inset 0 0 0 2px var(--dark);font-weight:800;color:var(--dark)}
-.cal-day.study.today{box-shadow:inset 0 0 0 2px var(--pink)}
-.cal-day.review.today{box-shadow:inset 0 0 0 2px var(--teal)}
-.cal-day.empty{visibility:hidden}
-.cal-legend{display:flex;gap:16px;justify-content:center;margin-top:12px;font-size:.78rem;color:var(--subtle)}
-.cal-leg-item{display:flex;align-items:center;gap:6px}
-.cal-dot{width:12px;height:12px;border-radius:50%;display:inline-block}
-.cal-dot.study{background:var(--pink-light);border:1px solid var(--pink)}
-.cal-dot.review{background:var(--teal-light);border:1px solid var(--teal)}
 
 /* ===== CONFIDENCE METER ===== */
 .conf-meter{background:var(--white);border-radius:var(--r-lg);padding:24px;box-shadow:var(--shadow-card);margin-bottom:24px;text-align:center}
@@ -501,15 +484,6 @@ input[type="range"]::-webkit-slider-thumb{appearance:none;-webkit-appearance:non
 
   <!-- SCHEDULE TAB -->
   <div class="tab-panel active" id="panel-schedule">
-    <div class="rsec" id="calendarSec">
-      <h3>&#x1F4C5; Your Study Calendar</h3>
-      <p class="rsub">Your study days at a glance.</p>
-      <div id="calendarGrid"></div>
-      <div class="cal-legend">
-        <span class="cal-leg-item"><span class="cal-dot study"></span> Study</span>
-        <span class="cal-leg-item"><span class="cal-dot review"></span> Review</span>
-      </div>
-    </div>
     <div class="rsec" id="milestoneSec">
       <h3>Weekly Milestones</h3>
       <p class="rsub">Track your progress week by week. Each milestone brings you closer to exam day.</p>
@@ -979,7 +953,7 @@ function showResults(){
   }
   document.getElementById('resGrid').innerHTML='<div class="scard"><div class="snum">'+p.totalHrs+'</div><div class="slbl">'+(isUnreg?'Recommended Hours':'Study Hours')+'</div></div><div class="scard"><div class="snum">'+(p.totalSess+p.reviewSess)+'</div><div class="slbl">Total Sessions</div></div><div class="scard"><div class="snum">'+p.totalSess+'</div><div class="slbl">Study Sessions</div></div><div class="scard"><div class="snum">'+p.reviewSess+'</div><div class="slbl">Review Sessions</div></div>';
   document.getElementById('dlCount').textContent=(p.totalSess+p.reviewSess);
-  renderConfidence();renderMilestones();renderCalendar();renderMonthlyDownloads();renderSchedule();renderTopics();renderFC();renderQuiz();renderExamPrep();renderCourseRecs();showTab('schedule');window.scrollTo({top:0,behavior:'smooth'});
+  renderConfidence();renderMilestones();renderMonthlyDownloads();renderSchedule();renderTopics();renderFC();renderQuiz();renderExamPrep();renderCourseRecs();showTab('schedule');window.scrollTo({top:0,behavior:'smooth'});
 }
 
 function renderSchedule(){
@@ -989,8 +963,8 @@ function renderSchedule(){
   // Group events by week
   var weeks=[],evts=S.plan.events;
   evts.forEach(function(e){
-    var d=e.start,sow=new Date(d);sow.setDate(sow.getDate()-sow.getDay());
-    var key=sow.toISOString().split('T')[0];
+    var d=e.start,sow=new Date(d.getFullYear(),d.getMonth(),d.getDate());sow.setDate(sow.getDate()-sow.getDay());
+    var key=sow.getFullYear()+'-'+sow.getMonth()+'-'+sow.getDate();
     if(!weeks.length||weeks[weeks.length-1].key!==key){
       var eow=new Date(sow);eow.setDate(eow.getDate()+6);
       weeks.push({key:key,start:new Date(sow),end:eow,events:[]});
@@ -1268,8 +1242,8 @@ function renderMilestones(){
   wStart.setDate(wStart.getDate()-wStart.getDay()); // start of week (Sunday)
   var wIdx=0,totalAcc=0;
   sp.forEach(function(s){
-    var d=new Date(s.date),sow=new Date(d);sow.setDate(sow.getDate()-sow.getDay());
-    var key=sow.toISOString().split('T')[0];
+    var d=new Date(s.date),sow=new Date(d.getFullYear(),d.getMonth(),d.getDate());sow.setDate(sow.getDate()-sow.getDay());
+    var key=sow.getFullYear()+'-'+sow.getMonth()+'-'+sow.getDate();
     if(!weeks.length||weeks[weeks.length-1].key!==key){
       weeks.push({key:key,start:new Date(sow),sessions:[],studyHrs:0,reviewCount:0});
     }
@@ -1302,41 +1276,7 @@ function renderMilestones(){
   document.getElementById('milestoneList').innerHTML=html;
 }
 
-function renderCalendar(){
-  var evts=S.plan.events;if(!evts||!evts.length){document.getElementById('calendarSec').style.display='none';return;}
-  // Build date lookup: dateKey → 'study'|'review' (study wins over review)
-  var dateMap={};
-  evts.forEach(function(e){
-    var dk=e.start.getFullYear()+'-'+(e.start.getMonth()+1)+'-'+e.start.getDate();
-    if(!dateMap[dk]||e.type==='study')dateMap[dk]=e.type;
-  });
-  // Determine months to render
-  var first=evts[0].start,last=evts[evts.length-1].start;
-  var startM=first.getMonth(),startY=first.getFullYear();
-  var endM=last.getMonth(),endY=last.getFullYear();
-  var DOW=['S','M','T','W','T','F','S'];
-  var MO=['January','February','March','April','May','June','July','August','September','October','November','December'];
-  var today=new Date();var todayKey=today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-  var html='';
-  var y=startY,m=startM;
-  while(y<endY||(y===endY&&m<=endM)){
-    html+='<div class="cal-month"><div class="cal-month-title">'+MO[m]+' '+y+'</div><div class="cal-grid">';
-    DOW.forEach(function(d){html+='<div class="cal-hdr">'+d+'</div>';});
-    var firstDay=new Date(y,m,1).getDay();
-    var daysInMonth=new Date(y,m+1,0).getDate();
-    for(var p=0;p<firstDay;p++){html+='<div class="cal-day empty"></div>';}
-    for(var d=1;d<=daysInMonth;d++){
-      var dk=y+'-'+(m+1)+'-'+d;
-      var cls='cal-day';
-      if(dateMap[dk])cls+=' '+dateMap[dk];
-      if(dk===todayKey)cls+=' today';
-      html+='<div class="'+cls+'">'+d+'</div>';
-    }
-    html+='</div></div>';
-    m++;if(m>11){m=0;y++;}
-  }
-  document.getElementById('calendarGrid').innerHTML=html;
-}
+
 
 function showTab(id){document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');});document.querySelectorAll('.tab-panel').forEach(function(p){p.classList.remove('active');});document.querySelector('.tab[onclick="showTab(\''+id+'\')"]').classList.add('active');document.getElementById('panel-'+id).classList.add('active');}
 
