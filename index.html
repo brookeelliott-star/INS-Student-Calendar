@@ -501,6 +501,7 @@ input[type="range"]::-webkit-slider-thumb{appearance:none;-webkit-appearance:non
     <input class="inp" id="gName" placeholder="First name (optional)" onkeydown="if(event.key==='Enter')submitGate()">
     <button class="cta-btn" onclick="submitGate()" style="width:100%;margin-top:8px;padding:16px">Get My Study Plan &rarr;</button>
     <p class="gpri">No spam, ever. We just want to help you pass.</p>
+    <a href="#" onclick="document.getElementById('gate').classList.remove('active');showResults();return false;" style="display:inline-block;margin-top:12px;font-size:.8rem;color:var(--subtle);text-decoration:underline">Skip for now</a>
   </div>
 </div>
 
@@ -539,7 +540,8 @@ input[type="range"]::-webkit-slider-thumb{appearance:none;-webkit-appearance:non
 </footer>
 
 <script>
-var GATE = false;
+var GATE = true;
+var ITERABLE_API_KEY = ''; // Set your Iterable API key here
 
 // ===== LICENSE & UI DATA =====
 var LIC={pc:{l:"Property & Casualty",e:"&#x1F3E0;",slug:"property-and-casualty"},life:{l:"Life",e:"&#x1F49A;",slug:"life"},health:{l:"Health / Accident",e:"&#x1FA7A;",slug:"health"},lh:{l:"Life & Health",e:"&#x26A1;",slug:"life-and-health"},pl:{l:"Personal Lines",e:"&#x1F4CB;",slug:"personal-lines"},pclh:{l:"All Lines",e:"&#x1F3AF;",slug:"all-in-one"}};
@@ -799,7 +801,22 @@ function buildPlan(){
   S.plan={events:events,sp:sp,totalHrs:totalHrs,totalSess:se,reviewSess:events.length-se,endDate:endDate,tight:tight};
   if(GATE)document.getElementById('gate').classList.add('active');else showResults();
 }
-function submitGate(){var e=document.getElementById('gEmail').value;if(!e||e.indexOf('@')<0){document.getElementById('gEmail').style.borderColor='var(--pink)';return;}console.log('Lead:',{email:e,name:document.getElementById('gName').value});document.getElementById('gate').classList.remove('active');showResults();}
+function submitGate(){
+  var e=document.getElementById('gEmail').value.trim();
+  var n=document.getElementById('gName').value.trim();
+  if(!e||e.indexOf('@')<1||e.indexOf('.')<3){document.getElementById('gEmail').style.borderColor='var(--pink)';return;}
+  var btn=document.querySelector('#gate .cta-btn');
+  btn.textContent='Sending...';btn.disabled=true;
+  var payload={email:e,dataFields:{firstName:n,source:'study-planner',state:S.st,license:LIC[S.lic].l,studyHours:S.plan.totalHrs,totalSessions:S.plan.totalSess+S.plan.reviewSess}};
+  if(ITERABLE_API_KEY){
+    fetch('https://api.iterable.com/api/users/update',{method:'POST',headers:{'Content-Type':'application/json','Api-Key':ITERABLE_API_KEY},body:JSON.stringify(payload)})
+    .then(function(){document.getElementById('gate').classList.remove('active');showResults();})
+    .catch(function(){document.getElementById('gate').classList.remove('active');showResults();});
+  } else {
+    console.log('Iterable lead (no API key set):',payload);
+    document.getElementById('gate').classList.remove('active');showResults();
+  }
+}
 
 // ===== RENDER RESULTS =====
 function showResults(){
