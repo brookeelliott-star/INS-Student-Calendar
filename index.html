@@ -257,6 +257,42 @@ input[type="range"]::-webkit-slider-thumb{appearance:none;-webkit-appearance:non
 .quiz-result .qr-label{font-size:1.1rem;font-weight:800;color:var(--dark);margin:8px 0 4px}
 .quiz-result .qr-sub{font-size:.85rem;color:var(--subtle);margin-bottom:16px}
 
+/* ===== SOCIAL PROOF ===== */
+.social-proof{display:flex;align-items:center;justify-content:center;gap:16px;background:var(--grey-100);border:1px solid var(--grey-2);border-radius:var(--r-md);padding:14px 20px;margin-bottom:20px;flex-wrap:wrap}
+.sp-stars{color:#F59E0B;font-size:1.1rem;letter-spacing:2px}
+.sp-text{font-size:.85rem;color:var(--dark);font-weight:700}
+.sp-text span{color:var(--teal);font-weight:800}
+.sp-divider{width:1px;height:24px;background:var(--grey-3)}
+@media(max-width:480px){.sp-divider{display:none}.social-proof{flex-direction:column;gap:8px;text-align:center}}
+
+/* ===== QUICK QUIZ (Schedule Tab) ===== */
+.qq-inline{background:var(--white);border:2px solid var(--pink-200);border-radius:var(--r-lg);padding:24px 28px;margin-bottom:20px}
+.qq-inline h4{font-size:1rem;font-weight:800;color:var(--dark);margin-bottom:4px}
+.qq-inline .qq-sub{font-size:.82rem;color:var(--subtle);margin-bottom:16px}
+.qq-inline-q{background:var(--grey-100);border:1.5px solid var(--grey-2);border-radius:var(--r-md);padding:16px;margin-bottom:12px}
+.qq-inline-q:last-of-type{margin-bottom:0}
+.qq-inline-q .qqi-text{font-weight:700;font-size:.88rem;color:var(--dark);margin-bottom:10px;line-height:1.5}
+.qq-inline-q .qqi-opts label{display:block;padding:8px 12px;border:1.5px solid var(--grey-2);border-radius:var(--r-sm);margin-bottom:5px;cursor:pointer;font-size:.82rem;color:var(--dark);transition:all .15s;background:var(--white)}
+.qq-inline-q .qqi-opts label:hover{border-color:var(--teal);background:var(--teal-light)}
+.qq-inline-q .qqi-opts label.correct{border-color:var(--green-700);background:var(--green-200);color:var(--green-700);font-weight:700}
+.qq-inline-q .qqi-opts label.wrong{border-color:var(--pink);background:var(--pink-light);color:var(--pink);font-weight:700}
+.qq-inline-q .qqi-explain{display:none;margin-top:10px;padding:10px;background:var(--white);border-radius:var(--r-sm);font-size:.78rem;color:var(--subtle);line-height:1.5}
+.qq-inline-q.answered .qqi-explain{display:block}
+.qq-inline-q.answered .qqi-opts label{pointer-events:none;opacity:.85}
+.qq-inline-result{text-align:center;padding:16px;margin-top:16px;border-radius:var(--r-md)}
+.qq-inline-result.needs-work{background:var(--pink-light);border:1px solid var(--pink-300)}
+.qq-inline-result.good{background:var(--green-200);border:1px solid var(--green-600)}
+
+/* ===== SAVE / SHARE BAR ===== */
+.save-bar{display:flex;gap:10px;justify-content:center;margin-bottom:20px;flex-wrap:wrap}
+.save-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:var(--r-pill);font-family:var(--font);font-size:.82rem;font-weight:700;cursor:pointer;transition:all .2s;border:1.5px solid var(--grey-3);background:var(--white);color:var(--dark)}
+.save-btn:hover{border-color:var(--teal);background:var(--teal-light);color:var(--teal)}
+.save-btn .sb-icon{font-size:1rem}
+.saved-banner{background:var(--teal-light);border:1px solid var(--teal-300);border-radius:var(--r-lg);padding:20px 24px;text-align:center;margin-bottom:20px}
+.saved-banner h3{font-size:1rem;font-weight:800;color:var(--teal);margin-bottom:4px}
+.saved-banner p{font-size:.85rem;color:var(--subtle);margin-bottom:12px}
+.saved-banner .sb-actions{display:flex;gap:10px;justify-content:center}
+
 /* Topics */
 .topic-block{margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--grey-1)}
 .topic-block:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
@@ -380,6 +416,9 @@ input[type="range"]::-webkit-slider-thumb{appearance:none;-webkit-appearance:non
   <div class="pbar"><div class="pfill" id="pfill"></div></div>
 </div>
 
+<!-- SAVED PLAN BANNER (for returning visitors) -->
+<div id="savedBanner" style="display:none"></div>
+
 <!-- STEP 1: LICENSE -->
 <div class="card active" id="s1">
   <h2>What license are you going for?</h2>
@@ -434,6 +473,9 @@ input[type="range"]::-webkit-slider-thumb{appearance:none;-webkit-appearance:non
   <div class="rhero"><h2>Your Study Plan is Ready!</h2><p id="resSub"></p></div>
   <div id="alertArea"></div>
 
+  <!-- SOCIAL PROOF -->
+  <div id="socialProof"></div>
+
   <!-- CONFIDENCE METER + STATS -->
   <div style="display:grid;grid-template-columns:1fr 2fr;gap:16px;margin-bottom:24px;align-items:start" id="confRow">
     <div class="conf-meter" id="confMeter"></div>
@@ -459,6 +501,12 @@ input[type="range"]::-webkit-slider-thumb{appearance:none;-webkit-appearance:non
     <div style="background:var(--yellow-200);border-radius:var(--r-md);padding:12px 16px;margin-top:12px;font-size:.82rem;color:var(--yellow-700);line-height:1.5">
       <strong>Tip:</strong> If your calendar app doesn't import all sessions at once, use the monthly downloads below. Some apps have trouble with large .ICS files.
     </div>
+  </div>
+
+  <!-- SAVE / SHARE -->
+  <div class="save-bar" id="saveBar">
+    <button class="save-btn" onclick="savePlan()"><span class="sb-icon">&#x1F4BE;</span> Save My Plan</button>
+    <button class="save-btn" onclick="sharePlan()"><span class="sb-icon">&#x1F517;</span> Copy Share Link</button>
   </div>
 
   <!-- RESOURCE HIGHLIGHTS -->
@@ -489,6 +537,9 @@ input[type="range"]::-webkit-slider-thumb{appearance:none;-webkit-appearance:non
       <p class="rsub">Track your progress week by week. Each milestone brings you closer to exam day.</p>
       <div id="milestoneList"></div>
     </div>
+    <!-- QUICK QUIZ CONVERSION TRIGGER -->
+    <div class="rsec" id="quickQuizSec"></div>
+
     <div class="rsec">
       <h3>Your Study Sessions</h3>
       <p class="rsub">Click any week to see the details.</p>
@@ -833,6 +884,16 @@ var S={lic:null,st:null,life:[],days:[],time:[],sessionMin:60,startD:null,goalD:
   document.getElementById('dayPick').innerHTML=DAYS_DATA.map(function(x){return '<button class="day" data-d="'+x.d+'" onclick="togDay(this)">'+x.l+'</button>';}).join('');
   document.getElementById('timePick').innerHTML=TIMES_DATA.map(function(x){return '<button class="tslot" data-t="'+x.v+'" onclick="pickTime(this)"><div class="ti">'+x.e+'</div><div class="tl">'+x.l+'</div><div class="tr">'+x.r+'</div></button>';}).join('');
   var tmrw=new Date();tmrw.setDate(tmrw.getDate()+1);document.getElementById('startD').value=fmtD(tmrw);document.getElementById('startD').min=fmtD(tmrw);
+  checkSavedPlan();
+  // Handle shared plan URL
+  if(window.location.hash.indexOf('#plan=')===0){
+    try{
+      var params=JSON.parse(atob(window.location.hash.replace('#plan=','')));
+      S.lic=params.l;S.st=params.s;S.days=params.d;S.time=params.t;S.sessionMin=params.m||60;S.life=[];
+      S.startD=new Date();S.startD.setDate(S.startD.getDate()+1);S.goalD=null;
+      GATE=true;buildPlan();
+    }catch(e){}
+  }
 })();
 
 function fmtD(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
@@ -953,7 +1014,7 @@ function showResults(){
   }
   document.getElementById('resGrid').innerHTML='<div class="scard"><div class="snum">'+p.totalHrs+'</div><div class="slbl">'+(isUnreg?'Recommended Hours':'Study Hours')+'</div></div><div class="scard"><div class="snum">'+(p.totalSess+p.reviewSess)+'</div><div class="slbl">Total Sessions</div></div><div class="scard"><div class="snum">'+p.totalSess+'</div><div class="slbl">Study Sessions</div></div><div class="scard"><div class="snum">'+p.reviewSess+'</div><div class="slbl">Review Sessions</div></div>';
   document.getElementById('dlCount').textContent=(p.totalSess+p.reviewSess);
-  renderConfidence();renderMilestones();renderMonthlyDownloads();renderSchedule();renderTopics();renderFC();renderQuiz();renderExamPrep();renderCourseRecs();showTab('schedule');window.scrollTo({top:0,behavior:'smooth'});
+  renderSocialProof();renderConfidence();renderMilestones();renderQuickQuiz();renderMonthlyDownloads();renderSchedule();renderTopics();renderFC();renderQuiz();renderExamPrep();renderCourseRecs();showTab('schedule');window.scrollTo({top:0,behavior:'smooth'});
 }
 
 function renderSchedule(){
@@ -1437,8 +1498,115 @@ function dlFlashcardPDF(){
 }
 
 // ===== START OVER =====
+// ===== SOCIAL PROOF =====
+function renderSocialProof(){
+  var el=document.getElementById('socialProof');
+  var html='<div class="social-proof">';
+  html+='<div class="sp-stars">&#x2B50;&#x2B50;&#x2B50;&#x2B50;&#x2B50;</div>';
+  html+='<div class="sp-text"><span>15,000+</span> agents licensed with Aceable</div>';
+  html+='<div class="sp-divider"></div>';
+  html+='<div class="sp-text">Pass rate <span>2x</span> the national average</div>';
+  html+='</div>';
+  el.innerHTML=html;
+}
+
+// ===== QUICK QUIZ (Conversion Trigger) =====
+function renderQuickQuiz(){
+  var sec=document.getElementById('quickQuizSec');
+  var qs=QUIZ[S.lic]||QUIZ.pc;
+  var pool=qs.slice().sort(function(){return Math.random()-0.5;}).slice(0,2);
+  window._qqPool=pool;window._qqAnswered=0;window._qqCorrect=0;
+  var courseUrl=getCourseUrl(S.st,S.lic);var hasC=!!STATE_SLUGS[S.st];
+  var html='<div class="qq-inline">';
+  html+='<h4>&#x1F9E0; Quick Knowledge Check</h4>';
+  html+='<p class="qq-sub">Think you know your stuff? Try these before you start studying.</p>';
+  pool.forEach(function(q,i){
+    html+='<div class="qq-inline-q" id="qqi'+i+'">';
+    html+='<div class="qqi-text">'+q.q+'</div>';
+    html+='<div class="qqi-opts">';
+    q.opts.forEach(function(o,j){
+      html+='<label onclick="answerQQ('+i+','+j+')">'+o+'</label>';
+    });
+    html+='</div>';
+    html+='<div class="qqi-explain">'+q.explain+'</div>';
+    html+='</div>';
+  });
+  html+='<div id="qqResult"></div>';
+  html+='</div>';
+  sec.innerHTML=html;
+}
+function answerQQ(qi,oi){
+  var wrap=document.getElementById('qqi'+qi);
+  if(wrap.classList.contains('answered'))return;
+  wrap.classList.add('answered');
+  var labels=wrap.querySelectorAll('label');
+  var correct=window._qqPool[qi].ans;
+  labels[oi].classList.add(oi===correct?'correct':'wrong');
+  if(oi!==correct)labels[correct].classList.add('correct');
+  if(oi===correct)window._qqCorrect++;
+  window._qqAnswered++;
+  if(window._qqAnswered===2){
+    var courseUrl=getCourseUrl(S.st,S.lic);var hasC=!!STATE_SLUGS[S.st];
+    var resEl=document.getElementById('qqResult');
+    if(window._qqCorrect<2){
+      resEl.innerHTML='<div class="qq-inline-result needs-work"><strong>These topics are on the exam.</strong> Aceable\'s course breaks them down so they actually make sense.<br><a href="'+(hasC?courseUrl:'https://insurance.aceable.com/pre-license/')+'" target="_blank" class="cta-btn cta-btn-sm" style="margin-top:10px">Study with Aceable &rarr;</a><br><span style="font-size:.78rem;color:var(--subtle);cursor:pointer;text-decoration:underline;margin-top:6px;display:inline-block" onclick="showTab(\'quiz\')">Try the full 5-question quiz &rarr;</span></div>';
+    } else {
+      resEl.innerHTML='<div class="qq-inline-result good"><strong>Nice work!</strong> You know your stuff. Keep building on that foundation.<br><span style="font-size:.78rem;color:var(--teal);cursor:pointer;text-decoration:underline;margin-top:6px;display:inline-block" onclick="showTab(\'quiz\')">Challenge yourself with more questions &rarr;</span></div>';
+    }
+  }
+}
+
+// ===== SAVE / SHARE PLAN =====
+function savePlan(){
+  if(!S.plan)return;
+  var data={lic:S.lic,st:S.st,life:S.life,days:S.days,time:S.time,sessionMin:S.sessionMin,startD:S.startD?S.startD.toISOString():null,goalD:S.goalD?S.goalD.toISOString():null};
+  localStorage.setItem('aceableStudyPlan',JSON.stringify(data));
+  var btn=document.querySelector('#saveBar .save-btn');
+  if(btn){btn.innerHTML='<span class="sb-icon">&#x2705;</span> Plan Saved!';setTimeout(function(){btn.innerHTML='<span class="sb-icon">&#x1F4BE;</span> Save My Plan';},2000);}
+}
+function sharePlan(){
+  if(!S.plan)return;
+  var params=btoa(JSON.stringify({l:S.lic,s:S.st,d:S.days,t:S.time,m:S.sessionMin}));
+  var url=window.location.origin+window.location.pathname+'#plan='+params;
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(url);
+    var btns=document.querySelectorAll('#saveBar .save-btn');
+    if(btns[1]){btns[1].innerHTML='<span class="sb-icon">&#x2705;</span> Link Copied!';setTimeout(function(){btns[1].innerHTML='<span class="sb-icon">&#x1F517;</span> Copy Share Link';},2000);}
+  }
+}
+function checkSavedPlan(){
+  var saved=localStorage.getItem('aceableStudyPlan');
+  if(!saved)return;
+  try{
+    var d=JSON.parse(saved);
+    if(!d.lic||!d.st)return;
+    var banner=document.getElementById('savedBanner');
+    var licName=LIC[d.lic]?LIC[d.lic].l:d.lic;
+    var stName=ST[d.st]?ST[d.st].n:d.st;
+    banner.innerHTML='<div class="saved-banner"><h3>&#x1F44B; Welcome Back!</h3><p>You have a saved '+stName+' '+licName+' study plan.</p><div class="sb-actions"><button class="cta-btn cta-btn-sm" onclick="loadSavedPlan()">Load My Plan &rarr;</button><button class="cta-btn cta-btn-secondary cta-btn-sm" onclick="dismissSaved()">Start Fresh</button></div></div>';
+    banner.style.display='block';
+  }catch(e){}
+}
+function loadSavedPlan(){
+  var saved=localStorage.getItem('aceableStudyPlan');
+  if(!saved)return;
+  try{
+    var d=JSON.parse(saved);
+    S.lic=d.lic;S.st=d.st;S.life=d.life||[];S.days=d.days||[];S.time=d.time||[];S.sessionMin=d.sessionMin||60;
+    S.startD=d.startD?new Date(d.startD):new Date();
+    S.goalD=d.goalD?new Date(d.goalD):null;
+    document.getElementById('savedBanner').style.display='none';
+    GATE=false;
+    buildPlan();
+  }catch(e){alert('Could not load saved plan. Starting fresh.');dismissSaved();}
+}
+function dismissSaved(){
+  document.getElementById('savedBanner').style.display='none';
+  localStorage.removeItem('aceableStudyPlan');
+}
+
 function startOver(){
-  S={lic:null,st:null,life:[],days:[],time:null,sessionMin:60,startD:null,goalD:null,plan:null};
+  S={lic:null,st:null,life:[],days:[],time:[],sessionMin:60,startD:null,goalD:null,plan:null};
   document.querySelectorAll('.opt,.day,.tslot').forEach(function(b){b.classList.remove('sel');});
   document.getElementById('stSel').value='';document.getElementById('stInfo').style.display='none';
   document.getElementById('sSlider').value=60;document.getElementById('sLen').textContent='60';
