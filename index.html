@@ -865,7 +865,7 @@ function chkDates(){S.startD=document.getElementById('startD').value?new Date(do
 
 // ===== BUILD PLAN =====
 function buildPlan(){
-  var totalHrs=getHrs(S.st,S.lic);if(totalHrs===0){var d={pc:20,life:20,health:20,lh:40,pl:20,pclh:60};totalHrs=d[S.lic]||20;}
+  var totalHrs=getHrs(S.st,S.lic);if(totalHrs===0){var d={pc:40,life:20,health:20,lh:40,pl:20,pclh:80};totalHrs=d[S.lic]||20;}
   var sessHrs=S.sessionMin/60,sorted=[].concat(S.days).sort(function(a,b){return a-b;});
   var tMap={morning:{h:8},afternoon:{h:13},evening:{h:19}};
   var startHours=S.time.map(function(t){return(tMap[t]||tMap.morning).h;}).sort(function(a,b){return a-b;});
@@ -1192,7 +1192,7 @@ function renderConfidence(){
   if(isUnreg){
     // Unregulated state: empowering scoring calibrated for focused 4-6 week plans
     // 1. Study volume (25 pts) — scaled to recommended hours
-    var recHrs={pc:20,life:20,health:20,lh:40,pl:20,pclh:60}[S.lic]||20;
+    var recHrs={pc:40,life:20,health:20,lh:40,pl:20,pclh:80}[S.lic]||20;
     if(p.totalHrs>=recHrs){score+=25;tips.push('You\'re covering all the material. Solid plan!');}else if(p.totalHrs>=recHrs*0.7){score+=20;tips.push('Great start! A few more sessions would round this out nicely.');}else{score+=12;tips.push('Adding a few more study days would help you cover all topics.');}
     // 2. Topic coverage (25 pts)
     var topics=TOPICS[S.lic]||TOPICS.pc;
