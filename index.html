@@ -296,6 +296,24 @@ input[type="range"]::-webkit-slider-thumb{appearance:none;-webkit-appearance:non
 .ms-fill{height:100%;border-radius:3px;transition:width .4s ease}
 .ms-detail{font-size:.78rem;color:var(--subtle)}
 
+/* ===== MONTH CALENDAR ===== */
+.cal-month{margin-bottom:24px}
+.cal-month-title{font-weight:800;font-size:1rem;margin-bottom:8px;color:var(--dark);text-align:center}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
+.cal-hdr{text-align:center;font-size:.7rem;font-weight:700;color:var(--muted);padding:6px 0}
+.cal-day{text-align:center;aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:var(--r-sm);font-size:.82rem;color:var(--subtle)}
+.cal-day.study{background:var(--pink-light);color:var(--pink);font-weight:800}
+.cal-day.review{background:var(--teal-light);color:var(--teal);font-weight:700}
+.cal-day.today{box-shadow:inset 0 0 0 2px var(--dark);font-weight:800;color:var(--dark)}
+.cal-day.study.today{box-shadow:inset 0 0 0 2px var(--pink)}
+.cal-day.review.today{box-shadow:inset 0 0 0 2px var(--teal)}
+.cal-day.empty{visibility:hidden}
+.cal-legend{display:flex;gap:16px;justify-content:center;margin-top:12px;font-size:.78rem;color:var(--subtle)}
+.cal-leg-item{display:flex;align-items:center;gap:6px}
+.cal-dot{width:12px;height:12px;border-radius:50%;display:inline-block}
+.cal-dot.study{background:var(--pink-light);border:1px solid var(--pink)}
+.cal-dot.review{background:var(--teal-light);border:1px solid var(--teal)}
+
 /* ===== CONFIDENCE METER ===== */
 .conf-meter{background:var(--white);border-radius:var(--r-lg);padding:24px;box-shadow:var(--shadow-card);margin-bottom:24px;text-align:center}
 .conf-meter h3{font-size:1rem;font-weight:800;color:var(--dark);margin-bottom:16px}
@@ -409,7 +427,7 @@ input[type="range"]::-webkit-slider-thumb{appearance:none;-webkit-appearance:non
   <h2>When can you study?</h2>
   <p class="sub">Pick the days and times that work best for you.</p>
   <div class="fg"><label>Which days work for studying?</label><div class="days" id="dayPick"></div></div>
-  <div class="fg"><label>What time of day?</label><div class="times" id="timePick"></div></div>
+  <div class="fg"><label>What times work for you?</label><div class="times" id="timePick"></div></div>
   <div class="fg">
     <label>How long per session?</label>
     <div class="sdisp"><span id="sLen">60</span> min <span>per session</span></div>
@@ -483,6 +501,15 @@ input[type="range"]::-webkit-slider-thumb{appearance:none;-webkit-appearance:non
 
   <!-- SCHEDULE TAB -->
   <div class="tab-panel active" id="panel-schedule">
+    <div class="rsec" id="calendarSec">
+      <h3>&#x1F4C5; Your Study Calendar</h3>
+      <p class="rsub">Your study days at a glance.</p>
+      <div id="calendarGrid"></div>
+      <div class="cal-legend">
+        <span class="cal-leg-item"><span class="cal-dot study"></span> Study</span>
+        <span class="cal-leg-item"><span class="cal-dot review"></span> Review</span>
+      </div>
+    </div>
     <div class="rsec" id="milestoneSec">
       <h3>Weekly Milestones</h3>
       <p class="rsub">Track your progress week by week. Each milestone brings you closer to exam day.</p>
@@ -821,7 +848,7 @@ fl:{icon:"&#x2728;",title:"Flexible Schedule",tips:["With time on your side, aim
 };
 
 // ===== APP STATE =====
-var S={lic:null,st:null,life:[],days:[],time:null,sessionMin:60,startD:null,goalD:null,plan:null};
+var S={lic:null,st:null,life:[],days:[],time:[],sessionMin:60,startD:null,goalD:null,plan:null};
 
 // ===== INIT =====
 (function(){
@@ -858,36 +885,42 @@ function pickState(){
 function getHrs(st,lic){var s=ST[st];if(lic==='pclh')return(s.pc||0)+(s.lh||0);return s[lic]||0;}
 function togLife(btn){btn.classList.toggle('sel');var v=btn.dataset.v;if(S.life.indexOf(v)>-1)S.life=S.life.filter(function(x){return x!==v;});else S.life.push(v);}
 function togDay(btn){btn.classList.toggle('sel');var d=+btn.dataset.d;if(S.days.indexOf(d)>-1)S.days=S.days.filter(function(x){return x!==d;});else S.days.push(d);chk4();}
-function pickTime(btn){document.querySelectorAll('.tslot').forEach(function(b){b.classList.remove('sel');});btn.classList.add('sel');S.time=btn.dataset.t;chk4();}
-function chk4(){document.getElementById('n4').disabled=!(S.days.length>0&&S.time);}
+function pickTime(btn){btn.classList.toggle('sel');var v=btn.dataset.t;if(S.time.indexOf(v)>-1)S.time=S.time.filter(function(x){return x!==v;});else S.time.push(v);chk4();}
+function chk4(){document.getElementById('n4').disabled=!(S.days.length>0&&S.time.length>0);}
 function chkDates(){S.startD=document.getElementById('startD').value?new Date(document.getElementById('startD').value+'T00:00:00'):null;S.goalD=document.getElementById('goalD').value?new Date(document.getElementById('goalD').value+'T00:00:00'):null;document.getElementById('nGen').disabled=!S.startD;}
 
 // ===== BUILD PLAN =====
 function buildPlan(){
   var totalHrs=getHrs(S.st,S.lic);if(totalHrs===0){var d={pc:20,life:20,health:20,lh:40,pl:20,pclh:60};totalHrs=d[S.lic]||20;}
   var sessHrs=S.sessionMin/60,sorted=[].concat(S.days).sort(function(a,b){return a-b;});
-  var tMap={morning:{h:8},afternoon:{h:13},evening:{h:19}},startH=(tMap[S.time]||tMap.morning).h;
+  var tMap={morning:{h:8},afternoon:{h:13},evening:{h:19}};
+  var startHours=S.time.map(function(t){return(tMap[t]||tMap.morning).h;}).sort(function(a,b){return a-b;});
+  var slotsPerDay=startHours.length;
   var endDate;
   var isUnregBuild=(getHrs(S.st,S.lic)===0);
-  if(S.goalD){endDate=new Date(S.goalD);}else{var rw=Math.ceil(totalHrs/(S.days.length*sessHrs));endDate=new Date(S.startD);var pad=isUnregBuild?Math.ceil(rw+1):Math.ceil(rw*1.25+1);endDate.setDate(endDate.getDate()+pad*7);}
+  if(S.goalD){endDate=new Date(S.goalD);}else{var rw=Math.ceil(totalHrs/(S.days.length*slotsPerDay*sessHrs));endDate=new Date(S.startD);var pad=isUnregBuild?Math.ceil(rw+1):Math.ceil(rw*1.25+1);endDate.setDate(endDate.getDate()+pad*7);}
   var allDates=[];var cur=new Date(S.startD);
   while(cur<=endDate){if(sorted.indexOf(cur.getDay())>-1)allDates.push(new Date(cur));cur.setDate(cur.getDate()+1);}
   if(!allDates.length){alert('No study days in your date range. Adjust your dates or study days.');return;}
-  var topics=TOPICS[S.lic]||TOPICS.pc,tc=topics.length,needed=Math.ceil(totalHrs/sessHrs),hasExtra=allDates.length>needed;
+  // Build flat list of slots: each date × each time slot
+  var allSlots=[];
+  allDates.forEach(function(dt){startHours.forEach(function(h,si){allSlots.push({date:dt,slotIdx:si});});});
+  var topics=TOPICS[S.lic]||TOPICS.pc,tc=topics.length,needed=Math.ceil(totalHrs/sessHrs),hasExtra=allSlots.length>needed;
   var tight=false,sp=[];
   if(hasExtra){
     var left=totalHrs,si=0;
-    for(var i=0;i<allDates.length;i++){
-      if(left>0){var h=Math.min(sessHrs,left);sp.push({date:allDates[i],type:'study',hours:h,topic:topics[si%tc].cat,topicIdx:si%tc});left-=h;si++;}
-      else{sp.push({date:allDates[i],type:'review',hours:sessHrs*.5,topic:'Review & Practice',topicIdx:-1});}
+    for(var i=0;i<allSlots.length;i++){
+      if(left>0){var h=Math.min(sessHrs,left);sp.push({date:allSlots[i].date,slotIdx:allSlots[i].slotIdx,type:'study',hours:h,topic:topics[si%tc].cat,topicIdx:si%tc});left-=h;si++;}
+      else{sp.push({date:allSlots[i].date,slotIdx:allSlots[i].slotIdx,type:'review',hours:sessHrs*.5,topic:'Review & Practice',topicIdx:-1});}
     }
   } else {
-    var per=Math.round(totalHrs/allDates.length*100)/100;if(per*60>S.sessionMin)tight=true;
-    var left2=totalHrs;for(var j=0;j<allDates.length;j++){var h2=Math.min(per,left2);sp.push({date:allDates[j],type:'study',hours:Math.round(h2*100)/100,topic:topics[j%tc].cat,topicIdx:j%tc});left2-=h2;}
+    var per=Math.round(totalHrs/allSlots.length*100)/100;if(per*60>S.sessionMin)tight=true;
+    var left2=totalHrs;for(var j=0;j<allSlots.length;j++){var h2=Math.min(per,left2);sp.push({date:allSlots[j].date,slotIdx:allSlots[j].slotIdx,type:'study',hours:Math.round(h2*100)/100,topic:topics[j%tc].cat,topicIdx:j%tc});left2-=h2;}
   }
   var events=[];
   sp.forEach(function(s){
-    var es=new Date(s.date);es.setHours(startH,0,0,0);
+    var sH=startHours[s.slotIdx];
+    var es=new Date(s.date);es.setHours(sH,0,0,0);
     var dur=s.type==='study'?Math.round(s.hours*60):Math.round(sessHrs*30);
     var ee=new Date(es);ee.setMinutes(ee.getMinutes()+dur);
     var titleClean=s.type==='review'?'Review Session - '+LIC[S.lic].l:s.topic+' - '+LIC[S.lic].l;
@@ -946,7 +979,7 @@ function showResults(){
   }
   document.getElementById('resGrid').innerHTML='<div class="scard"><div class="snum">'+p.totalHrs+'</div><div class="slbl">'+(isUnreg?'Recommended Hours':'Study Hours')+'</div></div><div class="scard"><div class="snum">'+(p.totalSess+p.reviewSess)+'</div><div class="slbl">Total Sessions</div></div><div class="scard"><div class="snum">'+p.totalSess+'</div><div class="slbl">Study Sessions</div></div><div class="scard"><div class="snum">'+p.reviewSess+'</div><div class="slbl">Review Sessions</div></div>';
   document.getElementById('dlCount').textContent=(p.totalSess+p.reviewSess);
-  renderConfidence();renderMilestones();renderMonthlyDownloads();renderSchedule();renderTopics();renderFC();renderQuiz();renderExamPrep();renderCourseRecs();showTab('schedule');window.scrollTo({top:0,behavior:'smooth'});
+  renderConfidence();renderMilestones();renderCalendar();renderMonthlyDownloads();renderSchedule();renderTopics();renderFC();renderQuiz();renderExamPrep();renderCourseRecs();showTab('schedule');window.scrollTo({top:0,behavior:'smooth'});
 }
 
 function renderSchedule(){
@@ -1267,6 +1300,42 @@ function renderMilestones(){
     html+='</div>';
   });
   document.getElementById('milestoneList').innerHTML=html;
+}
+
+function renderCalendar(){
+  var evts=S.plan.events;if(!evts||!evts.length){document.getElementById('calendarSec').style.display='none';return;}
+  // Build date lookup: dateKey → 'study'|'review' (study wins over review)
+  var dateMap={};
+  evts.forEach(function(e){
+    var dk=e.start.getFullYear()+'-'+(e.start.getMonth()+1)+'-'+e.start.getDate();
+    if(!dateMap[dk]||e.type==='study')dateMap[dk]=e.type;
+  });
+  // Determine months to render
+  var first=evts[0].start,last=evts[evts.length-1].start;
+  var startM=first.getMonth(),startY=first.getFullYear();
+  var endM=last.getMonth(),endY=last.getFullYear();
+  var DOW=['S','M','T','W','T','F','S'];
+  var MO=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var today=new Date();var todayKey=today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+  var html='';
+  var y=startY,m=startM;
+  while(y<endY||(y===endY&&m<=endM)){
+    html+='<div class="cal-month"><div class="cal-month-title">'+MO[m]+' '+y+'</div><div class="cal-grid">';
+    DOW.forEach(function(d){html+='<div class="cal-hdr">'+d+'</div>';});
+    var firstDay=new Date(y,m,1).getDay();
+    var daysInMonth=new Date(y,m+1,0).getDate();
+    for(var p=0;p<firstDay;p++){html+='<div class="cal-day empty"></div>';}
+    for(var d=1;d<=daysInMonth;d++){
+      var dk=y+'-'+(m+1)+'-'+d;
+      var cls='cal-day';
+      if(dateMap[dk])cls+=' '+dateMap[dk];
+      if(dk===todayKey)cls+=' today';
+      html+='<div class="'+cls+'">'+d+'</div>';
+    }
+    html+='</div></div>';
+    m++;if(m>11){m=0;y++;}
+  }
+  document.getElementById('calendarGrid').innerHTML=html;
 }
 
 function showTab(id){document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');});document.querySelectorAll('.tab-panel').forEach(function(p){p.classList.remove('active');});document.querySelector('.tab[onclick="showTab(\''+id+'\')"]').classList.add('active');document.getElementById('panel-'+id).classList.add('active');}
