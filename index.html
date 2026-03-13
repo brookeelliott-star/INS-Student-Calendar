@@ -212,6 +212,51 @@ input[type="range"]::-webkit-slider-thumb{appearance:none;-webkit-appearance:non
 .tip-card .tip-title{font-weight:800;color:var(--dark);font-size:.88rem;margin-bottom:4px;display:flex;align-items:center;gap:8px}
 .tip-card .tip-text{font-size:.82rem;color:var(--subtle);line-height:1.6}
 
+/* Week Groups (condensed schedule) */
+.wk-group{border:1px solid var(--grey-2);border-radius:var(--r-md);margin-bottom:8px;overflow:hidden}
+.wk-hdr{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;cursor:pointer;background:var(--white);transition:background .2s}
+.wk-hdr:hover{background:var(--grey-1)}
+.wk-hdr .wk-label{font-weight:800;font-size:.88rem;color:var(--dark)}
+.wk-hdr .wk-meta{font-size:.78rem;color:var(--subtle)}
+.wk-hdr .wk-arrow{font-size:.8rem;color:var(--muted);transition:transform .2s}
+.wk-group.open .wk-arrow{transform:rotate(180deg)}
+.wk-body{display:none;border-top:1px solid var(--grey-1);padding:4px 18px}
+.wk-group.open .wk-body{display:block}
+.wk-group.open .wk-hdr{background:var(--teal-light)}
+.wk-sess{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--grey-1);align-items:center;font-size:.82rem}
+.wk-sess:last-child{border-bottom:none}
+.wk-sess .wk-day{width:50px;font-weight:700;color:var(--dark);flex-shrink:0}
+.wk-sess .wk-time{width:80px;color:var(--subtle);flex-shrink:0}
+.wk-sess .wk-topic{flex:1;color:var(--dark)}
+.wk-sess .wk-tag{font-size:.68rem;font-weight:800;padding:2px 8px;border-radius:var(--r-pill);text-transform:uppercase}
+.wk-tag.study{background:var(--teal-light);color:var(--teal)}
+.wk-tag.review{background:var(--yellow-200);color:var(--yellow-700)}
+
+/* Resource Highlights */
+.res-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px}
+.res-card{background:var(--white);border:1.5px solid var(--grey-2);border-radius:var(--r-md);padding:18px;cursor:pointer;transition:all .2s;text-align:center}
+.res-card:hover{border-color:var(--pink);transform:translateY(-2px);box-shadow:var(--shadow-card)}
+.res-card .rc-icon{font-size:1.8rem;margin-bottom:8px}
+.res-card .rc-title{font-weight:800;font-size:.88rem;color:var(--dark);margin-bottom:4px}
+.res-card .rc-desc{font-size:.75rem;color:var(--subtle);line-height:1.4}
+
+/* Practice Quiz */
+.quiz-wrap{max-width:600px;margin:0 auto}
+.quiz-q{background:var(--white);border:1.5px solid var(--grey-2);border-radius:var(--r-md);padding:20px;margin-bottom:12px}
+.quiz-q .qq-num{font-size:.7rem;font-weight:800;color:var(--teal);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px}
+.quiz-q .qq-text{font-weight:700;font-size:.92rem;color:var(--dark);margin-bottom:14px;line-height:1.5}
+.quiz-q .qq-opts label{display:block;padding:10px 14px;border:1.5px solid var(--grey-2);border-radius:var(--r-sm);margin-bottom:6px;cursor:pointer;font-size:.85rem;color:var(--dark);transition:all .15s}
+.quiz-q .qq-opts label:hover{border-color:var(--teal);background:var(--teal-light)}
+.quiz-q .qq-opts label.selected{border-color:var(--teal);background:var(--teal-light);font-weight:700}
+.quiz-q .qq-opts label.correct{border-color:var(--green-700);background:var(--green-200);color:var(--green-700)}
+.quiz-q .qq-opts label.wrong{border-color:var(--pink);background:var(--pink-light);color:var(--pink)}
+.quiz-q .qq-explain{display:none;margin-top:12px;padding:12px;background:var(--grey-1);border-radius:var(--r-sm);font-size:.82rem;color:var(--subtle);line-height:1.5}
+.quiz-q.answered .qq-explain{display:block}
+.quiz-result{text-align:center;padding:28px;background:var(--white);border-radius:var(--r-lg);box-shadow:var(--shadow-card)}
+.quiz-result .qr-score{font-size:2.5rem;font-weight:800;color:var(--pink)}
+.quiz-result .qr-label{font-size:1.1rem;font-weight:800;color:var(--dark);margin:8px 0 4px}
+.quiz-result .qr-sub{font-size:.85rem;color:var(--subtle);margin-bottom:16px}
+
 /* Topics */
 .topic-block{margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--grey-1)}
 .topic-block:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
@@ -415,11 +460,24 @@ input[type="range"]::-webkit-slider-thumb{appearance:none;-webkit-appearance:non
     </div>
   </div>
 
+  <!-- RESOURCE HIGHLIGHTS -->
+  <div class="rsec" style="padding:20px 24px">
+    <h3 style="text-align:center;margin-bottom:4px">Your Study Toolkit</h3>
+    <p class="rsub" style="text-align:center">Everything you need to prepare, all in one place.</p>
+    <div class="res-cards" id="resCards">
+      <div class="res-card" onclick="showTab('schedule')"><div class="rc-icon">&#x1F4C5;</div><div class="rc-title">Study Schedule</div><div class="rc-desc">Every session mapped to your calendar</div></div>
+      <div class="res-card" onclick="showTab('topics')"><div class="rc-icon">&#x1F4D6;</div><div class="rc-title">Topic Guide</div><div class="rc-desc">What to study and when</div></div>
+      <div class="res-card" onclick="showTab('flashcards')"><div class="rc-icon">&#x1F0CF;</div><div class="rc-title">Flashcards</div><div class="rc-desc" id="fcCardCount">Key terms to memorize</div></div>
+      <div class="res-card" onclick="showTab('quiz')"><div class="rc-icon">&#x1F9E0;</div><div class="rc-title">Practice Quiz</div><div class="rc-desc">Test your knowledge now</div></div>
+    </div>
+  </div>
+
   <!-- TABS -->
   <div class="tabs" id="tabBar">
     <button class="tab active" onclick="showTab('schedule')">&#x1F4C5; Schedule</button>
     <button class="tab" onclick="showTab('topics')">&#x1F4D6; Topics</button>
     <button class="tab" onclick="showTab('flashcards')">&#x1F0CF; Flashcards</button>
+    <button class="tab" onclick="showTab('quiz')">&#x1F9E0; Practice Quiz</button>
     <button class="tab" onclick="showTab('examprep')">&#x1F3AF; Exam Prep</button>
   </div>
 
@@ -432,7 +490,7 @@ input[type="range"]::-webkit-slider-thumb{appearance:none;-webkit-appearance:non
     </div>
     <div class="rsec">
       <h3>Your Study Sessions</h3>
-      <p class="rsub">Every session mapped to a date, time, and topic.</p>
+      <p class="rsub">Click any week to see the details.</p>
       <div id="sessList"></div>
     </div>
   </div>
@@ -456,6 +514,16 @@ input[type="range"]::-webkit-slider-thumb{appearance:none;-webkit-appearance:non
         <button class="cta-btn" onclick="dlFlashcardPDF()">&#x1F4C4; Download Flashcard PDF</button>
         <p style="font-size:.75rem;color:var(--muted);margin-top:8px">Printable study cards to take on the go</p>
       </div>
+    </div>
+  </div>
+
+  <!-- PRACTICE QUIZ TAB -->
+  <div class="tab-panel" id="panel-quiz">
+    <div class="rsec">
+      <h3>Practice Quiz</h3>
+      <p class="rsub">Test yourself with sample questions. See how exam-ready you are.</p>
+      <div class="quiz-wrap" id="quizArea"></div>
+      <div id="quizResult" style="display:none"></div>
     </div>
   </div>
 
@@ -586,16 +654,16 @@ AL:{n:"Alabama",pc:0,life:0,health:0,lh:0,pl:0,qs:150,pass:70,time:150,prov:"Pea
 AK:{n:"Alaska",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PSI",nt:"No mandated pre-licensing; study recommended"},
 AZ:{n:"Arizona",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PSI",nt:"No mandated pre-licensing; study recommended"},
 AR:{n:"Arkansas",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PSI",nt:"No mandated pre-licensing; study recommended"},
-CA:{n:"California",pc:12,life:12,health:12,lh:12,pl:12,qs:100,pass:60,time:120,prov:"PSI",nt:"12-hr Ethics & Code course required for all lines (AB 943, eff. Jan 2026)"},
+CA:{n:"California",pc:12,life:12,health:12,lh:12,pl:12,qs:150,pass:60,time:180,prov:"PSI",nt:"12-hr Ethics & CA Insurance Code course required (AB 943 repealed 20-hr PLE eff. Jan 2026)"},
 CO:{n:"Colorado",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PSI",nt:"No mandated pre-licensing; study recommended"},
-CT:{n:"Connecticut",pc:40,life:20,health:20,lh:40,pl:20,qs:130,pass:70,time:150,prov:"PSI"},
+CT:{n:"Connecticut",pc:40,life:20,health:20,lh:40,pl:20,qs:145,pass:70,time:150,prov:"Pearson VUE"},
 DE:{n:"Delaware",pc:40,life:40,health:40,lh:40,pl:40,qs:100,pass:70,time:120,prov:"PSI"},
-FL:{n:"Florida",pc:200,life:40,health:40,lh:60,pl:200,qs:150,pass:70,time:150,prov:"Pearson VUE",nt:"FL has the highest hour requirements nationally"},
-GA:{n:"Georgia",pc:16,life:8,health:8,lh:16,pl:8,qs:100,pass:70,time:120,prov:"Pearson VUE"},
+FL:{n:"Florida",pc:200,life:40,health:40,lh:60,pl:200,qs:165,pass:70,time:180,prov:"Pearson VUE",nt:"FL has the highest hour requirements nationally"},
+GA:{n:"Georgia",pc:40,life:20,health:20,lh:40,pl:20,qs:135,pass:70,time:150,prov:"Pearson VUE"},
 HI:{n:"Hawaii",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PSI",nt:"No mandated pre-licensing; study recommended"},
 ID:{n:"Idaho",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PSI",nt:"No mandated pre-licensing; study recommended"},
 IL:{n:"Illinois",pc:40,life:20,health:20,lh:40,pl:20,qs:100,pass:70,time:120,prov:"PSI",nt:"P&C = 20hr Property + 20hr Casualty; 7.5hr/line must be classroom"},
-IN:{n:"Indiana",pc:40,life:20,health:20,lh:40,pl:40,qs:160,pass:70,time:180,prov:"PSI"},
+IN:{n:"Indiana",pc:40,life:20,health:20,lh:40,pl:40,qs:160,pass:70,time:180,prov:"Pearson VUE"},
 IA:{n:"Iowa",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PSI",nt:"No mandated pre-licensing; study recommended"},
 KS:{n:"Kansas",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PSI",nt:"No mandated pre-licensing; study recommended"},
 KY:{n:"Kentucky",pc:40,life:20,health:20,lh:40,pl:20,qs:100,pass:70,time:120,prov:"PSI"},
@@ -605,7 +673,7 @@ MD:{n:"Maryland",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PS
 MA:{n:"Massachusetts",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PSI",nt:"No mandated pre-licensing; study recommended"},
 MI:{n:"Michigan",pc:40,life:20,health:20,lh:40,pl:20,qs:100,pass:70,time:120,prov:"PSI",nt:"Includes 6hrs ethics per line"},
 MN:{n:"Minnesota",pc:40,life:20,health:20,lh:40,pl:20,qs:100,pass:70,time:120,prov:"PSI"},
-MS:{n:"Mississippi",pc:40,life:0,health:20,lh:20,pl:20,qs:100,pass:70,time:120,prov:"PSI",nt:"Life pre-licensing exempted Jul 2024; P&C and Health still required"},
+MS:{n:"Mississippi",pc:40,life:0,health:20,lh:20,pl:20,qs:75,pass:70,time:120,prov:"Pearson VUE",nt:"Life pre-licensing exempted Jul 2024; P&C and Health still required"},
 MO:{n:"Missouri",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PSI",nt:"No mandated pre-licensing; study recommended"},
 MT:{n:"Montana",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PSI",nt:"No mandated pre-licensing; study recommended"},
 NE:{n:"Nebraska",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PSI",nt:"No mandated pre-licensing; study recommended"},
@@ -614,7 +682,7 @@ NH:{n:"New Hampshire",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,pro
 NJ:{n:"New Jersey",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PSI",nt:"No mandated pre-licensing; study recommended"},
 NM:{n:"New Mexico",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PSI",nt:"No mandated pre-licensing; study recommended"},
 NY:{n:"New York",pc:90,life:20,health:20,lh:40,pl:40,qs:150,pass:70,time:150,prov:"PSI",nt:"NY P&C requires 90 classroom hours (statutory minimum)"},
-NC:{n:"North Carolina",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PSI",nt:"Pre-licensing eliminated Oct 2025 (HB 737); study recommended"},
+NC:{n:"North Carolina",pc:0,life:0,health:0,lh:0,pl:0,qs:120,pass:70,time:150,prov:"Pearson VUE",nt:"Pre-licensing eliminated Oct 2025 (HB 737); study recommended"},
 ND:{n:"North Dakota",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PSI",nt:"No mandated pre-licensing; study recommended"},
 OH:{n:"Ohio",pc:40,life:20,health:20,lh:40,pl:40,qs:100,pass:70,time:120,prov:"PSI"},
 OK:{n:"Oklahoma",pc:0,life:0,health:0,lh:0,pl:0,qs:100,pass:70,time:120,prov:"PSI",nt:"No mandated pre-licensing; study recommended"},
@@ -673,14 +741,14 @@ TOPICS.lh=[].concat(TOPICS.life,TOPICS.health);TOPICS.pl=TOPICS.pc;TOPICS.pclh=[
 var FC={pc:[
 {cat:"Fundamentals",q:"What's the difference between a peril and a hazard?",a:"A peril is the direct cause of loss (fire, theft, windstorm). A hazard is a condition that increases the chance of loss. Three types: physical (icy sidewalk), moral (intent to defraud), morale (carelessness)."},
 {cat:"Fundamentals",q:"What are the 4 elements of a legal contract?",a:"(1) Offer & acceptance, (2) Consideration (premium for promise to pay), (3) Legal purpose, (4) Competent parties. All four must be present."},
-{cat:"Fundamentals",q:"What is the principle of indemnity?",a:"The insured should be restored to the same financial position as before the loss — no better, no worse. Prevents profiting from insurance."},
+{cat:"Fundamentals",q:"What is the principle of indemnity?",a:"The insured should be restored to the same financial position as before the loss, no better, no worse. Prevents profiting from insurance."},
 {cat:"Fundamentals",q:"What is adverse selection?",a:"The tendency of higher-risk individuals to seek insurance more than lower-risk people. Insurers combat this through underwriting."},
 {cat:"Fundamentals",q:"What is subrogation?",a:"After the insurer pays a claim, they gain the right to pursue recovery from the responsible third party. The insured can't collect from both."},
 {cat:"Property",q:"What is the coinsurance formula?",a:"(Amount Carried / Amount Required) x Loss = Payment. If you insure below the required percentage (usually 80%), you become a co-insurer and share the loss."},
 {cat:"Property",q:"ACV vs replacement cost?",a:"Actual Cash Value = replacement cost MINUS depreciation. Replacement Cost = cost to replace with like kind and quality at current prices, no depreciation deducted."},
-{cat:"Property",q:"Name the 3 cause of loss forms.",a:"Basic (11 named perils), Broad (adds more named perils like weight of ice/snow), Special (open peril — covers everything EXCEPT what's specifically excluded)."},
+{cat:"Property",q:"Name the 3 cause of loss forms.",a:"Basic (11 named perils), Broad (adds more named perils like weight of ice/snow), Special (open peril, covers everything EXCEPT what's specifically excluded)."},
 {cat:"Homeowners",q:"What are the 6 HO coverage sections?",a:"A: Dwelling, B: Other Structures, C: Personal Property, D: Loss of Use, E: Personal Liability, F: Medical Payments to Others."},
-{cat:"Homeowners",q:"What is an HO-3 policy?",a:"The 'Special Form' — most common homeowners policy. Open peril on dwelling (A & B), named peril on personal property (C)."},
+{cat:"Homeowners",q:"What is an HO-3 policy?",a:"The 'Special Form' and the most common homeowners policy. Open peril on dwelling (A & B), named peril on personal property (C)."},
 {cat:"Liability",q:"What are the 4 elements of negligence?",a:"(1) Duty of care owed, (2) Breach of that duty, (3) Proximate cause linking breach to injury, (4) Actual damages suffered. ALL four required to prove negligence."},
 {cat:"Auto",q:"Name the PAP coverage parts.",a:"A: Liability, B: Medical Payments, C: Uninsured/Underinsured Motorist, D: Coverage for Damage to Your Auto, E: Duties After Accident, F: General Provisions."},
 {cat:"Auto",q:"Collision vs comprehensive?",a:"Collision = your car hits another vehicle or object (even if your fault). Comprehensive (Other Than Collision) = theft, fire, hail, flood, vandalism, animal strikes."},
@@ -689,22 +757,22 @@ var FC={pc:[
 {cat:"Regulations",q:"Name common unfair trade practices.",a:"Misrepresentation, twisting (inducing replacement through lies), rebating (giving inducements not in the contract), unfair discrimination, defamation of competitors."},
 {cat:"Regulations",q:"What is a state guaranty association?",a:"Protects policyholders if their insurer becomes insolvent. Funded by assessments on remaining solvent insurers in the state. Coverage limits vary by state."}
 ],life:[
-{cat:"Basics",q:"When is insurable interest required in life insurance?",a:"At the time of application only — NOT at the time of claim. The policyholder must benefit from the insured's continued life."},
+{cat:"Basics",q:"When is insurable interest required in life insurance?",a:"At the time of application only, NOT at the time of claim. The policyholder must benefit from the insured's continued life."},
 {cat:"Basics",q:"What is the incontestability clause?",a:"After 2 years from issue, the insurer cannot void the policy for misrepresentation on the application (fraud excepted in some states)."},
 {cat:"Term",q:"Level term vs decreasing term?",a:"Level: death benefit stays the same throughout. Decreasing: benefit decreases over time (common for mortgage protection). Premiums are typically level for both."},
 {cat:"Permanent",q:"Whole life vs universal life?",a:"Whole: fixed premiums, guaranteed cash value growth, guaranteed death benefit. Universal: flexible premiums, adjustable death benefit, cash value tied to interest rates."},
 {cat:"Permanent",q:"What is a Modified Endowment Contract (MEC)?",a:"A life policy that fails the 7-pay test (overfunded). Withdrawals are taxed LIFO (gains first) and hit with 10% penalty if taken before age 59 1/2."},
-{cat:"Provisions",q:"What are the nonforfeiture options?",a:"If you stop paying premiums: (1) Cash surrender — take the cash value, (2) Reduced paid-up — smaller permanent policy, (3) Extended term — same face amount as term for a limited period."},
+{cat:"Provisions",q:"What are the nonforfeiture options?",a:"If you stop paying premiums: (1) Cash surrender, take the cash value. (2) Reduced paid-up, smaller permanent policy. (3) Extended term, same face amount as term for a limited period."},
 {cat:"Provisions",q:"How long is the grace period?",a:"31 days after premium due date. Policy stays in force during grace period. If insured dies during grace, benefit is paid minus the overdue premium."},
 {cat:"Beneficiaries",q:"Revocable vs irrevocable beneficiary?",a:"Revocable: policyowner can change anytime without consent. Irrevocable: requires the beneficiary's written consent to change. Irrevocable beneficiary has vested interest."},
 {cat:"Annuities",q:"Immediate vs deferred annuity?",a:"Immediate: funded with single premium, payouts begin within one annuity period. Deferred: accumulation phase (money grows), then annuitization/payout phase later."},
 {cat:"Tax",q:"What is a 1035 exchange?",a:"Tax-free swap of policies: Life-to-Life OK, Life-to-Annuity OK, Annuity-to-Annuity OK. Annuity-to-Life is NOT allowed."},
-{cat:"Tax",q:"How is a death benefit taxed?",a:"Generally received income tax-free by the beneficiary. Exception: transfer-for-value rule — if the policy was sold/transferred for consideration, gain may be taxable."},
+{cat:"Tax",q:"How is a death benefit taxed?",a:"Generally received income tax-free by the beneficiary. Exception: if the policy was sold or transferred for consideration (transfer-for-value rule), gain may be taxable."},
 {cat:"Regulations",q:"What is twisting?",a:"Inducing a policyholder to replace an existing policy through misrepresentation or incomplete comparisons. Illegal in all states."}
 ],health:[
-{cat:"Plans",q:"HMO vs PPO vs POS?",a:"HMO: in-network only, need referrals, lowest cost. PPO: can go out-of-network (higher cost), no referrals. POS: hybrid — choose PCP like HMO but can go OON like PPO."},
+{cat:"Plans",q:"HMO vs PPO vs POS?",a:"HMO: in-network only, need referrals, lowest cost. PPO: can go out-of-network (higher cost), no referrals. POS: hybrid that combines both. Choose a PCP like HMO but can go OON like PPO."},
 {cat:"Plans",q:"What is a stop-loss provision?",a:"Once the insured's out-of-pocket costs hit a set threshold, the insurer pays 100% of covered expenses for the rest of the year. Caps the insured's annual cost."},
-{cat:"Medical",q:"Deductible vs coinsurance?",a:"Deductible: flat dollar amount you pay first each year before insurance kicks in. Coinsurance: percentage split after deductible (typically 80/20 — insurer pays 80%)."},
+{cat:"Medical",q:"Deductible vs coinsurance?",a:"Deductible: flat dollar amount you pay first each year before insurance kicks in. Coinsurance: percentage split after deductible (typically 80/20, insurer pays 80%)."},
 {cat:"Disability",q:"Own-occupation vs any-occupation?",a:"Own-occ: you're disabled if you can't perform YOUR specific job. Any-occ: disabled only if you can't perform ANY job you're qualified for. Own-occ is more favorable and more expensive."},
 {cat:"Disability",q:"What is an elimination period?",a:"The waiting period between when disability begins and when benefits start. Works like a time-based deductible. Typically 30 to 180 days. Longer = lower premiums."},
 {cat:"Group",q:"What is COBRA?",a:"Allows employees to continue group health coverage for 18-36 months after a qualifying event (job loss, divorce, etc.). Employee pays full premium plus up to 2% administrative fee."},
@@ -715,15 +783,36 @@ var FC={pc:[
 ]};
 FC.lh=[].concat(FC.life,FC.health);FC.pl=FC.pc;FC.pclh=[].concat(FC.pc,FC.life,FC.health);
 
+// ===== PRACTICE QUIZ =====
+var QUIZ={pc:[
+{q:"Which principle prevents an insured from profiting from a loss?",opts:["Subrogation","Indemnity","Insurable interest","Utmost good faith"],ans:1,explain:"The principle of indemnity states the insured should be restored to their pre-loss financial position, no more, no less."},
+{q:"What type of hazard involves dishonesty or character defects?",opts:["Physical hazard","Moral hazard","Morale hazard","Legal hazard"],ans:1,explain:"Moral hazard relates to dishonesty or character defects that increase the chance of loss (e.g., arson for profit)."},
+{q:"An HO-3 policy covers the dwelling on what basis?",opts:["Named perils","Broad form","Open perils (special form)","Basic form"],ans:2,explain:"HO-3 covers the dwelling and other structures on an open-perils (special form) basis, meaning everything is covered unless specifically excluded."},
+{q:"What is the coinsurance penalty triggered by?",opts:["Filing too many claims","Insuring below the required percentage of value","Missing premium payments","Having multiple policies"],ans:1,explain:"If you insure your property below the coinsurance requirement (typically 80%), you become a co-insurer and won't receive full claim payments."},
+{q:"Which of the following is NOT a requirement for an insurable risk?",opts:["Loss must be definite and measurable","Loss must be catastrophic to most insureds","Large number of similar exposure units","Loss must be due to chance"],ans:1,explain:"For a risk to be insurable, the loss should NOT be catastrophic to most insureds simultaneously. Insurers need to spread risk."},
+{q:"General liability insurance would cover which situation?",opts:["Employee injury at work","Damage to the insured's own property","A customer slipping in your store","Flood damage to the building"],ans:2,explain:"Commercial general liability (CGL) covers third-party bodily injury and property damage, like a customer slipping and falling in your store."},
+{q:"What does 'ACV' stand for in property insurance?",opts:["Actual Cash Value","Applied Coverage Value","Assessed Claim Verification","Annual Coverage Variation"],ans:0,explain:"ACV = Actual Cash Value, which is replacement cost minus depreciation. It reflects what the property was worth at the time of loss."},
+{q:"An insurance contract is classified as what type of legal agreement?",opts:["Bilateral","Commutative","Aleatory","Conditional and aleatory"],ans:3,explain:"Insurance contracts are aleatory (unequal exchange of value) and conditional (certain conditions must be met for coverage to apply)."}
+],lh:[
+{q:"Which policy provision allows the insured to borrow against the cash value?",opts:["Nonforfeiture option","Policy loan provision","Grace period","Automatic premium loan"],ans:1,explain:"The policy loan provision allows the policyowner to borrow against the accumulated cash value of a permanent life insurance policy."},
+{q:"What is the elimination period in disability insurance?",opts:["Time before coverage can be cancelled","Waiting period before benefits begin","Maximum benefit duration","Time to file a claim"],ans:1,explain:"The elimination period is the waiting period (e.g., 30, 60, 90 days) after disability begins before benefits start paying."},
+{q:"Which life insurance product provides coverage for a specific time period?",opts:["Whole life","Universal life","Term life","Variable life"],ans:2,explain:"Term life insurance provides pure death protection for a specific period (10, 20, 30 years) with no cash value accumulation."},
+{q:"What does a health insurance deductible represent?",opts:["Monthly premium amount","Amount insured pays before insurance kicks in","Maximum out-of-pocket cost","Co-payment for doctor visits"],ans:1,explain:"The deductible is the amount the insured must pay out of pocket before the insurance company begins paying covered expenses."},
+{q:"What is the purpose of the incontestability clause?",opts:["Allows cancellation at any time","Prevents the insurer from voiding the policy after 2 years","Guarantees premium rates","Requires annual renewal"],ans:1,explain:"After 2 years from issue, the insurer generally cannot contest or void the policy due to misstatements on the application (except for fraud in some states)."},
+{q:"Which type of life insurance has a flexible premium?",opts:["Whole life","Term life","Universal life","Modified life"],ans:2,explain:"Universal life insurance allows the policyowner to adjust premium payments and death benefits within certain limits, offering flexibility."},
+{q:"Medicare Part B covers which of the following?",opts:["Hospital stays","Outpatient and physician services","Prescription drugs","Long-term care"],ans:1,explain:"Medicare Part B covers outpatient services, doctor visits, preventive care, and medical equipment. Part A covers hospital stays, Part D covers prescriptions."},
+{q:"What does 'COBRA' allow employees to do?",opts:["Switch to a spouse's plan","Continue group health coverage after leaving a job","Get Medicaid benefits","Reduce their deductible"],ans:1,explain:"COBRA (Consolidated Omnibus Budget Reconciliation Act) allows employees to continue their employer's group health insurance for up to 18-36 months after qualifying events like job loss."}
+]};QUIZ.life=QUIZ.lh;QUIZ.health=QUIZ.lh;QUIZ.pl=QUIZ.pc;QUIZ.pclh=QUIZ.pc.concat(QUIZ.lh);
+
 // ===== STUDY TIPS =====
 var TIPS={
-ft:{icon:"&#x1F4BC;",title:"Working Full-Time",tips:["Block 30-60 min before or after work as non-negotiable study time — consistency beats cramming","Use your commute for audio review (record yourself reading key terms, play it back)","Study on your lunch break — even 20 focused minutes adds up over weeks","Tell your employer you're getting licensed — many are supportive and may even adjust your schedule"]},
+ft:{icon:"&#x1F4BC;",title:"Working Full-Time",tips:["Block 30-60 min before or after work as your non-negotiable study time. Consistency beats cramming.","Use your commute for audio review (record yourself reading key terms, play it back).","Study on your lunch break. Even 20 focused minutes adds up over weeks.","Tell your employer you're getting licensed. Many are supportive and may even adjust your schedule."]},
 pt:{icon:"&#x1F552;",title:"Working Part-Time",tips:["Schedule study sessions right before or after shifts when you're already in 'work mode'","Use your off-days for longer deep-study blocks (2+ hours)","If your schedule varies, batch-plan your study at the start of each week"]},
-py:{icon:"&#x1F476;",title:"Parent of Young Kids",tips:["Nap time = study time. Guard it fiercely.","Flashcards are your best friend — review them during feedings or playground time","If you have a partner, trade off kid duty for dedicated 1-hour study blocks","Don't aim for perfection. 20 focused minutes is better than 0 minutes."]},
-ps:{icon:"&#x1F392;",title:"Parent of School-Age Kids",tips:["Study while they do homework — model the behavior and get your hours in","Use the window after drop-off or before pickup for focused sessions","Weekend mornings before activities can be great for uninterrupted study","Get the family involved: let them quiz you on flashcards"]},
-cg:{icon:"&#x1F91D;",title:"Caregiver",tips:["Protect small windows: even 15-minute micro-sessions with flashcards count","Study during waiting rooms, appointment times, and quiet moments","Be realistic about your bandwidth — a slower pace still gets you to the finish line"]},
-st:{icon:"&#x1F393;",title:"Student",tips:["Apply study techniques you already use: spaced repetition, practice tests, study groups","Cross-reference insurance concepts with your coursework where possible","Your brain is already in learning mode — use that momentum"]},
-fl:{icon:"&#x2728;",title:"Flexible Schedule",tips:["With time on your side, aim for quality over quantity — deeper understanding beats memorization","Front-load the harder topics (policy math, coinsurance calculations) while motivation is high","Take practice exams early and often to gauge where you stand"]}
+py:{icon:"&#x1F476;",title:"Parent of Young Kids",tips:["Nap time = study time. Guard it fiercely.","Flashcards are your best friend. Review them during feedings or playground time.","If you have a partner, trade off kid duty for dedicated 1-hour study blocks.","Don't aim for perfection. 20 focused minutes is better than 0 minutes."]},
+ps:{icon:"&#x1F392;",title:"Parent of School-Age Kids",tips:["Study while they do homework. Model the behavior and get your hours in.","Use the window after drop-off or before pickup for focused sessions.","Weekend mornings before activities can be great for uninterrupted study.","Get the family involved: let them quiz you on flashcards."]},
+cg:{icon:"&#x1F91D;",title:"Caregiver",tips:["Protect small windows: even 15-minute micro-sessions with flashcards count.","Study during waiting rooms, appointment times, and quiet moments.","Be realistic about your bandwidth. A slower pace still gets you to the finish line."]},
+st:{icon:"&#x1F393;",title:"Student",tips:["Apply study techniques you already use: spaced repetition, practice tests, study groups.","Cross-reference insurance concepts with your coursework where possible.","Your brain is already in learning mode, so use that momentum."]},
+fl:{icon:"&#x2728;",title:"Flexible Schedule",tips:["With time on your side, aim for quality over quantity. Deeper understanding beats memorization.","Front-load the harder topics (policy math, coinsurance calculations) while motivation is high.","Take practice exams early and often to gauge where you stand."]}
 };
 
 // ===== APP STATE =====
@@ -770,11 +859,12 @@ function chkDates(){S.startD=document.getElementById('startD').value?new Date(do
 
 // ===== BUILD PLAN =====
 function buildPlan(){
-  var totalHrs=getHrs(S.st,S.lic);if(totalHrs===0){var d={pc:40,life:20,health:20,lh:40,pl:20,pclh:60};totalHrs=d[S.lic]||40;}
+  var totalHrs=getHrs(S.st,S.lic);if(totalHrs===0){var d={pc:15,life:10,health:10,lh:15,pl:10,pclh:24};totalHrs=d[S.lic]||15;}
   var sessHrs=S.sessionMin/60,sorted=[].concat(S.days).sort(function(a,b){return a-b;});
   var tMap={morning:{h:8},afternoon:{h:13},evening:{h:19}},startH=(tMap[S.time]||tMap.morning).h;
   var endDate;
-  if(S.goalD){endDate=new Date(S.goalD);}else{var rw=Math.ceil(totalHrs/(S.days.length*sessHrs));endDate=new Date(S.startD);endDate.setDate(endDate.getDate()+Math.ceil(rw*1.25+1)*7);}
+  var isUnregBuild=(getHrs(S.st,S.lic)===0);
+  if(S.goalD){endDate=new Date(S.goalD);}else{var rw=Math.ceil(totalHrs/(S.days.length*sessHrs));endDate=new Date(S.startD);var pad=isUnregBuild?Math.ceil(rw+1):Math.ceil(rw*1.25+1);endDate.setDate(endDate.getDate()+pad*7);}
   var allDates=[];var cur=new Date(S.startD);
   while(cur<=endDate){if(sorted.indexOf(cur.getDay())>-1)allDates.push(new Date(cur));cur.setDate(cur.getDate()+1);}
   if(!allDates.length){alert('No study days in your date range. Adjust your dates or study days.');return;}
@@ -826,27 +916,63 @@ function submitGate(){
 }
 
 // ===== RENDER RESULTS =====
+var isUnreg=false; // true if state has no required pre-licensing hours
 function showResults(){
-  var p=S.plan;document.querySelectorAll('.card').forEach(function(c){c.classList.remove('active');});document.getElementById('prog').style.display='none';document.getElementById('res').classList.add('active');
+  var p=S.plan;
+  var reqHrs=getHrs(S.st,S.lic);
+  isUnreg=(reqHrs===0);
+  document.querySelectorAll('.card').forEach(function(c){c.classList.remove('active');});
+  document.getElementById('prog').style.display='none';
+  document.getElementById('res').classList.add('active');
   var fN=function(d){return d.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});};
-  document.getElementById('resSub').textContent=p.totalHrs+' hours of '+LIC[S.lic].l+' study in '+ST[S.st].n+'.\n'+fN(S.startD)+' through '+fN(p.endDate);
-  document.getElementById('alertArea').innerHTML=p.tight?'<div class="alert-box"><strong>Heads up:</strong> Your timeline is tight. Some sessions may run longer than '+S.sessionMin+' min. Consider adding more study days or pushing your goal date.</div>':'';
-  document.getElementById('resGrid').innerHTML='<div class="scard"><div class="snum">'+p.totalHrs+'</div><div class="slbl">Study Hours</div></div><div class="scard"><div class="snum">'+(p.totalSess+p.reviewSess)+'</div><div class="slbl">Total Sessions</div></div><div class="scard"><div class="snum">'+p.totalSess+'</div><div class="slbl">Study Sessions</div></div><div class="scard"><div class="snum">'+p.reviewSess+'</div><div class="slbl">Review Sessions</div></div>';
+  if(isUnreg){
+    var wks=Math.ceil(p.totalSess/S.days.length);
+    document.getElementById('resSub').textContent='Pass your '+LIC[S.lic].l+' exam on the first try. '+p.totalHrs+' hours over ~'+wks+' weeks.';
+    var courseUrl2=getCourseUrl(S.st,S.lic);var hasC=!!STATE_SLUGS[S.st];
+    var alertHtml='<a href="'+(hasC?courseUrl2:'https://insurance.aceable.com/pre-license/')+'" target="_blank" style="display:block;text-align:center;background:var(--pink);color:#FFFFFF;font-weight:800;font-size:1rem;padding:16px 32px;border-radius:var(--r-pill);text-decoration:none;margin-bottom:16px;box-shadow:var(--shadow-btn)">Enroll in '+ST[S.st].n+' '+LIC[S.lic].l+' with Aceable &rarr;</a>';
+    alertHtml+='<div style="background:var(--teal-light);border:1px solid var(--teal-200);border-radius:var(--r-md);padding:16px 20px;margin-bottom:16px;font-size:.88rem;color:var(--dark);line-height:1.6">';
+    alertHtml+='<strong>Pass the first time and save money with Aceable.</strong> ';
+    alertHtml+='This '+p.totalHrs+'-hour study plan covers every '+LIC[S.lic].l+' exam topic. Pair it with Aceable\'s course (6 months of access) and you\'ll walk into exam day fully prepared. No retake fees, no wasted time.</div>';
+    document.getElementById('alertArea').innerHTML=alertHtml;
+  } else {
+    document.getElementById('resSub').textContent=p.totalHrs+' hours of '+LIC[S.lic].l+' study in '+ST[S.st].n+'.\n'+fN(S.startD)+' through '+fN(p.endDate);
+    document.getElementById('alertArea').innerHTML=p.tight?'<div class="alert-box"><strong>Heads up:</strong> Your timeline is tight. Some sessions may run longer than '+S.sessionMin+' min. Consider adding more study days or pushing your goal date.</div>':'';
+  }
+  document.getElementById('resGrid').innerHTML='<div class="scard"><div class="snum">'+p.totalHrs+'</div><div class="slbl">'+(isUnreg?'Prep Hours':'Study Hours')+'</div></div><div class="scard"><div class="snum">'+(p.totalSess+p.reviewSess)+'</div><div class="slbl">Total Sessions</div></div><div class="scard"><div class="snum">'+p.totalSess+'</div><div class="slbl">Study Sessions</div></div><div class="scard"><div class="snum">'+p.reviewSess+'</div><div class="slbl">Review Sessions</div></div>';
   document.getElementById('dlCount').textContent=(p.totalSess+p.reviewSess);
-  renderConfidence();renderMilestones();renderMonthlyDownloads();renderSchedule();renderTopics();renderFC();renderExamPrep();renderCourseRecs();showTab('schedule');window.scrollTo({top:0,behavior:'smooth'});
+  renderConfidence();renderMilestones();renderMonthlyDownloads();renderSchedule();renderTopics();renderFC();renderQuiz();renderExamPrep();renderCourseRecs();showTab('schedule');window.scrollTo({top:0,behavior:'smooth'});
 }
 
 function renderSchedule(){
   var el=document.getElementById('sessList');
-  var DOWNAMES=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-  var MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var DOW=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  var MO=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  // Group events by week
+  var weeks=[],evts=S.plan.events;
+  evts.forEach(function(e){
+    var d=e.start,sow=new Date(d);sow.setDate(sow.getDate()-sow.getDay());
+    var key=sow.toISOString().split('T')[0];
+    if(!weeks.length||weeks[weeks.length-1].key!==key){
+      var eow=new Date(sow);eow.setDate(eow.getDate()+6);
+      weeks.push({key:key,start:new Date(sow),end:eow,events:[]});
+    }
+    weeks[weeks.length-1].events.push(e);
+  });
   var html='';
-  S.plan.events.forEach(function(e){
-    var d=e.start;
-    var timeStr=d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',hour12:true});
-    var endStr=e.end.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',hour12:true});
-    var dur=Math.round((e.end-e.start)/60000);
-    html+='<div class="sess-item"><div class="sess-date"><div class="sd-mon">'+MONTHS[d.getMonth()]+'</div><div class="sd-day">'+d.getDate()+'</div><div class="sd-dow">'+DOWNAMES[d.getDay()]+'</div></div><div class="sess-info"><div class="sess-time">'+timeStr+' - '+endStr+' ('+dur+' min)</div><div class="sess-topic">'+e.topic+'</div><span class="sess-type '+e.type+'">'+(e.type==='study'?'Study':'Review')+'</span></div></div>';
+  weeks.forEach(function(w,i){
+    var study=0,review=0;
+    w.events.forEach(function(e){if(e.type==='study')study++;else review++;});
+    var label=MO[w.start.getMonth()]+' '+w.start.getDate()+' - '+MO[w.end.getMonth()]+' '+w.end.getDate();
+    var meta=study+' study'+(review?' + '+review+' review':'')+' · '+w.events.length+' sessions';
+    html+='<div class="wk-group'+(i===0?' open':'')+'" onclick="this.classList.toggle(\'open\')">';
+    html+='<div class="wk-hdr"><div><div class="wk-label">Week '+(i+1)+': '+label+'</div><div class="wk-meta">'+meta+'</div></div><div class="wk-arrow">&#x25BC;</div></div>';
+    html+='<div class="wk-body">';
+    w.events.forEach(function(e){
+      var d=e.start;
+      var t=d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',hour12:true});
+      html+='<div class="wk-sess"><div class="wk-day">'+DOW[d.getDay()]+' '+d.getDate()+'</div><div class="wk-time">'+t+'</div><div class="wk-topic">'+e.topic+'</div><span class="wk-tag '+e.type+'">'+(e.type==='study'?'Study':'Review')+'</span></div>';
+    });
+    html+='</div></div>';
   });
   el.innerHTML=html;
 }
@@ -868,7 +994,50 @@ function renderTopics(){
 
 function renderFC(){
   var cards=FC[S.lic]||FC.pc;document.getElementById('fcCount').textContent=cards.length;
+  document.getElementById('fcCardCount').textContent=cards.length+' key terms to memorize';
   document.getElementById('fcDeck').innerHTML=cards.map(function(c){return '<div class="fc" onclick="this.classList.toggle(\'flipped\')"><div class="fc-cat">'+c.cat+'</div><div class="fc-q">'+c.q+'</div><div class="fc-a">'+c.a+'</div><div class="fc-hint">tap to reveal</div></div>';}).join('');
+}
+
+function renderQuiz(){
+  var qs=QUIZ[S.lic]||QUIZ.pc;
+  // Pick 5 random questions
+  var pool=qs.slice().sort(function(){return Math.random()-0.5;}).slice(0,5);
+  var html='';
+  pool.forEach(function(q,i){
+    html+='<div class="quiz-q" id="qq'+i+'">';
+    html+='<div class="qq-num">Question '+(i+1)+' of 5</div>';
+    html+='<div class="qq-text">'+q.q+'</div>';
+    html+='<div class="qq-opts">';
+    q.opts.forEach(function(o,j){
+      html+='<label data-qi="'+i+'" data-oi="'+j+'" onclick="answerQuiz('+i+','+j+')">'+o+'</label>';
+    });
+    html+='</div>';
+    html+='<div class="qq-explain">'+q.explain+'</div>';
+    html+='</div>';
+  });
+  html+='<div style="text-align:center;margin-top:16px"><button class="cta-btn cta-btn-secondary cta-btn-sm" onclick="renderQuiz()">&#x1F504; New Questions</button></div>';
+  document.getElementById('quizArea').innerHTML=html;
+  document.getElementById('quizResult').style.display='none';
+  window._quizPool=pool;window._quizAnswered=0;window._quizCorrect=0;
+}
+function answerQuiz(qi,oi){
+  var wrap=document.getElementById('qq'+qi);
+  if(wrap.classList.contains('answered'))return;
+  wrap.classList.add('answered');
+  var labels=wrap.querySelectorAll('label');
+  var correct=window._quizPool[qi].ans;
+  labels[oi].classList.add(oi===correct?'correct':'wrong');
+  if(oi!==correct)labels[correct].classList.add('correct');
+  if(oi===correct)window._quizCorrect++;
+  window._quizAnswered++;
+  if(window._quizAnswered===5){
+    var pct=Math.round(window._quizCorrect/5*100);
+    var resEl=document.getElementById('quizResult');
+    var msg=pct>=80?'You\'re in great shape! Keep reviewing and you\'ll crush the exam.':pct>=60?'Solid foundation! A bit more study and you\'ll be exam-ready.':'Keep studying! Aceable\'s course will help you nail these topics.';
+    var courseUrl3=getCourseUrl(S.st,S.lic);var hasC3=!!STATE_SLUGS[S.st];
+    resEl.innerHTML='<div class="quiz-result"><div class="qr-score">'+window._quizCorrect+'/5</div><div class="qr-label">'+pct+'% '+(pct>=80?'Exam Ready':pct>=60?'Almost There':'Keep Studying')+'</div><div class="qr-sub">'+msg+'</div><button class="cta-btn" onclick="renderQuiz()" style="margin-right:8px">Try Again</button><a href="'+(hasC3?courseUrl3:'https://insurance.aceable.com/pre-license/')+'" target="_blank" class="cta-btn cta-btn-secondary">Study with Aceable &rarr;</a></div>';
+    resEl.style.display='block';
+  }
 }
 
 function renderExamPrep(){
@@ -883,9 +1052,9 @@ function renderExamPrep(){
     '<div class="snap-item"><div class="snap-val">1 Year</div><div class="snap-lbl">Score Validity</div></div>';
 
   document.getElementById('examChecklist').innerHTML=[
-    {icon:'&#x1F4F7;',text:'<strong>Government-issued photo ID</strong> — must be current and not expired.'},
-    {icon:'&#x1F4CB;',text:'<strong>Exam confirmation</strong> — print or screenshot your scheduling confirmation from '+s.prov+'.'},
-    {icon:'&#x23F0;',text:'<strong>Arrive 30 minutes early</strong> — you\'ll need time to check in and store belongings.'},
+    {icon:'&#x1F4F7;',text:'<strong>Government-issued photo ID.</strong> Must be current and not expired.'},
+    {icon:'&#x1F4CB;',text:'<strong>Exam confirmation.</strong> Print or screenshot your scheduling confirmation from '+s.prov+'.'},
+    {icon:'&#x23F0;',text:'<strong>Arrive 30 minutes early.</strong> You\'ll need time to check in and store belongings.'},
     {icon:'&#x1F6AB;',text:'<strong>No phones or electronics</strong> in the testing room.'},
     {icon:'&#x1F4A1;',text:'<strong>Read every question carefully.</strong> Watch for "except," "not," and "all of the following."'},
     {icon:'&#x23F1;',text:'<strong>Pace yourself:</strong> ~'+Math.round(s.time/s.qs*60)+' seconds per question. Flag tough ones and come back.'},
@@ -911,48 +1080,91 @@ function renderCourseRecs(){
   var hasAceableCourse=!!STATE_SLUGS[S.st];
   var html='';
 
-  // Top CTA - state-specific messaging
-  html+='<div class="course-cta teal-light" style="margin-top:8px">';
-  html+='<div class="eyebrow" style="color:var(--teal);margin-bottom:12px">RECOMMENDED FOR YOU</div>';
-  if(hasAceableCourse){
-    html+='<h3>Get Your '+state.n+' '+lic.l+' Course</h3>';
-    html+='<p>Aceable has a state-approved '+lic.l+' pre-licensing course for '+state.n+'. Study online at your own pace, on any device.</p>';
-    html+='<a href="'+courseUrl+'" target="_blank" class="cta-btn">Enroll in '+state.n+' '+lic.l+' &rarr;</a>';
-  } else {
-    html+='<h3>'+state.n+' '+lic.l+' Pre-Licensing Course</h3>';
-    html+='<p>Browse Aceable\'s growing catalog of state-approved insurance pre-licensing courses. New states added regularly!</p>';
-    html+='<a href="https://insurance.aceable.com/pre-license/" target="_blank" class="cta-btn">Browse Available Courses &rarr;</a>';
-  }
-  html+='</div>';
+  if(isUnreg){
+    // UNREGULATED STATE: Drive urgency — they still need to pass the exam
+    html+='<div class="course-cta pink" style="margin-top:8px">';
+    html+='<div class="eyebrow" style="color:rgba(255,255,255,.85);margin-bottom:12px">PASS THE FIRST TIME &bull; SAVE MONEY</div>';
+    html+='<h3>Your Plan + Aceable = Licensed in Weeks</h3>';
+    html+='<p>Your study schedule is ready. Aceable\'s '+state.n+' '+lic.l+' course teaches every exam topic clearly so you pass on the first try. You get 6 months of access to study at your own pace.</p>';
+    if(hasAceableCourse){
+      html+='<a href="'+courseUrl+'" target="_blank" class="cta-btn cta-btn-white">Get Exam-Ready with Aceable &rarr;</a>';
+    } else {
+      html+='<a href="https://insurance.aceable.com/pre-license/" target="_blank" class="cta-btn cta-btn-white">Get Exam-Ready with Aceable &rarr;</a>';
+    }
+    html+='</div>';
 
-  // Product cards with real deep links
-  html+='<div style="margin-top:16px;margin-bottom:24px">';
-  if(hasAceableCourse){
-    html+='<a href="'+courseUrl+'" target="_blank" class="product-card"><div class="pc-icon" style="background:var(--teal-light)">&#x1F4DA;</div><div class="pc-text"><div class="pc-name">'+state.n+' '+lic.l+' Course</div><div class="pc-desc">State-approved &bull; 100% online &bull; Self-paced &bull; Enroll now</div></div><div class="pc-arrow">&rsaquo;</div></a>';
-    // Show other license options for this state
-    var otherLics=[{k:'pc',l:'Property & Casualty'},{k:'lh',l:'Life & Health'},{k:'pclh',l:'All-in-One Bundle'}];
-    otherLics.forEach(function(ol){
-      if(ol.k!==S.lic){
-        var olUrl=getCourseUrl(S.st,ol.k);
-        html+='<a href="'+olUrl+'" target="_blank" class="product-card"><div class="pc-icon" style="background:var(--pink-light)">&#x1F4CB;</div><div class="pc-text"><div class="pc-name">'+state.n+' '+ol.l+'</div><div class="pc-desc">Also available for '+state.n+' &bull; Enroll online</div></div><div class="pc-arrow">&rsaquo;</div></a>';
-      }
-    });
+    // How Aceable helps — framed around the study plan they just got
+    html+='<div style="margin-top:16px;margin-bottom:24px">';
+    html+='<div style="background:var(--white);border:1px solid var(--grey-2);border-radius:var(--r-lg);padding:24px;margin-bottom:12px">';
+    html+='<h4 style="font-size:1rem;font-weight:800;color:var(--dark);margin-bottom:4px">Everything you need to pass, nothing you don\'t</h4>';
+    html+='<p style="font-size:.82rem;color:var(--subtle);margin-bottom:16px;line-height:1.5">Your study schedule keeps you on track. Aceable\'s course teaches the material with 6 months of access. Every topic explained simply so it actually sticks.</p>';
+    html+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">';
+    html+='<div style="display:flex;gap:10px;align-items:flex-start"><span style="font-size:1.2rem">&#x1F9E9;</span><div><strong style="font-size:.85rem;color:var(--dark)">Topic-by-topic breakdown</strong><p style="font-size:.78rem;color:var(--subtle);margin-top:2px">Each concept explained clearly. No jargon, no fluff</p></div></div>';
+    html+='<div style="display:flex;gap:10px;align-items:flex-start"><span style="font-size:1.2rem">&#x1F4CA;</span><div><strong style="font-size:.85rem;color:var(--dark)">Practice exams that mirror the real thing</strong><p style="font-size:.78rem;color:var(--subtle);margin-top:2px">Know exactly what to expect before you walk in</p></div></div>';
+    html+='<div style="display:flex;gap:10px;align-items:flex-start"><span style="font-size:1.2rem">&#x1F4F1;</span><div><strong style="font-size:.85rem;color:var(--dark)">Fits your schedule</strong><p style="font-size:.78rem;color:var(--subtle);margin-top:2px">Study on your phone during lunch or on your laptop at night</p></div></div>';
+    html+='<div style="display:flex;gap:10px;align-items:flex-start"><span style="font-size:1.2rem">&#x1F6E1;&#xFE0F;</span><div><strong style="font-size:.85rem;color:var(--dark)">Pass guarantee</strong><p style="font-size:.78rem;color:var(--subtle);margin-top:2px">If you don\'t pass, we\'ll refund your course. Period</p></div></div>';
+    html+='</div></div>';
+
+    if(hasAceableCourse){
+      html+='<a href="'+courseUrl+'" target="_blank" class="product-card"><div class="pc-icon" style="background:var(--teal-light)">&#x1F4DA;</div><div class="pc-text"><div class="pc-name">'+state.n+' '+lic.l+' Exam Prep Course</div><div class="pc-desc">6 months access &bull; 100% online &bull; Self-paced &bull; Every exam topic covered</div></div><div class="pc-arrow">&rsaquo;</div></a>';
+      var otherLics=[{k:'pc',l:'Property & Casualty'},{k:'lh',l:'Life & Health'},{k:'pclh',l:'All-in-One Bundle'}];
+      otherLics.forEach(function(ol){
+        if(ol.k!==S.lic){
+          var olUrl=getCourseUrl(S.st,ol.k);
+          html+='<a href="'+olUrl+'" target="_blank" class="product-card"><div class="pc-icon" style="background:var(--pink-light)">&#x1F4CB;</div><div class="pc-text"><div class="pc-name">'+state.n+' '+ol.l+'</div><div class="pc-desc">Also available &bull; Same format</div></div><div class="pc-arrow">&rsaquo;</div></a>';
+        }
+      });
+    } else {
+      html+='<a href="https://insurance.aceable.com/pre-license/" target="_blank" class="product-card"><div class="pc-icon" style="background:var(--teal-light)">&#x1F4DA;</div><div class="pc-text"><div class="pc-name">Browse Exam Prep Courses</div><div class="pc-desc">Available in 18+ states &bull; P&amp;C, Life &amp; Health, All Lines</div></div><div class="pc-arrow">&rsaquo;</div></a>';
+    }
+    html+='<a href="https://insurance.aceable.com/resources/" target="_blank" class="product-card"><div class="pc-icon" style="background:var(--blue-200)">&#x1F4D6;</div><div class="pc-text"><div class="pc-name">Free Study Resources &amp; Guides</div><div class="pc-desc">Blog articles, exam tips, and career guides</div></div><div class="pc-arrow">&rsaquo;</div></a>';
+    html+='</div>';
   } else {
-    html+='<a href="https://insurance.aceable.com/pre-license/" target="_blank" class="product-card"><div class="pc-icon" style="background:var(--teal-light)">&#x1F4DA;</div><div class="pc-text"><div class="pc-name">Browse All Pre-Licensing Courses</div><div class="pc-desc">Available in 18+ states &bull; P&amp;C, Life &amp; Health, All Lines</div></div><div class="pc-arrow">&rsaquo;</div></a>';
+    // REGULATED STATE: Original compliance-focused messaging
+    html+='<div class="course-cta teal-light" style="margin-top:8px">';
+    html+='<div class="eyebrow" style="color:var(--teal);margin-bottom:12px">RECOMMENDED FOR YOU</div>';
+    if(hasAceableCourse){
+      html+='<h3>Get Your '+state.n+' '+lic.l+' Course</h3>';
+      html+='<p>Aceable has a state-approved '+lic.l+' pre-licensing course for '+state.n+'. Study online at your own pace, on any device.</p>';
+      html+='<a href="'+courseUrl+'" target="_blank" class="cta-btn">Enroll in '+state.n+' '+lic.l+' &rarr;</a>';
+    } else {
+      html+='<h3>'+state.n+' '+lic.l+' Pre-Licensing Course</h3>';
+      html+='<p>Browse Aceable\'s growing catalog of state-approved insurance pre-licensing courses. New states added regularly!</p>';
+      html+='<a href="https://insurance.aceable.com/pre-license/" target="_blank" class="cta-btn">Browse Available Courses &rarr;</a>';
+    }
+    html+='</div>';
+
+    html+='<div style="margin-top:16px;margin-bottom:24px">';
+    if(hasAceableCourse){
+      html+='<a href="'+courseUrl+'" target="_blank" class="product-card"><div class="pc-icon" style="background:var(--teal-light)">&#x1F4DA;</div><div class="pc-text"><div class="pc-name">'+state.n+' '+lic.l+' Course</div><div class="pc-desc">State-approved &bull; 100% online &bull; Self-paced &bull; Enroll now</div></div><div class="pc-arrow">&rsaquo;</div></a>';
+      var otherLics2=[{k:'pc',l:'Property & Casualty'},{k:'lh',l:'Life & Health'},{k:'pclh',l:'All-in-One Bundle'}];
+      otherLics2.forEach(function(ol){
+        if(ol.k!==S.lic){
+          var olUrl=getCourseUrl(S.st,ol.k);
+          html+='<a href="'+olUrl+'" target="_blank" class="product-card"><div class="pc-icon" style="background:var(--pink-light)">&#x1F4CB;</div><div class="pc-text"><div class="pc-name">'+state.n+' '+ol.l+'</div><div class="pc-desc">Also available for '+state.n+' &bull; Enroll online</div></div><div class="pc-arrow">&rsaquo;</div></a>';
+        }
+      });
+    } else {
+      html+='<a href="https://insurance.aceable.com/pre-license/" target="_blank" class="product-card"><div class="pc-icon" style="background:var(--teal-light)">&#x1F4DA;</div><div class="pc-text"><div class="pc-name">Browse All Pre-Licensing Courses</div><div class="pc-desc">Available in 18+ states &bull; P&amp;C, Life &amp; Health, All Lines</div></div><div class="pc-arrow">&rsaquo;</div></a>';
+    }
+    html+='<a href="https://insurance.aceable.com/resources/" target="_blank" class="product-card"><div class="pc-icon" style="background:var(--blue-200)">&#x1F4D6;</div><div class="pc-text"><div class="pc-name">Free Study Resources &amp; Guides</div><div class="pc-desc">Blog articles, exam tips, and career guides for new agents</div></div><div class="pc-arrow">&rsaquo;</div></a>';
+    html+='</div>';
   }
-  html+='<a href="https://insurance.aceable.com/resources/" target="_blank" class="product-card"><div class="pc-icon" style="background:var(--blue-200)">&#x1F4D6;</div><div class="pc-text"><div class="pc-name">Free Study Resources &amp; Guides</div><div class="pc-desc">Blog articles, exam tips, and career guides for new agents</div></div><div class="pc-arrow">&rsaquo;</div></a>';
-  html+='</div>';
   document.getElementById('courseRecs').innerHTML=html;
 
-  // Bottom CTA - deep link to enrollment
+  // Bottom CTA
   var btm='<div class="course-cta dark">';
-  if(hasAceableCourse){
+  if(isUnreg){
+    btm+='<h3>Pass the First Time. Save Money. Get Licensed.</h3>';
+    btm+='<p>Your study schedule is set. Pair it with Aceable\'s '+state.n+' '+lic.l+' course for every exam topic in clear, simple lessons. You get 6 months of access to pass on your first attempt and skip the retake fees.</p>';
+    btm+='<a href="'+(hasAceableCourse?courseUrl:'https://insurance.aceable.com/pre-license/')+'" target="_blank" class="cta-btn cta-btn-white">Get Started with Aceable &rarr;</a>';
+  } else if(hasAceableCourse){
     btm+='<h3>Ready to Get Licensed in '+state.n+'?</h3>';
     btm+='<p>Your study plan is set. Now get the state-approved course to match it. Aceable\'s '+lic.l+' course for '+state.n+' is 100% online and self-paced.</p>';
     btm+='<a href="'+courseUrl+'" target="_blank" class="cta-btn cta-btn-white">Enroll in Your '+state.n+' Course &rarr;</a>';
   } else {
     btm+='<h3>Ready to Start Your Pre-Licensing Course?</h3>';
-    btm+='<p>Aceable\'s online courses let you study at your own pace — on your phone, tablet, or computer. State-approved and trusted by thousands of new agents.</p>';
+    btm+='<p>Aceable\'s online courses let you study at your own pace on your phone, tablet, or computer. State-approved and trusted by thousands of new agents.</p>';
     btm+='<a href="https://insurance.aceable.com/pre-license/" target="_blank" class="cta-btn cta-btn-white">Browse Insurance Courses &rarr;</a>';
   }
   btm+='</div>';
@@ -962,25 +1174,42 @@ function renderCourseRecs(){
 // ===== CONFIDENCE METER =====
 function renderConfidence(){
   var p=S.plan,score=0,tips=[];
-  // Score factors (max 100)
-  // 1. Enough total hours? (30 pts)
   var hrs=getHrs(S.st,S.lic);
-  if(hrs===0||p.totalHrs>=hrs){score+=30;}else{score+=Math.round(p.totalHrs/hrs*30);tips.push('Your plan covers '+p.totalHrs+' of '+hrs+' required hours.');}
-  // 2. Session length appropriate? (15 pts)
-  if(S.sessionMin>=45&&S.sessionMin<=90){score+=15;}else if(S.sessionMin>=30){score+=10;tips.push('Sessions of 45-90 min are ideal for retention.');}else{score+=5;tips.push('Longer sessions help with deep study.');}
-  // 3. Study frequency (20 pts)
-  if(S.days.length>=5){score+=20;}else if(S.days.length>=3){score+=15;tips.push('Adding 1-2 more study days per week boosts retention.');}else{score+=8;tips.push('More frequent, shorter sessions beat fewer long ones.');}
-  // 4. Has review sessions? (15 pts)
-  if(p.reviewSess>0){score+=15;}else{score+=5;tips.push('Build in review sessions to reinforce what you learn.');}
-  // 5. Timeline not too tight (20 pts)
-  if(!p.tight){score+=20;}else{score+=8;tips.push('Your timeline is tight. Consider extending your goal date.');}
+
+  if(isUnreg){
+    // Unregulated state: empowering scoring calibrated for focused 4-6 week plans
+    // 1. Study volume (25 pts) — scaled to recommended hours
+    var recHrs={pc:15,life:10,health:10,lh:15,pl:10,pclh:24}[S.lic]||15;
+    if(p.totalHrs>=recHrs){score+=25;tips.push('You\'re covering all the material. Solid plan!');}else if(p.totalHrs>=recHrs*0.7){score+=20;tips.push('Great start! A few more sessions would round this out nicely.');}else{score+=12;tips.push('Adding a few more study days would help you cover all topics.');}
+    // 2. Topic coverage (25 pts)
+    var topics=TOPICS[S.lic]||TOPICS.pc;
+    if(p.totalSess>=topics.length){score+=25;tips.push('Every major topic is covered. You\'ll be well-rounded.');}else{score+=15;tips.push('You\'ll hit the biggest topics. Consider an extra week to cover them all.');}
+    // 3. Session length (15 pts)
+    if(S.sessionMin>=45&&S.sessionMin<=90){score+=15;}else if(S.sessionMin>=30){score+=12;tips.push('Even 30-minute sessions add up. Consistency is what matters.');}else{score+=8;}
+    // 4. Study frequency (20 pts)
+    if(S.days.length>=4){score+=20;}else if(S.days.length>=3){score+=16;}else if(S.days.length>=2){score+=10;tips.push('Even 2 days a week works! Just stay consistent.');}else{score+=5;}
+    // 5. Review sessions (15 pts)
+    if(p.reviewSess>=2){score+=15;}else if(p.reviewSess>0){score+=12;}else{score+=5;tips.push('A review session or two before the exam locks everything in.');}
+  } else {
+    // Regulated state: original scoring
+    // 1. Enough total hours? (30 pts)
+    if(p.totalHrs>=hrs){score+=30;}else{score+=Math.round(p.totalHrs/hrs*30);tips.push('Your plan covers '+p.totalHrs+' of '+hrs+' required hours.');}
+    // 2. Session length (15 pts)
+    if(S.sessionMin>=45&&S.sessionMin<=90){score+=15;}else if(S.sessionMin>=30){score+=10;tips.push('Sessions of 45-90 min are ideal for retention.');}else{score+=5;tips.push('Longer sessions help with deep study.');}
+    // 3. Study frequency (20 pts)
+    if(S.days.length>=5){score+=20;}else if(S.days.length>=3){score+=15;tips.push('Adding 1-2 more study days per week boosts retention.');}else{score+=8;tips.push('More frequent, shorter sessions beat fewer long ones.');}
+    // 4. Has review sessions? (15 pts)
+    if(p.reviewSess>0){score+=15;}else{score+=5;tips.push('Build in review sessions to reinforce what you learn.');}
+    // 5. Timeline not too tight (20 pts)
+    if(!p.tight){score+=20;}else{score+=8;tips.push('Your timeline is tight. Consider extending your goal date.');}
+  }
 
   var color=score>=80?'var(--green-700)':score>=60?'var(--yellow-700)':'var(--pink)';
-  var label=score>=80?'Strong Plan':score>=60?'Good Plan':'Needs Work';
+  var label=isUnreg?(score>=80?'You\'re Set':score>=60?'Looking Good':'Good Start'):(score>=80?'Strong Plan':score>=60?'Good Plan':'Needs Work');
   var circ=2*Math.PI*52;
   var offset=circ-(score/100*circ);
 
-  var html='<h3>Plan Strength</h3>';
+  var html='<h3>'+(isUnreg?'Exam Readiness':'Plan Strength')+'</h3>';
   html+='<div class="conf-ring"><svg viewBox="0 0 120 120"><circle class="bg" cx="60" cy="60" r="52"/><circle class="fg" cx="60" cy="60" r="52" stroke="'+color+'" stroke-dasharray="'+circ+'" stroke-dashoffset="'+offset+'"/></svg><div class="conf-score">'+score+'</div></div>';
   html+='<div class="conf-label" style="color:'+color+'">'+label+'</div>';
   if(tips.length){
