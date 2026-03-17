@@ -257,14 +257,6 @@ input[type="range"]::-webkit-slider-thumb{appearance:none;-webkit-appearance:non
 .quiz-result .qr-label{font-size:1.1rem;font-weight:800;color:var(--dark);margin:8px 0 4px}
 .quiz-result .qr-sub{font-size:.85rem;color:var(--subtle);margin-bottom:16px}
 
-/* ===== SOCIAL PROOF ===== */
-.social-proof{display:flex;align-items:center;justify-content:center;gap:16px;background:var(--grey-100);border:1px solid var(--grey-2);border-radius:var(--r-md);padding:14px 20px;margin-bottom:20px;flex-wrap:wrap}
-.sp-stars{color:#F59E0B;font-size:1.1rem;letter-spacing:2px}
-.sp-text{font-size:.85rem;color:var(--dark);font-weight:700}
-.sp-text span{color:var(--teal);font-weight:800}
-.sp-divider{width:1px;height:24px;background:var(--grey-3)}
-@media(max-width:480px){.sp-divider{display:none}.social-proof{flex-direction:column;gap:8px;text-align:center}}
-
 /* ===== QUICK QUIZ (Schedule Tab) ===== */
 .qq-inline{background:var(--white);border:2px solid var(--pink-200);border-radius:var(--r-lg);padding:24px 28px;margin-bottom:20px}
 .qq-inline h4{font-size:1rem;font-weight:800;color:var(--dark);margin-bottom:4px}
@@ -312,6 +304,27 @@ input[type="range"]::-webkit-slider-thumb{appearance:none;-webkit-appearance:non
 .course-cta h3{font-size:1.3rem;font-weight:800;margin-bottom:8px}
 .course-cta p{opacity:.9;font-size:.88rem;margin-bottom:20px;line-height:1.6}
 .course-cta .cta-btn{margin:0 auto}
+
+/* ===== ACTION STRIP ===== */
+.action-strip{display:flex;align-items:stretch;background:var(--white);border:1.5px solid var(--grey-2);border-radius:var(--r-md);margin-bottom:16px;overflow:hidden}
+.action-strip-item{display:flex;align-items:center;gap:10px;padding:14px 18px;flex:1}
+.action-strip-item strong{display:block;font-size:.85rem;color:var(--dark)}
+.action-strip-item .as-sub{display:block;font-size:.75rem;color:var(--subtle);margin-top:1px}
+.action-strip-item .as-icon{font-size:1.3rem;flex-shrink:0}
+.action-strip-divider{width:1.5px;background:var(--grey-2);flex-shrink:0}
+.action-strip-link{text-decoration:none;color:inherit;transition:background .15s;cursor:pointer}
+.action-strip-link:hover{background:var(--teal-light)}
+.action-strip-link .as-arrow{font-size:1.3rem;font-weight:700;color:var(--pink);margin-left:auto;flex-shrink:0}
+@media(max-width:480px){.action-strip{flex-direction:column}.action-strip-divider{width:100%;height:1.5px}}
+
+/* ===== APP CARD (Toolkit) ===== */
+.app-card{display:flex;align-items:center;gap:14px;background:var(--dark);border-radius:var(--r-md);padding:16px 20px;margin-top:12px;text-decoration:none;color:#fff;transition:all .2s;cursor:pointer}
+.app-card:hover{background:var(--grey-4);transform:translateY(-1px);box-shadow:var(--shadow-btn)}
+.app-card-icon{font-size:1.6rem;width:44px;height:44px;background:rgba(255,255,255,.1);border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.app-card-text{flex:1}
+.app-card-title{font-weight:800;font-size:.88rem}
+.app-card-desc{font-size:.75rem;opacity:.7;margin-top:2px;line-height:1.4}
+.app-card-arrow{font-size:1.4rem;font-weight:700;color:var(--pink);flex-shrink:0}
 
 /* ===== INLINE PRODUCT CARD ===== */
 .product-card{background:var(--white);border:1px solid var(--grey-2);border-radius:var(--r-lg);padding:20px 24px;display:flex;align-items:center;gap:16px;margin-bottom:12px;transition:all .2s;cursor:pointer;text-decoration:none}
@@ -472,9 +485,6 @@ input[type="range"]::-webkit-slider-thumb{appearance:none;-webkit-appearance:non
 <div class="results" id="res">
   <div class="rhero"><h2>Your Study Plan is Ready!</h2><p id="resSub"></p></div>
   <div id="alertArea"></div>
-
-  <!-- SOCIAL PROOF -->
-  <div id="socialProof"></div>
 
   <!-- CONFIDENCE METER + STATS -->
   <div style="display:grid;grid-template-columns:1fr 2fr;gap:16px;margin-bottom:24px;align-items:start" id="confRow">
@@ -1004,9 +1014,7 @@ function showResults(){
     document.getElementById('resSub').textContent='Pass your '+LIC[S.lic].l+' exam on the first try. '+p.totalHrs+' hours over ~'+wks+' weeks.';
     var courseUrl2=getCourseUrl(S.st,S.lic);var hasC=!!STATE_SLUGS[S.st];
     var alertHtml='<a href="'+(hasC?courseUrl2:'https://insurance.aceable.com/pre-license/')+'" target="_blank" style="display:block;text-align:center;background:var(--pink);color:#FFFFFF;font-weight:800;font-size:1rem;padding:16px 32px;border-radius:var(--r-pill);text-decoration:none;margin-bottom:16px;box-shadow:var(--shadow-btn)">Enroll in '+ST[S.st].n+' '+LIC[S.lic].l+' with Aceable &rarr;</a>';
-    alertHtml+='<div style="background:var(--teal-light);border:1px solid var(--teal-200);border-radius:var(--r-md);padding:16px 20px;margin-bottom:16px;font-size:.88rem;color:var(--dark);line-height:1.6">';
-    alertHtml+='<strong>Pass the first time and save money with Aceable.</strong> ';
-    alertHtml+='This '+p.totalHrs+'-hour study plan covers every '+LIC[S.lic].l+' exam topic. Pair it with Aceable\'s course (6 months of access) and you\'ll walk into exam day fully prepared. No retake fees, no wasted time.</div>';
+    alertHtml+='<div class="action-strip"><div class="action-strip-item"><span class="as-icon">&#x1F393;</span><div><strong>Pass on the first try, skip retake fees</strong><span class="as-sub">6 months of course access</span></div></div><div class="action-strip-divider"></div><a href="https://insurance.aceable.com/aceable-insurance-app/" target="_blank" class="action-strip-item action-strip-link"><span class="as-icon">&#x1F4F1;</span><div><strong>Get the App</strong><span class="as-sub">Study anywhere on your phone</span></div><span class="as-arrow">&rsaquo;</span></a></div>';
     document.getElementById('alertArea').innerHTML=alertHtml;
   } else {
     document.getElementById('resSub').textContent=p.totalHrs+' hours of '+LIC[S.lic].l+' study in '+ST[S.st].n+'.\n'+fN(S.startD)+' through '+fN(p.endDate);
@@ -1014,7 +1022,7 @@ function showResults(){
   }
   document.getElementById('resGrid').innerHTML='<div class="scard"><div class="snum">'+p.totalHrs+'</div><div class="slbl">'+(isUnreg?'Recommended Hours':'Study Hours')+'</div></div><div class="scard"><div class="snum">'+(p.totalSess+p.reviewSess)+'</div><div class="slbl">Total Sessions</div></div><div class="scard"><div class="snum">'+p.totalSess+'</div><div class="slbl">Study Sessions</div></div><div class="scard"><div class="snum">'+p.reviewSess+'</div><div class="slbl">Review Sessions</div></div>';
   document.getElementById('dlCount').textContent=(p.totalSess+p.reviewSess);
-  renderSocialProof();renderConfidence();renderMilestones();renderQuickQuiz();renderMonthlyDownloads();renderSchedule();renderTopics();renderFC();renderQuiz();renderExamPrep();renderCourseRecs();showTab('schedule');window.scrollTo({top:0,behavior:'smooth'});
+  renderConfidence();renderMilestones();renderQuickQuiz();renderMonthlyDownloads();renderSchedule();renderTopics();renderFC();renderQuiz();renderExamPrep();renderCourseRecs();showTab('schedule');window.scrollTo({top:0,behavior:'smooth'});
 }
 
 function renderSchedule(){
@@ -1498,18 +1506,6 @@ function dlFlashcardPDF(){
 }
 
 // ===== START OVER =====
-// ===== SOCIAL PROOF =====
-function renderSocialProof(){
-  var el=document.getElementById('socialProof');
-  var html='<div class="social-proof">';
-  html+='<div class="sp-stars">&#x2B50;&#x2B50;&#x2B50;&#x2B50;&#x2B50;</div>';
-  html+='<div class="sp-text"><span>15,000+</span> agents licensed with Aceable</div>';
-  html+='<div class="sp-divider"></div>';
-  html+='<div class="sp-text">Pass rate <span>2x</span> the national average</div>';
-  html+='</div>';
-  el.innerHTML=html;
-}
-
 // ===== QUICK QUIZ (Conversion Trigger) =====
 function renderQuickQuiz(){
   var sec=document.getElementById('quickQuizSec');
